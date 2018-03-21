@@ -1,0 +1,80 @@
+#content_inner{
+	padding: 50px 5%;
+}
+#content_inner h1{
+	font-size: 40px;
+}
+#content_inner h2{
+	font-size: 30px;
+	margin-top: 80px;
+}
+.admin_table{
+	border-collapse: collapse;
+}
+.admin_table td{
+	padding: 10px;
+	border: 1px solid rgba(0,0,0,0.5);
+}
+.admin_table_thumb{
+	height: 60px;
+}
+.admin_table_thumb img{
+	height: 100%;
+}
+.admin_table_actions i{
+	margin: 0px 5px;
+}
+.admin_table_actions i:hover{
+	cursor: pointer;
+	color: #c66200;
+}
+
+.admin_table_applications_hosting:hover{
+	cursor: pointer;
+	color: #c66200;
+}
+
+#application_reply{
+	position: absolute;
+	left: 10%;
+	top: 50px;
+	right: 10%;
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: #fff;
+	text-align: center;
+}
+#application_reply:not(.active){
+	display: none;
+}
+#application_reply_close{
+	float: right;
+	margin-right: 10px;
+}
+#application_reply_close:hover{
+	cursor: pointer;
+	color: #c66200;
+}
+#application_reply_headline{
+	font-size: 120%;
+}
+#application_reply textarea{
+	width: 100%;
+	max-width: 600px;
+	height: 150px;
+	margin: 10px auto;
+}
+#application_reply_button{
+	width: 100%;
+	max-width: 600px;
+	margin: 10px auto;
+}
+.application_reply_button_element{
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+.application_reply_button_element span:hover{
+	cursor: pointer;
+	color: #c66200;
+}

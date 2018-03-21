@@ -1,0 +1,99 @@
+ <div class="hosting_content_row_element">
+
+    <form action="javascript:void(0);" autocomplete="off">
+        <select id="h_pricing_select">
+            <option value="free"<?php if($h_rows["price_model"] == "free"){ ?> selected<?php } ?>>Kostenlos anbieten</option>
+            <option value="fix"<?php if($h_rows["price_model"] == "fix"){ ?> selected<?php } ?>>Fixpreis</option>
+            <option value="abo"<?php if($h_rows["price_model"] == "abo"){ ?> selected<?php } ?>>Abonnement</option>
+        </select>
+    </form>
+
+    <div class="h_pricing_element<?php if($h_rows["price_model"] == "free"){ ?> active<?php } ?>" data-h_pricing="free">
+        <div class="h_pricing_element_submit">Übernehmen</div>
+    </div>
+
+    <div class="h_pricing_element<?php if($h_rows["price_model"] == "fix"){ ?> active<?php } ?>" data-h_pricing="fix">
+
+        <form action="javascript:void(0);" autocomplete="off">
+
+            <div class="h_pricing_inner">
+
+                <div class="h_pricing_headline">Einmalzahlung</div>
+
+                <div id="h_pricing_fix_all" class="h_input_element">
+                    <div class="h_input_element">
+                        <div class="h_input_element_rows1">
+                            <label for="h_pricing_fix_all_input">Preis in EUR</label>
+                        </div>
+                        <div class="h_input_element_rows2">
+                            <input id="h_pricing_fix_all_input" type="text" data-pricing_input="fix" value="<?php if($h_rows["price_model"] == "fix"){ echo $h_rows["price_1"]; } ?>" placeholder="Preis in EUR"/> &euro;
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="h_input_element">
+                        <div class="h_input_element_rows1">
+                            Du erhältst (70%)
+                        </div>
+                        <div class="h_input_element_rows2">
+                            <input type="text" class="h_pricing_revenue_input" data-pricing_rev="fix" readonly /> €
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div class="h_pricing_headline">Ratenzahlung</div>
+
+                <div id="h_pricing_fix_rate" class="h_input_element">
+                    <div class="h_input_element_rows1">
+                        <label for="h_pricing_fix_rate_input">mtl. Rate in EUR</label>
+                    </div>
+                    <div class="h_input_element_rows2">
+                        <input id="h_pricing_fix_rate_input" type="text" value="<?php if($h_rows["price_model"] == "fix"){ echo $h_rows["price_2"]; } ?>" placeholder="Preis in EUR" /> &euro;
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="h_pricing_fix_rate" class="h_input_element">
+                    <div class="h_input_element_rows1">
+                        <label for="h_pricing_fix_rate_duration_input">Dauer in Monaten</label>
+                    </div>
+                    <div class="h_input_element_rows2">
+                        <input id="h_pricing_fix_rate_duration_input" type="text" value="<?php if($h_rows["price_model"] == "fix"){ echo $h_rows["price_duration"]; } ?>" placeholder="Monate" />
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </form>
+        <div class="h_pricing_element_submit">Übernehmen</div>
+    </div>
+
+    <div class="h_pricing_element<?php if($h_rows["price_model"] == "abo"){ ?> active<?php } ?>" data-h_pricing="abo">
+        <form action="javascript:void(0);" autocomplete="off">
+
+            <div class="h_pricing_inner">
+
+                <div class="h_pricing_headline">monatliche Abrechung</div>
+
+                <div id="h_pricing_abo" class="h_input_element">
+                    <div class="h_input_element_rows1">
+                        <label for="h_pricing_abo_input">Betrag in EUR</label>
+                    </div>
+                    <div class="h_input_element_rows2">
+                        <input id="h_pricing_abo_input" type="text" data-pricing_input="abo" value="<?php if($h_rows["price_model"] == "abo"){ echo $h_rows["price_1"]; } ?>" placeholder="Betrag in EUR" /> &euro;
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="h_input_element">
+                    <div class="h_input_element_rows1">
+                        Du erhältst (70%)
+                    </div>
+                    <div class="h_input_element_rows2">
+                        <input type="text" class="h_pricing_revenue_input" data-pricing_rev="abo" readonly /> €
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+        </form>
+        <div class="h_pricing_element_submit">Übernehmen</div>
+    </div>
+</div>

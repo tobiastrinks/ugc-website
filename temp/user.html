@@ -1,0 +1,207 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+	
+	include($home_dir."temp/html/marketplace_search.html");
+?>
+
+<div id="content">
+	
+	<div id="user_head_img" data-cmstype="img" data-cmspos="hosting_bg" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img($hosting_bg, 0, 0, ""); ?></div>
+	
+	<?php
+		$kurs_created_result = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online') AND user_key='".$user_key."'");
+	
+		if(mysqli_num_rows($user_ergebnis) > 0){
+			
+			if(isset($_SESSION["login"]) OR mysqli_num_rows($kurs_created_result) > 0){
+	?>
+		<div id="content_inner">
+			<div id="user_headline" data-cmstype="text_short" data-cmspos="user_headline" data-cmsglobal="1"><?=$user_fname." ".$user_lname;?></div>
+			
+			<div id="user_general">
+				<div class="user_rows">
+					<div class="user_square user_general_widget">
+						<div class="user_square_inner" id="user_general_thumbnail">
+							<?php 
+								if($user_icon_src != ""){
+							?>
+								<img src="<?=$home_dir?>temp/media/project/<?=$user_icon_src;?>" alt="<?=$user_fname." ".$user_lname;?>" />
+							<?php
+								}
+								else{
+							?>
+							<i class="fa fa-user-o" aria-hidden="true"></i>
+							<?php
+								}
+							?>
+						</div>
+					</div>
+				</div>
+				<div class="user_rows">
+					<div class="user_rows_headline" data-cmstype="text_short" data-cmspos="user_general_headline1" data-cmsglobal="1"><?=$user_general_headline1;?></div>
+					<div class="user_general_widget" id="user_general_descr">
+						<?php
+							if(count($user_descr))
+								echo $user_descr;
+							else{
+							?>
+							Dieser Nutzer hat noch nichts über sich erzählt. :(
+							<?php
+							}
+						?>
+					</div>
+				</div>
+				<div class="user_rows">
+					<div class="user_rows_headline" data-cmstype="text_short" data-cmspos="user_general_headline2" data-cmsglobal="1"><?=$user_general_headline2;?></div>
+					<div id="user_general_contact" data-cw_type="user_contact" data-cw_user_key="<?=$user_key;?>">
+						<div class="user_general_contact_element user_general_widget user_square half" data-cw_type="user_contact_private" data-cw_user_key="<?=$user_key;?>">
+							<div class="user_square_inner">
+								<div class="user_square_inner_icon">
+									<i class="fa fa-comment" aria-hidden="true"></i>
+								</div>
+								<div class="user_square_inner_text">
+									<span>private Nachricht</span>
+								</div>
+							</div>
+						</div>
+						<div class="user_general_contact_element user_general_widget user_square half" data-cw_type="user_contact_support" data-cw_user_key="<?=$user_key;?>">
+							<div class="user_square_inner">
+								<div class="user_square_inner_icon">
+									<i class="fa fa-question-circle" aria-hidden="true"></i>
+								</div>
+								<div class="user_square_inner_text">
+									<span>Kurssupport anfordern</span>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div class="user_general_contact_element user_general_contact_blocked user_general_widget">
+							<span class="user_general_contact_blocked_element" data-cw_block="blocked_0">du wurdest von diesem Nutzer blockiert</span>
+							<span class="user_general_contact_blocked_element" data-cw_block="blocked_1">du hast diesen Nutzer blockiert</span>
+						</div>
+					</div>
+					<?php
+					$soc_net_bool = false;
+					if(	${"user_facebook_link"} 	!= "" ||
+						${"user_twitter_link"} 		!= "" ||
+						${"user_youtube_link"} 		!= "" ||
+						${"user_instagram_link"} 	!= ""){
+						$soc_net_bool = true;
+					}
+					
+					if($soc_net_bool == true){
+					?>
+						<div class="user_rows_headline" data-cmstype="text_short" data-cmspos="user_general_headline3" data-cmsglobal="1"><?=$user_general_headline3;?></div>
+						<div id="user_general_soc_net">
+						
+							<?php
+								for($x_user_soc_net=0; $x_user_soc_net<4; $x_user_soc_net++){
+								
+									$user_icon_soc_net = 0;
+								
+									if($x_user_soc_net == 0){
+										$user_output_soc_net = "facebook";
+										$user_output_soc_net2 = "Facebook";
+									}
+									if($x_user_soc_net == 1){
+										$user_output_soc_net = "twitter";
+										$user_output_soc_net2 = "Twitter";
+									}
+									if($x_user_soc_net == 2){
+										$user_output_soc_net = "youtube";
+										$user_icon_soc_net 	= "youtube-play";
+										$user_output_soc_net2 = "Youtube";
+									}
+									if($x_user_soc_net == 3){
+										$user_output_soc_net = "instagram";
+										$user_output_soc_net2 = "Instagram";
+									}
+										
+									if($user_icon_soc_net == 0)
+										$user_icon_soc_net = $user_output_soc_net;
+									
+									$user_link = ${"user_".$user_output_soc_net."_link"};
+									
+									if( $user_link != ""){
+							?>		
+									<div class="user_general_soc_net_element user_general_widget user_square quarter">
+										<a href="<?=$user_link;?>" target="_blank">
+											<div class="user_square_inner">
+												<div class="user_square_inner_icon">
+													<i class="fa fa-<?=$user_icon_soc_net;?>" aria-hidden="true"></i>
+												</div>
+												<div class="user_square_inner_text">
+													<span><?=$user_output_soc_net2;?></span>
+												</div>
+											</div>
+										</a>
+									</div>
+							<?php
+									}
+								}
+							?>
+							<div class="clear"></div>
+						</div>
+					<?php
+					}	
+					?>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<?php
+				$kurs_list_ergebnis = $kurs_created_result;
+				if(mysqli_num_rows($kurs_list_ergebnis) > 0){
+			?>
+					<div class="user_subheadline">
+						<div class="user_subheadline_img" data-cmstype="img" data-cmspos="course_created_head_img" data-cms_img_align="cover_center" data-cmsglobal="1"><?php cms_load_img($course_created_head_img, 0, 0, "");?></div>
+						<div class="user_subheadline_text" data-cmstype="text_short" data-cmspos="course_created_head_text" data-cmsglobal="1"><?=$course_created_head_text;?></div>
+					</div>
+					
+					<div id="user_course_create">
+					
+						<div id="user_course_create_inner">
+							<?php
+								include($home_dir."temp/html/kurs_list.html");
+							?>
+						</div>
+					</div>
+			<?php
+				}
+			?>
+			<?php
+				$kurs_tile_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online') AND ID IN (SELECT kurs_id FROM user_kurse WHERE user_key='".$user_key."' AND rights='admin')");
+				if(isset($_SESSION["login"]) AND mysqli_num_rows($kurs_tile_ergebnis) > 0){
+			?>
+					<div class="user_subheadline">
+						<div class="user_subheadline_img" data-cmstype="img" data-cmspos="course_joined_head_img" data-cms_img_align="cover_center" data-cmsglobal="1"><?php cms_load_img($course_joined_head_img, 0, 0, "");?></div>
+						<div class="user_subheadline_text" data-cmstype="text_short" data-cmspos="course_joined_head_text" data-cmsglobal="1"><?=$course_joined_head_text;?></div>
+					</div>
+					
+					<div id="user_course_joined">
+					
+						<div id="user_course_joined_inner">
+							<?php
+								include($home_dir."temp/html/kurs_tile.html");
+							?>
+						</div>
+					</div>
+			<?php
+				}
+			?>
+		</div>
+	<?php
+			}
+			else{
+				?>
+				<div class="user_error">
+					Dieses Nutzerprofil ist nicht öffentlich sichtbar. Bitte melde dich an.
+				</div>
+				<?php
+			}
+		}
+		
+		include($home_dir."temp/html/footer.html");
+	?>
+</div>

@@ -1,0 +1,1 @@
+<?php $cms_desktop_dir = "/"; $cms_mobile_dir = "/mobile/"; ?>

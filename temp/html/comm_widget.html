@@ -1,0 +1,1521 @@
+<div id="comm_widget_open">
+	<div id="comm_widget_open_inner">
+		<i id="comm_widget_open_icon" class="fa fa-comment" aria-hidden="true"></i>
+		<div id="comm_widget_open_not" data-cw_type="notcounter_global"></div>
+	</div>
+	<div id="comm_widget_push_active"><i title="Push-Benachrichtigungen einschalten" class="fa fa-bell" aria-hidden="true"></i></div>
+</div>
+<div id="comm_widget_push">
+	<div id="comm_widget_push_mute"><i title="Push-Benachrichtigungen ausschalten" class="fa fa-bell-slash" aria-hidden="true"></i></div>
+	<div id="comm_widget_push_inner">
+		<div id="comm_widget_push_img_standard" class="comm_widget_push_img comm_widget_push_inner_rows" data-lc_transl="chatroom_icon"></div>
+		<div id="comm_widget_push_img_unigrow" class="comm_widget_push_img comm_widget_push_inner_rows" data-cmstype="img" data-cmspos="unigrow_push_img" data-cmsglobal="1"><?php cms_load_img($unigrow_push_img, 0, 0, ""); ?></div>
+		<div id="comm_widget_push_text" class="comm_widget_push_inner_rows">
+			<div id="comm_widget_push_title">
+				<p id="comm_widget_push_title1"></p>
+				<p id="comm_widget_push_title2"></p>
+			</div>
+			<div id="comm_widget_push_content"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div id="comm_widget_push_input">
+		<form action="javascript:void(0);">
+			<textarea placeholder="Antworten"></textarea><button type="submit"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+			<div class="clear"></div>
+		</form>
+	</div>
+</div>
+
+<div id="comm_widget_blk"></div>
+
+<div id="comm_widget" class="small">
+
+	<div id="comm_widget_nav">
+		
+		<?php
+			if(isset($_SESSION["login"])){
+		?>
+			<div class="comm_widget_nav_elements" data-content="chatrooms">
+				<div class="comm_widget_nav_elements_icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+				<div class="comm_widget_nav_elements_title">CHATROOMS</div>
+			</div>
+			<div class="comm_widget_nav_elements" data-content="nachrichten">
+				<div class="comm_widget_nav_elements_icon"><i class="fa fa-comment" aria-hidden="true"></i></div>
+				<div class="comm_widget_nav_elements_title">NACHRICHTEN</div>
+			</div>
+			<div class="comm_widget_nav_elements" data-content="support">
+				<div class="comm_widget_nav_elements_icon"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
+				<div class="comm_widget_nav_elements_title">SUPPORT</div>
+			</div>
+			<div class="comm_widget_nav_elements" data-content="search">
+				<div class="comm_widget_nav_elements_icon"><i class="fa fa-search" aria-hidden="true"></i></div>
+				<div class="comm_widget_nav_elements_title">SUCHE</div>
+			</div>
+			<?php
+				if($device == "desktop"){
+			?>
+				<div class="clear"></div>
+				
+				<div id="comm_widget_nav_size" class="comm_widget_nav_elements comm_widget_nav_elements_bottom max">
+					<div class="comm_widget_nav_elements_icon min"><i class="fa fa-compress" aria-hidden="true"></i></div>
+					<div class="comm_widget_nav_elements_icon max"><i class="fa fa-expand" aria-hidden="true"></i></div>
+					<div class="comm_widget_nav_elements_title min">MINIMIEREN</div>
+					<div class="comm_widget_nav_elements_title max">MAXIMIEREN</div>
+				</div>
+			<?php
+				}
+			}
+			?>
+			<div id="comm_widget_close" class="comm_widget_nav_elements">
+				<div class="comm_widget_nav_elements_icon"><i class="fa fa-times" aria-hidden="true"></i></div>
+			</div>
+			<?php
+				if($device == "mobile"){
+			?>
+				<div class="clear"></div>
+			<?php
+				}
+			?>
+	</div>
+	
+	<div id="comm_widget_content">
+		
+		<div id="comm_widget_content_loading">Lädt</div>
+		
+		<div id="comm_widget_img">
+			<div id="comm_widget_inner">
+				<div id="comm_widget_img_cancel" title="Zurück"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+				<div id="comm_widget_img_content">
+					<div id="comm_widget_img_content_inner"></div>
+				</div>
+				<div id="comm_widget_img_loading">Lädt</div>
+			</div>
+		</div>
+		
+		<div id="comm_widget_content_menu_wrapper">
+		
+			<div id="comm_widget_content_chatrooms" class="comm_widget_content_elements">
+				<div class="comm_widget_content_elements_inner">
+					<div id="comm_widget_content_chatrooms_menu" class="comm_widget_content_menu">
+						
+						<div class="comm_widget_content_menu_headline">CHATROOMS</div>
+						
+						<div id="comm_widget_content_chatrooms_kurse" class="comm_widget_content_widget comm_widget_content_chatrooms_menu_elements">
+							
+							<div class="comm_widget_content_widget_title">
+								KURSCHATS
+							</div>
+							
+							<div class="comm_widget_content_chatrooms_menu_elements_content">
+							
+								<div id="comm_widget_content_chatrooms_kurse_list"></div>
+								<div class="comm_widget_content_chatrooms_menu_elements_list_more">Mehr anzeigen...</div>
+							</div>
+							<div class="comm_widget_content_widget_empty">
+								Hier erscheinen Gruppen deiner Kurse...
+							</div>
+							
+							<!-- clonable -->
+							<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_list_element clonable">
+								
+								<div data-cw_type="notcounter"></div>
+								
+								<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+									<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+								</div>
+								
+								<div class="comm_widget_chatroom_list_element_text">
+									<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+										<div data-cw_type="title" data-cw_title="content"></div>
+										<div data-cw_type="first_msg"></div>
+									</div>
+									
+									<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+										<!--<div data-cw_type="category"></div>-->
+										<div data-cw_type="timestamp"></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						
+						<div id="comm_widget_content_chatrooms_eigene_gruppen" class="comm_widget_content_widget comm_widget_content_chatrooms_menu_elements">
+						
+							<div class="comm_widget_content_widget_title">
+								<span>DEINE GRUPPEN</span>
+								<span id="comm_widget_content_chatrooms_eigene_gruppen_add"><i class="fa fa-plus" aria-hidden="true" title="Gruppe erstellen"></i></span>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="comm_widget_content_chatrooms_menu_elements_content">
+							
+								<div id="comm_widget_content_chatrooms_eigene_gruppen_list"></div>
+								<div class="comm_widget_content_chatrooms_menu_elements_list_more">Mehr anzeigen...</div>
+							</div>
+							<div class="comm_widget_content_widget_empty">
+								Hier erscheinen deine Gruppen...
+							</div>
+							
+							<!-- clonable -->
+							<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_list_element clonable">
+								
+								<div data-cw_type="notcounter"></div>
+								
+								<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+									<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+								</div>
+								<div class="comm_widget_chatroom_list_element_text">
+									<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+										<div data-cw_type="title" data-cw_title="content"></div>
+										<div data-cw_type="first_msg"></div>
+									</div>
+									
+									<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+										<!--<div data-cw_type="category" data-cw_hide="removed,left"></div>-->
+										<div data-cw_type="timestamp" data-cw_hide="removed,left"></div>
+										<div class="comm_widget_chatroom_list_element_user_leave_remove"><span data-cw_type="user_leave_remove">Löschen <i class="fa fa-trash" aria-hidden="true"></i></span></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							
+						</div>
+						
+						<div id="comm_widget_content_chatrooms_gruppe_beitreten" class="comm_widget_content_widget comm_widget_content_chatrooms_menu_elements">
+							
+							<div class="comm_widget_content_widget_title">
+								<span>EINER GRUPPE BEITRETEN</span>
+							</div>
+							
+							<div class="comm_widget_content_chatrooms_menu_elements_content">
+								
+								<div id="comm_widget_content_chatrooms_gruppe_beitreten_search" class="comm_widget_content_search_form">
+									<form action="javascript:void(0);">
+										<input type="text" data-placeholder_standard="Gruppe suchen" data-placeholder_empty="Bitte Gruppennamen eingeben" /><button type="submit">Suchen</button>
+									</form>
+								</div>
+								
+								<div id="comm_widget_content_chatrooms_gruppe_beitreten_popular">
+									<div id="comm_widget_content_chatrooms_gruppe_beitreten_popular_list"></div>
+									<div class="clear"></div>
+								</div>
+								
+								<div id="comm_widget_content_chatrooms_gruppe_beitreten_search_content">
+								
+									<p id="comm_widget_content_chatrooms_gruppe_beitreten_search_content_cancel">Zurück</p>
+									<div id="comm_widget_content_chatrooms_gruppe_beitreten_search_content_list"></div>
+									<div id="comm_widget_content_chatrooms_gruppe_beitreten_search_content_no_result">Keine Ergebnisse</div>
+									<div id="comm_widget_content_chatrooms_gruppe_beitreten_search_content_loading">Lädt</div>
+								</div>
+							</div>
+							
+							
+							<!-- clonable -->
+							<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_gruppe_beitreten_list_element_bubble comm_widget_chatroom_list_element clonable">
+								<div class="comm_widget_chatroom_gruppe_beitreten_list_element_bubble_icon" data-cw_type="icon"></div>
+								
+								<div class="comm_widget_chatroom_gruppe_beitreten_list_element_bubble_text">
+									<p class="comm_widget_chatroom_gruppe_beitreten_list_element_bubble_text_title" data-cw_type="title"></p>
+									<p class="comm_widget_chatroom_gruppe_beitreten_list_element_bubble_text_member">(<span data-cw_type="member"></span> Nutzer)</p>
+								</div>
+							</div>
+							
+							<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_gruppe_beitreten_list_element_search comm_widget_chatroom_list_element clonable">
+								
+								<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+									<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+								</div>
+								<div class="comm_widget_chatroom_list_element_text">
+									<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+										<div>
+											<span data-cw_type="title" data-cw_title="content"></span>
+										</div>
+										<div class="comm_widget_chatroom_gruppe_beitreten_list_element_search_member"><span data-cw_type="member"></span> Nutzer</div>
+									</div>
+									
+									<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+										<div data-cw_type="join_button">Beitreten</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div id="comm_widget_content_chatrooms_chatbox" class="comm_widget_content_chatbox_wrapper">
+						<div id="comm_widget_content_chatrooms_chatbox_area" class="comm_widget_content_widget comm_widget_content_chatbox_area"></div>
+					</div>
+				</div>
+				
+				<div id="comm_widget_create_chatroom">
+					<div id="comm_widget_create_chatroom_inner">
+						
+						<div class="comm_widget_content_menu_headline">
+							<div id="comm_widget_create_chatroom_cancel" title="Zurück"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+							GRUPPE ERSTELLEN
+						</div>
+						
+						<div class="comm_widget_create_chatroom_element">
+							<div class="comm_widget_create_chatroom_element_content">
+								<div class="comm_widget_create_chatroom_img"><i class="fa fa-users" aria-hidden="true"></i></div>
+								<div class="comm_widget_create_chatroom_element_content_dropzone_wrapper"></div>
+								
+								<div id="comm_widget_create_chatroom_icon_wrapper">
+									<div class="comm_widget_create_chatroom_input">
+										<input type="text" placeholder="icon" id="comm_widget_create_chatroom_icon"/>
+									</div>
+									<div class="comm_widget_create_chatroom_input">
+										<input type="text" placeholder="icon_type" id="comm_widget_create_chatroom_icon_type"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="comm_widget_create_chatroom_element">
+							<div class="comm_widget_create_chatroom_element_content">
+								<div class="comm_widget_create_chatroom_input">
+									<input type="text" placeholder="Titel" id="comm_widget_create_chatroom_title"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="comm_widget_create_chatroom_element" id="comm_widget_create_chatroom_user_join_wrapper">
+							
+							<p class="comm_widget_create_chatroom_element_headline">Nutzerbeitritt</p>
+							
+							<div class="comm_widget_create_chatroom_element_content" id="comm_widget_create_chatroom_user_join">
+								<span data-cw_val="open" class="active">Offen für alle</span><br />
+								<span data-cw_val="invite">nur auf Einladung</span>
+							</div>
+						</div>
+						
+						<div class="comm_widget_create_chatroom_element" id="comm_widget_create_chatroom_category_wrapper">
+							
+							<p class="comm_widget_create_chatroom_element_headline">Kategorie</p>
+							
+							<div class="comm_widget_create_chatroom_element_content">
+								<select name="category" id="comm_widget_create_chatroom_category">
+									<?php
+										$ergebnis = $mysqli_project->query("SELECT ID, title FROM category ORDER BY title ASC");
+										$x=0;
+										while($row = $ergebnis->fetch_assoc()){
+											?>
+											<option value="<?=$row["ID"];?>"><?=$row["title"];?></option>
+											<?php
+											$x++;
+										}
+									?>
+								</select>
+							</div>
+						</div>
+						
+						<?php
+							if(rights($_SESSION["lc_user_key"], "root")){
+						?>
+						<div class="comm_widget_create_chatroom_element" id="comm_widget_create_chatroom_admin_settings_wrapper">
+							
+							<p class="comm_widget_create_chatroom_element_headline">Admin Settings</p>
+							
+							<div class="comm_widget_create_chatroom_element_content">
+							
+								<input id="comm_widget_create_chatroom_admin_create" type="checkbox" name="admin_create" />
+								<label for="comm_widget_create_chatroom_admin_create">admin_create </label>
+								<br />
+							</div>
+						</div>
+						<?php
+							}
+						?>
+						
+						<div id="comm_widget_create_chatroom_submit">
+							Gruppe erstellen
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="comm_widget_content_nachrichten" class="comm_widget_content_elements">
+				<div class="comm_widget_content_elements_inner">
+					<div id="comm_widget_content_nachrichten_menu" class="comm_widget_content_menu">
+						
+						<div class="comm_widget_content_menu_headline">NACHRICHTEN</div>
+						
+						<div id="comm_widget_content_nachrichten_privat" class="comm_widget_content_widget">
+							
+							<div class="comm_widget_content_widget_title">
+								<span>PRIVATE KONVERSATIONEN</span>
+							</div>
+							
+							<div class="comm_widget_content_nachrichten_privat_content">
+								
+								<div id="comm_widget_content_nachrichten_privat_search" class="comm_widget_content_search_form">
+									<form action="javascript:void(0);" class="comm_widget_content_search_form">
+										<input type="text" data-placeholder_standard="Durchsuchen" data-placeholder_empty="Nutzernamen eingeben" />
+									</form>
+								</div>
+								
+								<div id="comm_widget_content_nachrichten_privat_list"></div>
+								<div id="comm_widget_content_nachrichten_privat_search_no_result">Keine Treffer</div>
+							</div>
+							
+							<div class="comm_widget_content_widget_empty">Hier erscheinen deine privaten Konversationen</div>
+							
+							<!-- clonable -->
+							<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_list_element clonable">
+								
+								<div data-cw_type="notcounter"></div>
+								
+								<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+									<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+								</div>
+								<div class="comm_widget_chatroom_list_element_text">
+									<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+										<div data-cw_type="title" data-cw_title="content"></div>
+										<div data-cw_type="first_msg"></div>
+									</div>
+									
+									<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+									
+										<div data-cw_type="timestamp"></div>
+										
+										<div class="comm_widget_chatroom_list_element_user_status" data-lc_type="user_status">
+											<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+											<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="comm_widget_content_nachrichten_chatbox" class="comm_widget_content_chatbox_wrapper">
+						<div id="comm_widget_content_nachrichten_chatbox_area" class="comm_widget_content_widget comm_widget_content_chatbox_area"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="comm_widget_content_support" class="comm_widget_content_elements">
+				<div class="comm_widget_content_elements_inner">
+					<div id="comm_widget_content_support_menu" class="comm_widget_content_menu">
+						
+						<?php
+							if(isset($_SESSION["login"])){
+						?>
+							
+							<div class="comm_widget_content_menu_headline">SUPPORT</div>
+							
+							<div id="comm_widget_content_support_kursersteller" class="comm_widget_content_widget">
+								
+								<div class="comm_widget_content_widget_title">
+									<span>KURSERSTELLER</span>
+								</div>
+								
+								<div id="comm_widget_content_support_kursersteller_content">
+									<div id="comm_widget_content_support_kursersteller_content_list"></div>
+								</div>
+								<div class="comm_widget_content_widget_empty">Hier erscheinen deine Konversationen mit Kurserstellern</div>
+								
+							</div>
+						
+							<div id="comm_widget_content_support_plattform" class="comm_widget_content_widget">
+								
+								<div class="comm_widget_content_widget_title">
+									<span>UNIGROW-TEAM</span>
+								</div>
+								
+								<div id="comm_widget_content_support_plattform_content">
+									
+									<?php
+										if(rights( $_SESSION["lc_user_key"], "root" ) OR rights( $_SESSION["lc_user_key"], "lc_mod" ) OR rights( $_SESSION["lc_user_key"], "supporter" )){
+									?>
+									
+									<div id="comm_widget_content_support_plattform_list"></div>
+									
+									<!-- clonable -->
+									<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_list_element clonable">
+										
+										<div data-cw_type="notcounter"></div>
+										
+										<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+											<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+										</div>
+										<div class="comm_widget_chatroom_list_element_text">
+											<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+												<div data-cw_type="title" data-cw_title="content"></div>
+												<div data-cw_type="first_msg"></div>
+											</div>
+											
+											<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+												
+												<div data-cw_type="timestamp"></div>
+												<div class="comm_widget_chatroom_list_element_user_leave_remove"><span data-cw_type="user_leave_remove">Löschen <i class="fa fa-trash" aria-hidden="true"></i></span></div>
+												
+												<div class="comm_widget_chatroom_list_element_user_status" data-lc_type="user_status">
+													<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+													<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+												</div>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									
+									<?php
+										}
+										else{
+									?>
+									
+									<div data-cw_type="chatroom_list_element" class="comm_widget_chatroom_list_element">
+											
+										<div data-cw_type="notcounter"></div>
+										
+										<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+											<div data-cw_type="icon" data-cmstype="img" data-cmspos="cw_support_plattform" data-cmsglobal="1"><?php cms_load_img($cw_support_plattform, 0, 0, ""); ?></div>
+										</div>
+										<div class="comm_widget_chatroom_list_element_text">
+											<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+												<div data-cw_type="mod_status" data-lc_type="user_status">
+													<div data-cw_type="mod_status_online" data-lc_type="user_status_online">
+														<div><span data-cw_type="title"><i class="fa fa-circle" aria-hidden="true"></i> Wir sind online</span></div>
+														<div data-cw_type="first_msg">Nimm direkt mit uns Kontakt auf.</div>
+													</div>
+													<div data-cw_type="mod_status_offline" data-lc_type="user_status_offline">
+														<div><span><i class="fa fa-circle" aria-hidden="true"></i> Wir sind offline</span></div>
+														<div data-cw_type="first_msg">Hinterlasse uns eine Nachricht.</div>
+													</div>
+												</div>
+											</div>
+											<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+												<div data-cw_type="timestamp" data-lc_transl="timestamp"></div>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<div class="clear"></div>
+									</div>
+									<?php 
+										}
+									?>
+								</div>
+								
+							</div>
+						<?php
+							}
+						?>
+					</div>
+					
+					
+					<!--clonable-->
+					<div data-cw_type="chatroom_list_element" class="comm_widget_content_support_kursersteller_list_element comm_widget_chatroom_list_element clonable">
+						
+						<div data-cw_type="notcounter"></div>
+						
+						<div class="comm_widget_chatroom_list_element_icon comm_widget_chatroom_list_element_row">
+							<div data-cw_type="icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+						</div>
+						<div class="comm_widget_chatroom_list_element_text">
+							<div class="comm_widget_chatroom_list_element_text1 comm_widget_chatroom_list_element_row">
+								<div class="comm_widget_content_support_kursersteller_list_element_title" data-cw_title="content"><span data-cw_type="title" data-lc_transl="user_name"></span><span data-cw_type="kurse_wrapper"> - <span data-cw_type="kurse"></span></span></div>
+								<div data-cw_type="first_msg"></div>
+							</div>
+							
+							<div class="comm_widget_chatroom_list_element_text2 comm_widget_chatroom_list_element_row">
+								<div class="comm_widget_chatroom_list_element_user_status" data-lc_type="user_status">
+									<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+									<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div id="comm_widget_content_support_chatbox" class="comm_widget_content_chatbox_wrapper">
+						<div id="comm_widget_content_support_chatbox_area" class="comm_widget_content_widget comm_widget_content_chatbox_area"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="comm_widget_content_search" class="comm_widget_content_elements">
+				
+				<div class="comm_widget_content_menu_headline">UNIGROW DURCHSUCHEN</div>
+				
+				<div class="comm_widget_content_widget">
+					<div id="comm_widget_search_form" class="comm_widget_content_search_form">
+						<form action="javascript:void(0);">
+							<input type="text" placeholder="nach Nutzern suchen"/><button type="submit">Suchen</button>
+						</form>
+					</div>
+				</div>
+				
+				<div id="comm_widget_search_user" class="comm_widget_content_widget">
+								
+					<div class="comm_widget_content_widget_title">
+						<span>NUTZER</span>
+					</div>
+					
+					<div class="comm_widget_search_subtitle comm_widget_search_recommend">
+						<span>zuletzt kontaktiert</span>
+					</div>
+					
+					<div class="comm_widget_search_lists">
+						<div id="comm_widget_search_user_list" class="comm_widget_search_results"></div>
+						<div id="comm_widget_search_user_recommend_list" class="comm_widget_search_recommend"></div>
+					</div>
+					<div class="comm_widget_search_empty comm_widget_search_results">
+						keine Benutzer gefunden
+					</div>
+					
+					<div class="comm_widget_search_user_list_element clonable" data-cw_link="user_profile">
+						<div class="comm_widget_search_user_list_element_icon comm_widget_search_user_list_element_row">
+							<div data-cw_type="user_icon" data-lc_transl="user_icon"></div>
+						</div>
+						<div class="comm_widget_search_user_list_element_text comm_widget_search_user_list_element_row">
+							<p class="comm_widget_search_user_list_element_text_name">
+								<span data-cw_type="user_name"></span>
+								<span class="small_hide">
+									<span data-cw_type="user_name_empty"> (</span><span data-cw_type="user_username"></span><span data-cw_type="user_name_empty">)</span>
+								</span>
+							</p>
+							<p class="comm_widget_search_user_list_element_text_status">
+								<span data-lc_type="user_status">
+									<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+									<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+								</span>
+							</p>
+						</div>
+						<div class="comm_widget_search_user_list_element_buttons comm_widget_search_user_list_element_row" data-cw_type="user_contact">
+							<div data-cw_type="user_contact_private" class="comm_widget_search_user_list_element_buttons_rows" title="private Nachricht">
+								<i class="fa fa-comment" aria-hidden="true"></i>
+							</div>
+							<div data-cw_type="user_contact_support" class="comm_widget_search_user_list_element_buttons_rows" title="Support">
+								<i class="fa fa-question-circle" aria-hidden="true"></i>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			
+			
+			<!-- chatbox_clonable -->
+			
+			<div id="comm_widget_chatbox_clonable" class="comm_widget_chatbox" data-lc_type="chatbox">
+				<div data-lc_type="head">
+					
+					<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows" title="Zurück">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+					
+					<div class="comm_widget_chatbox_head_icon comm_widget_chatbox_head_rows" data-lc_type="chatroom_id" data-lc_transl="chatroom_icon" data-cw_link="cw_img"></div>
+					
+					<div class="comm_widget_chatbox_head_text comm_widget_chatbox_head_rows">
+					
+						<div class="comm_widget_chatbox_head_text1">
+						
+							<div class="comm_widget_chatbox_head_title comm_widget_chatbox_head_text_rows_left" data-lc_type="chatroom_title" data-cw_title="content"></div>
+							<div class="comm_widget_chatbox_head_buttons comm_widget_chatbox_head_text_rows_right">
+								<span class="comm_widget_chatbox_head_buttons_notifications">
+									<span data-cw_type="notifications" title="Benachrichtigungen ausschalten" data-cw_not="1"><i class="fa fa-bell" aria-hidden="true"></i></span>
+									<span data-cw_type="notifications" title="Benachrichtigungen einschalten" data-cw_not="0"><i class="fa fa-bell-slash" aria-hidden="true"></i></span>
+								</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="comm_widget_chatbox_head_text2">
+							<div class="comm_widget_chatbox_head_status comm_widget_chatbox_head_text_rows_left">
+								
+								<div data-lc_type="user_status">
+									<p data-lc_type="user_status_online">Online</p>
+									<p data-lc_type="user_status_offline">Offline</p>
+								</div>
+								<div><span data-lc_type="user_count_online"></span>/<span data-lc_type="user_count"></span> Online</div>
+							</div>
+							<div class="comm_widget_chatbox_head_activity comm_widget_chatbox_head_text_rows_right">
+								<span data-lc_type="user_activity" data-lc_activity_text="/user_key/ schreibt..."></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div data-lc_type="info">
+					<div data-lc_type="info_user_wrapper">
+						<div data-lc_type="info_user" class="comm_widget_chatbox_user_info clonable">
+						
+							<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+							<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+								<p data-lc_type="user_key" data-lc_transl="user_name"></p>
+								<div data-lc_type="user_status">
+									<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+									<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+								<p data-cw_type="rights_output"></p>
+								<p data-lc_type="user_invite">Eingeladen</p>
+							</div>
+							<div class="clear"></div>
+							
+						</div>
+					</div>
+					
+					<div class="comm_widget_chatbox_user_info_action">
+					
+						<div class="comm_widget_chatbox_user_info_action_content comm_widget_chatbox_user_info_action_element">
+							<p data-cw_type="chatroom_settings">Einstellungen</p>
+							<p data-cw_type="invite_user">Nutzer einladen</p>
+							<p data-cw_type="add_user">Nutzer hinzufügen</p>
+							<p data-cw_type="open">Chatroom öffnen</p>
+							<p data-cw_type="close">Chatroom schließen</p>
+							<p data-cw_type="clear">Chatverlauf leeren</p>
+							<p data-cw_type="remove">Chatroom löschen</p>
+							<p data-cw_type="leave">Chatroom verlassen</p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_user comm_widget_chatbox_user_info_action_element">
+							<p data-cw_type="user_info_more" data-cw_link="user_profile">Mehr über <span data-lc_transl="user_name"></span></p>
+							<p data-cw_type="add_admin">zum Admin machen</p>
+							<p data-cw_type="remove_admin">Adminrechte entfernen</p>
+							<p data-cw_type="remove_user">Entfernen</p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_confirm comm_widget_chatbox_user_info_action_element" data-cw_type="confirm">
+							<p data-cw_type="confirm_button">Bestätigen: <span data-cw_type="confirm_msg"></span></p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_button">
+							<p class="comm_widget_chatbox_user_info_action_button_text">Aktionen</p>
+							<p class="comm_widget_chatbox_user_info_action_button_cancel"><i class="fa fa-times" aria-hidden="true"></i></p>
+						</div>
+					</div>
+					
+					<div class="comm_widget_chatbox_settings comm_widget_chatroom_edit_element">
+						<div class="comm_widget_chatroom_edit_element_inner">
+						
+							<div class="comm_widget_chatbox_settings_element">
+								<div class="comm_widget_chatbox_settings_element_content">
+									<div data-cw_type="settings_img" data-lc_type="chatroom_id" data-lc_transl="chatroom_icon"></div>
+									<div class="comm_widget_chatbox_settings_element_content_dropzone_wrapper"></div>
+									
+									<div data-cw_type="settings_mod">
+										<div class="comm_widget_chatbox_settings_input">
+											<input type="text" placeholder="icon" data-cw_type="settings_mod_icon" />
+										</div>
+										<div class="comm_widget_chatbox_settings_input">
+											<input type="text" placeholder="icon_type" data-cw_type="settings_mod_icon_type" />
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="comm_widget_chatbox_settings_element" data-cw_type="settings_title">
+								<div class="comm_widget_chatbox_settings_element_content">
+									<div class="comm_widget_chatbox_settings_input">
+										<input type="text" placeholder="Titel" data-cw_type="settings_title_input"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="comm_widget_chatbox_settings_element" data-cw_type="settings_user_join">
+								
+								<p class="comm_widget_chatbox_settings_element_headline">Nutzerbeitritt</p>
+								
+								<div class="comm_widget_chatbox_settings_element_content">
+									<span data-cw_val="open"> Offen für alle</span><br />
+									<span data-cw_val="invite">nur auf Einladung</span>
+								</div>
+							</div>
+							
+							<div class="comm_widget_chatbox_settings_element" data-cw_type="settings_category">
+								
+								<p class="comm_widget_chatbox_settings_element_headline">Kategorie</p>
+								
+								<div class="comm_widget_chatbox_settings_element_content">
+									<select name="category">
+										<?php
+											$ergebnis = $mysqli_project->query("SELECT ID, title FROM category ORDER BY title ASC");
+											$x=0;
+											while($row = $ergebnis->fetch_assoc()){
+												?>
+												<option value="<?=$row["ID"];?>"><?=$row["title"];?></option>
+												<?php
+												$x++;
+											}
+										?>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="comm_widget_chatbox_add_user comm_widget_chatroom_edit_element">
+						<div class="comm_widget_chatroom_edit_element_inner">
+							
+							<div class="comm_widget_content_widget">
+								
+								<div class="comm_widget_content_widget_title">
+									<span data-cw_show="add">Nutzer hinzufügen</span>
+									<span data-cw_show="invite">Nutzer einladen</span>
+								</div>
+								
+								<div class="comm_widget_content_widget_content">
+									
+									<div class="comm_widget_chatbox_add_user_search">
+										<input class="comm_widget_chatbox_add_user_search_input" type="text" placeholder="Nach Nutzername suchen..." />
+										<span class="comm_widget_chatbox_add_user_search_submit"><i class="fa fa-search" aria-hidden="true"></i></span>
+										<div class="clear"></div>
+									</div>
+									
+									<div class="comm_widget_chatbox_add_user_results">
+										
+										<div class="comm_widget_chatbox_add_user_results_element_wrapper">
+										
+											<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_results_element">
+												<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+												<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+													<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+													<div data-lc_type="user_status">
+														<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+														<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+													</div>
+												</div>
+												<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+													<p data-cw_link="user_profile">zum Profil</p>
+													<p data-cw_type="member">bereits Mitglied</p>
+													<p data-cw_type="invited">bereits eingeladen</p>
+													<p data-cw_type="blocked_0">blockierst du</p>
+													<p data-cw_type="blocked_1">blockiert dich</p>
+												</div>
+												<div class="clear"></div>
+											</div>
+											
+										</div>
+										<div class="comm_widget_chatbox_add_user_results_no_results">Keine Ergebnisse</div>
+									</div>
+									
+									<div class="comm_widget_chatbox_add_user_vorschlag">
+										<p class="comm_widget_chatbox_add_user_headline">zuletzt kontaktiert</p>
+										<div class="comm_widget_chatbox_add_user_vorschlag_element_wrapper">
+										
+											<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_vorschlag_element">
+												<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+												<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+													<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+													<div data-lc_type="user_status">
+														<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+														<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+													</div>
+												</div>
+												<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+													<p data-cw_link="user_profile">zum Profil</p>
+													<p data-cw_type="member">bereits Mitglied</p>
+													<p data-cw_type="invited">bereits eingeladen</p>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							
+							
+							<div class="comm_widget_chatbox_add_user_list comm_widget_content_widget">
+							
+								<p class="comm_widget_content_widget_title">
+									<span>Ausgewählte Nutzer</span>
+								</p>
+								
+								<div class="comm_widget_chatbox_add_user_list_element_wrapper">
+									<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_list_element">
+										<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+										<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+											<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+											<div data-lc_type="user_status">
+												<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+												<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+											</div>
+										</div>
+										<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+											<p data-cw_link="user_profile">zum Profil</p>
+											<p data-cw_type="user_add_remove">Löschen</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<p class="comm_widget_chatbox_add_user_list_submit">Bestätigen</p>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_history" data-lc_type="history">
+					<div data-lc_type="history_load_more">Weitere laden</div>
+					<div data-lc_type="history_msg">
+						<div class="comm_widget_content_chat_history_msg_subline">
+							<span data-lc_type="history_msg_user_src" data-lc_transl="user_name" data-cw_link="user_profile"></span> - <span data-lc_type="history_msg_timestamp" data-lc_transl="timestamp"></span>
+						</div>
+						<div data-lc_type="history_msg_content" class="comm_widget_content_chat_history_msg_content"><p data-lc_type="history_msg_content_element"></p></div>
+						<div class="clear"></div>
+					</div>
+					<div data-lc_type="history_report">
+						<p data-lc_type="history_report_timestamp" data-lc_transl="timestamp"></p>
+						<p data-lc_type="history_report_content" data-cw_link="user_profile"></p>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_form">
+					<form data-lc_type="form" action="javascript:void(0);">
+						
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_input">
+							<textarea 	data-lc_type="form_input" 
+										data-lc_placeholder_open="Deine Nachricht" 
+										data-lc_placeholder_close="Chatroom geschlossen"
+										data-lc_placeholder_removed="Du wurdest entfernt."
+										data-lc_placeholder_left="Du hast den Chatroom verlassen."></textarea>
+						</div>
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_submit">
+							<button data-lc_type="form_submit" type="submit"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div data-lc_type="invite" class="comm_widget_content_chat_invite">
+					<div class="comm_widget_content_chat_invite_inner">
+						<div class="comm_widget_content_chat_invite_headline">Du wurdest eingeladen</div>
+						<div class="comm_widget_content_chat_invite_content">
+							<div class="comm_widget_content_chat_invite_content_elements"><div data-lc_type="invite_accept" title="Annehmen"><i class="fa fa-check" aria-hidden="true"></i></div></div>
+							<div class="comm_widget_content_chat_invite_content_elements"><div data-lc_type="invite_reject" title="Ablehnen"><i class="fa fa-times" aria-hidden="true"></i></div></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="comm_widget_chatbox_private_clonable" class="comm_widget_chatbox comm_widget_chatbox_private" data-lc_type="chatbox">
+				
+				<div data-lc_type="head" data-lc_empty="hidden">
+					
+					<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows" title="Zurück">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+					
+					<div class="comm_widget_chatbox_head_icon comm_widget_chatbox_head_rows" data-lc_type="user_key" data-lc_transl="user_icon" data-cw_link="cw_img"></div>
+					
+					<div class="comm_widget_chatbox_head_text comm_widget_chatbox_head_rows">
+					
+						<div class="comm_widget_chatbox_head_text1">
+						
+							<div class="comm_widget_chatbox_head_title comm_widget_chatbox_head_text_rows_left" data-lc_type="chatroom_title" data-cw_link="user_profile" data-cw_title="content"></div>
+							<div class="comm_widget_chatbox_head_buttons comm_widget_chatbox_head_text_rows_right">
+								<span class="comm_widget_chatbox_head_buttons_notifications">
+									<span data-cw_type="notifications" title="Benachrichtigungen ausschalten" data-cw_not="1"><i class="fa fa-bell" aria-hidden="true"></i></span>
+									<span data-cw_type="notifications" title="Benachrichtigungen einschalten" data-cw_not="0"><i class="fa fa-bell-slash" aria-hidden="true"></i></span>
+								</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="comm_widget_chatbox_head_text2">
+							<div class="comm_widget_chatbox_head_status comm_widget_chatbox_head_text_rows_left">
+								
+								<div data-lc_type="user_status">
+									<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+									<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_head_activity comm_widget_chatbox_head_text_rows_right">
+								<span data-lc_type="user_activity" data-lc_activity_text="schreibt..."></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					
+					</div>
+					<div class="clear"></div>
+					
+				</div>
+				<div class="comm_widget_chatbox_empty_cancel" data-lc_empty="visible">
+					<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows" title="Zurück">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div class="comm_widget_chatbox_private_empty" data-lc_empty="visible">
+					<div class="comm_widget_chatbox_user_icon" data-lc_type="user_key" data-lc_transl="user_icon"></div>
+					<div class="comm_widget_chatbox_private_empty_name" data-lc_type="user_key" data-lc_transl="user_name"></div>
+					<div class="comm_widget_chatbox_private_empty_status" data-lc_type="user_status">
+						<p data-lc_type="user_status_online">Ich bin online!</p>
+						<p data-lc_type="user_status_offline">Ich bin offline!</p>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_history" data-lc_type="history" data-lc_empty="hidden" data-lc_report_hide="add_user,create">
+					<div data-lc_type="history_load_more">Weitere laden</div>
+					<div data-lc_type="history_msg">
+						<!--<span data-lc_type="history_msg_user_src" data-lc_transl="user_name" data-cw_link="user_profile"></span> - -->
+						<p class="comm_widget_content_chat_history_msg_subline"><span data-lc_type="history_msg_timestamp" data-lc_transl="timestamp"></span></p>
+						
+						<div data-lc_type="history_msg_content"><p data-lc_type="history_msg_content_element"></p></div>
+						<div class="clear"></div>
+					</div>
+					<div data-lc_type="history_report">
+						<p data-lc_type="history_report_timestamp"></p>
+						<p data-lc_type="history_report_content"></p>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_form">
+					<form data-lc_type="form" action="javascript:void(0);">
+						
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_input">
+							<textarea 	data-lc_type="form_input" 
+										data-lc_placeholder_open="Deine Nachricht" 
+										data-lc_placeholder_close="Chatroom geschlossen"
+										data-lc_placeholder_removed="Du wurdest entfernt."
+										data-lc_placeholder_left="Du hast den Chatroom verlassen."
+										data-cw_placeholder_blocked_1="Du wurdest blockiert."
+										data-cw_placeholder_blocked_0="Dieser Nutzer wurde von dir blockiert."></textarea>
+						</div>
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_submit">
+							<button data-lc_type="form_submit" type="submit"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+			</div>
+			
+			
+			<?php
+				
+				//User-Support
+				if(!rights($_SESSION["lc_user_key"], "supporter")){
+			?>
+			
+			<div id="comm_widget_chatbox_support_clonable" class="comm_widget_chatbox comm_widget_chatbox_support_plattform<?php if(!isset($_SESSION["login"])){?> no_login<?php }?>" data-lc_type="chatbox">
+				
+				<div data-lc_type="head" data-lc_empty="hidden">
+					
+					<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows<?php if(!isset($_SESSION["login"])){?> no_close<?php }?>" title="Zurück">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+					
+					<div class="comm_widget_chatbox_head_icon comm_widget_chatbox_head_rows" data-cmstype="img" data-cmspos="cw_support_plattform" data-cmsglobal="1" data-cw_link="cw_img"><?php cms_load_img($cw_support_plattform, 0, 0, ""); ?></div>
+					
+					<div class="comm_widget_chatbox_head_text comm_widget_chatbox_head_rows">
+					
+						<div class="comm_widget_chatbox_head_text1">
+						
+							<div class="comm_widget_chatbox_head_title comm_widget_chatbox_head_text_rows_left" data-cw_title="content" data-cw_title="content">Unigrow-Team</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="comm_widget_chatbox_head_text2">
+							<div class="comm_widget_chatbox_head_status comm_widget_chatbox_head_text_rows_left">
+								
+								<div data-cw_type="mod_status">
+									<span data-cw_type="mod_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Wir sind online!</span>
+									<span data-cw_type="mod_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Wir sind derzeit offline</span>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_head_activity comm_widget_chatbox_head_text_rows_right">
+								<span data-lc_type="user_activity" data-lc_activity_text="/user_key/ schreibt..."></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div data-lc_type="info">
+					<div data-lc_type="info_user_wrapper">
+						<div data-lc_type="info_user" class="comm_widget_chatbox_user_info clonable" data-cw_link="user_profile">
+						
+							<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+							<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+								<p data-lc_type="user_key" data-lc_transl="user_name"></p>
+								<div data-lc_type="user_status">
+									<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+									<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+								<p data-cw_type="rights_output"></p>
+								<p data-lc_type="user_invite">Eingeladen</p>
+							</div>
+							<div class="clear"></div>
+							
+						</div>
+					</div>
+				</div>
+				<?php
+				if(isset($_SESSION["login"])){
+				?>
+					<div class="comm_widget_chatbox_empty_cancel" data-lc_empty="visible">
+						<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows" title="Zurück">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</div>
+					</div>
+				<?php
+				}
+				?>
+				<div class="comm_widget_chatbox_private_empty">
+					<div class="comm_widget_chatbox_user_icon" data-cmstype="img" data-cmspos="cw_support_plattform" data-cmsglobal="1"><?php cms_load_img($cw_support_plattform, 0, 0, ""); ?></div>
+					<div class="comm_widget_chatbox_private_empty_name" data-lc_type="user_key" data-lc_transl="user_name"></div>
+					<div class="comm_widget_chatbox_private_empty_status" data-cw_type="mod_status">
+						<p data-cw_type="mod_status_online">Wir sind gerade online. Chatten Sie mit uns!</p>
+						<div data-cw_type="mod_status_offline">
+							<p>Wir sind zurzeit offline, Sie erhalten eine E-Mail, sobald Ihre Anfrage bearbeitet wurde.</p>
+						</div>
+						<?php
+						if(!isset($_SESSION["login"])){
+						?>
+							<input data-cw_type="mod_status_offline" type="email" class="comm_widget_plattform_support_email" placeholder="Deine E-Mail" required />
+						<?php
+						}
+						?>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_history" data-lc_type="history" data-lc_empty="hidden" data-lc_report_hide="add_user,create">
+					<div data-lc_type="history_load_more">Weitere laden</div>
+					<div data-lc_type="history_msg">
+						<div class="comm_widget_content_chat_history_msg_subline">
+							<span data-lc_type="history_msg_user_src" data-lc_transl="user_name" data-cw_link="user_profile"></span> - <span data-lc_type="history_msg_timestamp" data-lc_transl="timestamp"></span>
+						</div>
+						<div data-lc_type="history_msg_content" class="comm_widget_content_chat_history_msg_content"><p data-lc_type="history_msg_content_element"></p></div>
+						<div class="clear"></div>
+					</div>
+					<div data-lc_type="history_report">
+						<p data-lc_type="history_report_timestamp" data-lc_transl="timestamp"></p>
+						<p data-lc_type="history_report_content"></p>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_form">
+					<form data-lc_type="form" action="javascript:void(0);">
+						
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_input">
+							<textarea data-lc_type="form_input" placeholder="Deine Nachricht"></textarea>
+						</div>
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_submit">
+							<button data-lc_type="form_submit" type="submit"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+			</div>
+			
+			<?php
+			}
+			else{
+			?>
+			
+			<div id="comm_widget_chatbox_support_clonable" class="comm_widget_chatbox comm_widget_chatbox_support_plattform" data-lc_type="chatbox">
+				<div data-lc_type="head">
+					
+					<div class="comm_widget_content_chatbox_cancel comm_widget_chatbox_head_rows" title="Zurück">
+						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					</div>
+					
+					<div class="comm_widget_chatbox_head_icon comm_widget_chatbox_head_rows" data-cw_type="support_user_icon" data-cw_link="cw_img"></div>
+					
+					<div class="comm_widget_chatbox_head_text comm_widget_chatbox_head_rows">
+					
+						<div class="comm_widget_chatbox_head_text1">
+						
+							<div class="comm_widget_chatbox_head_title comm_widget_chatbox_head_text_rows_left info_open" data-cw_type="support_user_name" data-cw_link="user_profile" data-cw_title="content"></div>
+							<div class="comm_widget_chatbox_head_buttons comm_widget_chatbox_head_text_rows_right">
+								<span class="comm_widget_chatbox_head_buttons_notifications">
+									<span data-cw_type="notifications" title="Benachrichtigungen ausschalten" data-cw_not="1"><i class="fa fa-bell" aria-hidden="true"></i></span>
+									<span data-cw_type="notifications" title="Benachrichtigungen einschalten" data-cw_not="0"><i class="fa fa-bell-slash" aria-hidden="true"></i></span>
+								</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="comm_widget_chatbox_head_text2">
+							<div class="comm_widget_chatbox_head_status comm_widget_chatbox_head_text_rows_left">
+								
+								<div data-cw_type="support_user_status">
+									<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</span>
+									<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</span>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_head_activity comm_widget_chatbox_head_text_rows_right">
+								<span data-lc_type="user_activity" data-lc_activity_text="/user_key/ schreibt..."></span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				<div data-lc_type="info">
+					<div data-lc_type="info_user_wrapper">
+						<div data-lc_type="info_user" class="comm_widget_chatbox_user_info clonable">
+						
+							<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+							<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+								<p data-lc_type="user_key" data-lc_transl="user_name"></p>
+								<div data-lc_type="user_status">
+									<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+									<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+								</div>
+							</div>
+							<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+								<p data-cw_type="rights_output"></p>
+								<p data-lc_type="user_invite">Eingeladen</p>
+							</div>
+							<div class="clear"></div>
+							
+						</div>
+					</div>
+					
+					<div class="comm_widget_chatbox_user_info_action">
+					
+						<div class="comm_widget_chatbox_user_info_action_content comm_widget_chatbox_user_info_action_element">
+							<p data-cw_type="invite_user">Nutzer einladen</p>
+							<p data-cw_type="add_user">Nutzer hinzufügen</p>
+							<p data-cw_type="clear">Chatverlauf leeren</p>
+							<p data-cw_type="remove">Chatroom löschen</p>
+							<p data-cw_type="leave">Chatroom verlassen</p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_user comm_widget_chatbox_user_info_action_element">
+							<p data-cw_type="user_info_more" data-cw_link="user_profile">Mehr über <span data-lc_transl="user_name"></span></p>
+							<p data-cw_type="remove_user">Entfernen</p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_confirm comm_widget_chatbox_user_info_action_element" data-cw_type="confirm">
+							<p data-cw_type="confirm_button">Bestätigen: <span data-cw_type="confirm_msg"></span></p>
+						</div>
+						
+						<div class="comm_widget_chatbox_user_info_action_button">
+							<p class="comm_widget_chatbox_user_info_action_button_text">Aktionen</p>
+							<p class="comm_widget_chatbox_user_info_action_button_cancel"><i class="fa fa-times" aria-hidden="true"></i></p>
+						</div>
+					</div>
+					
+					<div class="comm_widget_chatbox_add_user comm_widget_chatroom_edit_element">
+						<div class="comm_widget_chatroom_edit_element_inner">
+							
+							<div class="comm_widget_content_widget">
+								
+								<div class="comm_widget_content_widget_title">
+									<span data-cw_show="add">Nutzer hinzufügen</span>
+									<span data-cw_show="invite">Nutzer einladen</span>
+								</div>
+								
+								<div class="comm_widget_content_widget_content">
+									
+									<div class="comm_widget_chatbox_add_user_search">
+										<input class="comm_widget_chatbox_add_user_search_input" type="text" placeholder="Nach Nutzername suchen..." />
+										<span class="comm_widget_chatbox_add_user_search_submit"><i class="fa fa-search" aria-hidden="true"></i></span>
+										<div class="clear"></div>
+									</div>
+									
+									<div class="comm_widget_chatbox_add_user_results">
+										
+										<div class="comm_widget_chatbox_add_user_results_element_wrapper">
+										
+											<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_results_element">
+												<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+												<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+													<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+													<div data-lc_type="user_status">
+														<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+														<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+													</div>
+												</div>
+												<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+													<p data-cw_link="user_profile">zum Profil</p>
+													<p data-cw_type="member">bereits Mitglied</p>
+													<p data-cw_type="invited">bereits eingeladen</p>
+													<p data-cw_type="block">blockiert dich</p>
+												</div>
+												<div class="clear"></div>
+											</div>
+											
+										</div>
+										<div class="comm_widget_chatbox_add_user_results_no_results">Keine Ergebnisse</div>
+									</div>
+									
+									<div class="comm_widget_chatbox_add_user_vorschlag">
+										<p class="comm_widget_chatbox_add_user_headline">zuletzt kontaktiert</p>
+										<div class="comm_widget_chatbox_add_user_vorschlag_element_wrapper">
+										
+											<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_vorschlag_element">
+												<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+												<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+													<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+													<div data-lc_type="user_status">
+														<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+														<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+													</div>
+												</div>
+												<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+													<p data-cw_link="user_profile">zum Profil</p>
+													<p data-cw_type="member">bereits Mitglied</p>
+													<p data-cw_type="invited">bereits eingeladen</p>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							</div>
+							
+							
+							<div class="comm_widget_chatbox_add_user_list comm_widget_content_widget">
+							
+								<p class="comm_widget_content_widget_title">
+									<span>Ausgewählte Nutzer</span>
+								</p>
+								
+								<div class="comm_widget_chatbox_add_user_list_element_wrapper">
+									<div class="comm_widget_chatbox_user_info comm_widget_chatbox_add_user_list_element">
+										<div class="comm_widget_chatbox_user_info_icon comm_widget_chatbox_user_info_row" data-cw_type="user_key" data-lc_transl="user_icon"></div>
+										<div class="comm_widget_chatbox_user_info_text1 comm_widget_chatbox_user_info_row">
+											<p data-cw_type="user_name" data-lc_transl="user_name"></p>
+											<div data-lc_type="user_status">
+												<p data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> Online</p>
+												<p data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> Offline</p>
+											</div>
+										</div>
+										<div class="comm_widget_chatbox_user_info_text2 comm_widget_chatbox_user_info_row">
+											<p data-cw_link="user_profile">zum Profil</p>
+											<p data-cw_type="user_add_remove">Löschen</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<p class="comm_widget_chatbox_add_user_list_submit">Bestätigen</p>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_history" data-lc_type="history">
+					<div data-lc_type="history_load_more">Weitere laden</div>
+					<div data-lc_type="history_msg">
+						<div class="comm_widget_content_chat_history_msg_subline">
+							<span data-lc_type="history_msg_user_src" data-lc_transl="user_name" data-cw_link="user_profile"></span> - <span data-lc_type="history_msg_timestamp" data-lc_transl="timestamp"></span>
+						</div>
+						<div data-lc_type="history_msg_content" class="comm_widget_content_chat_history_msg_content"><p data-lc_type="history_msg_content_element"></p></div>
+						<div class="clear"></div>
+					</div>
+					<div data-lc_type="history_report">
+						<p data-lc_type="history_report_timestamp" data-lc_transl="timestamp"></p>
+						<p data-lc_type="history_report_content" data-cw_link="user_profile"></p>
+					</div>
+				</div>
+				<div class="comm_widget_content_chat_form">
+					<form data-lc_type="form" action="javascript:void(0);">
+						
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_input">
+							<textarea 	data-lc_type="form_input" 
+										data-lc_placeholder_open="Deine Nachricht" 
+										data-lc_placeholder_close="Chatroom geschlossen"
+										data-lc_placeholder_removed="Du wurdest entfernt."
+										data-lc_placeholder_left="Du hast den Chatroom verlassen."></textarea>
+						</div>
+						<div class="comm_widget_content_chat_form_row comm_widget_content_chat_form_submit">
+							<button data-lc_type="form_submit" type="submit"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div data-lc_type="invite">
+					<p data-lc_type="invite_accept">Beitreten</p>
+					<p data-lc_type="invite_reject">Ablehnen</p>
+				</div>
+			</div>
+			
+			<?php
+			}
+			?>
+		</div>
+		
+		
+		<!-- user_profile -->
+		
+		<div id="comm_widget_user_profile">
+			
+			<div id="comm_widget_user_profile_head">
+				
+				<div id="comm_widget_user_profile_cancel" class="comm_widget_user_profile_head_rows">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</div>
+				<div id="comm_widget_user_profile_head_icon" class="comm_widget_user_profile_head_rows">
+					<div data-cw_type="user_profile_icon" data-lc_transl="user_icon" data-cw_link="cw_img"></div>
+				</div>
+				<div id="comm_widget_user_profile_head_name" class="comm_widget_user_profile_head_info comm_widget_user_profile_head_rows">
+					<div class="comm_widget_user_profile_head_info_inner">
+						<div id="comm_widget_user_profile_head_info_name" data-cw_title="content">
+							<span data-cw_type="user_profile_fname"></span>
+							<span data-cw_type="user_profile_lname"></span>
+						</div>
+						<div id="comm_widget_user_profile_head_info_username">
+							Nutzername: <span data-cw_type="user_profile_username"></span>
+						</div>
+					</div>
+				</div>
+				<div id="comm_widget_user_profile_head_status" class="comm_widget_user_profile_head_info comm_widget_user_profile_head_rows">
+					<div class="comm_widget_user_profile_head_info_inner">
+						<div data-lc_type="user_status">
+							<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i> gerade online</span>
+							<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i> offline</span>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			<div id="comm_widget_user_profile_content">
+			
+				<div id="comm_widget_user_profile_removed">
+					Dieser Nutzer existiert nicht mehr
+				</div>
+				
+				<div class="comm_widget_user_profile_content_element">
+				
+					<div class="comm_widget_user_profile_action_button" data-cw_type="user_contact_private">
+						<i class="fa fa-comment" aria-hidden="true"></i>
+						<span>private Nachricht</span>
+					</div>
+					
+					<div class="comm_widget_user_profile_action_button" data-cw_type="user_contact_support">
+						<i class="fa fa-question-circle" aria-hidden="true"></i>
+						<span>Frage stellen</span>
+					</div>
+					
+					<div data-cw_type="user_block">
+						<div class="comm_widget_user_profile_action_button" data-cw_type="user_block_0" title="Diesen Nutzer blockieren, um keine privaten Nachrichten oder Einladungen mehr zu erhalten.">
+							<i class="fa fa-ban" aria-hidden="true"></i>
+							<span>blockieren</span>
+						</div>
+						<div class="comm_widget_user_profile_action_button" data-cw_type="user_block_1" title="Diesem Nutzer erlauben private Nachrichten und Einladungen an dich zu versenden.">
+							<i class="fa fa-ban" aria-hidden="true"></i>
+							<span>nicht mehr blockieren</span>
+						</div>
+						<div class="comm_widget_user_profile_action_button" data-cw_type="user_block_2" title="Du kannst an diesen Nutzer keine privaten Nachrichten oder Einladungen versenden.">
+							<i class="fa fa-ban" aria-hidden="true"></i>
+							<span>du wurdest blockiert</span>
+						</div>
+					</div>
+					
+					<a href="#">
+						<div class="comm_widget_user_profile_action_button" id="comm_widget_user_profile_action_button_profile">
+							<i class="fa fa-external-link" aria-hidden="true"></i>
+							<span>zum Nutzerprofil</span>
+						</div>
+					</a>
+				</div>
+				
+				<div class="comm_widget_user_profile_content_element" data-cw_type="user_profile_courses_created">
+					<p class="comm_widget_user_profile_content_element_title">Erstellte Kurse</p>
+					<div class="comm_widget_user_profile_content_element_content">
+						
+						<div class="comm_widget_user_profile_course_list" data-cw_type="user_profile_courses_list"></div>
+						<div class="clear"></div>
+						
+						<div class="comm_widget_user_profile_course_element clonable" data-cw_type="user_profile_courses_clonable">
+							<div class="comm_widget_user_profile_course_element_inner">
+								<div class="comm_widget_user_profile_course_element_icon" data-cw_type="user_profile_courses_thumbnail">
+									<img src="#" alt="Kursthumbnail" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="comm_widget_user_profile_content_element" data-cw_type="user_profile_courses_visited">
+					<p class="comm_widget_user_profile_content_element_title">Besuchte Kurse</p>
+					<div class="comm_widget_user_profile_content_element_content">
+						
+						<div class="comm_widget_user_profile_course_list" data-cw_type="user_profile_courses_list"></div>
+						<div class="clear"></div>
+						
+						<div class="comm_widget_user_profile_course_element clonable" data-cw_type="user_profile_courses_clonable">
+							<div class="comm_widget_user_profile_course_element_inner">
+								<a href="#" data-cw_type="user_profile_courses_link">
+									<div class="comm_widget_user_profile_course_element_icon" data-cw_type="user_profile_courses_thumbnail">
+										<img src="#" alt="Kursthumbnail" />
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="comm_widget_user_profile_content_element">
+					<p class="comm_widget_user_profile_content_element_title">Soziale Netzwerke</p>
+					
+					<div class="comm_widget_user_profile_content_element_content">
+					
+						<div class="comm_widget_user_profile_content_element_content_social_network" data-cw_type="user_profile_facebook">
+							<div class="comm_widget_user_profile_content_element_content_social_network_icon"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+							<p class="comm_widget_user_profile_content_element_content_social_network_name">Facebook</p>
+						</div>
+						
+						<div class="comm_widget_user_profile_content_element_content_social_network" data-cw_type="user_profile_twitter">
+							<div class="comm_widget_user_profile_content_element_content_social_network_icon"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+							<p class="comm_widget_user_profile_content_element_content_social_network_name">Twitter</p>
+						</div>
+						
+						<div class="comm_widget_user_profile_content_element_content_social_network" data-cw_type="user_profile_youtube">
+							<div class="comm_widget_user_profile_content_element_content_social_network_icon"><i class="fa fa-youtube-play" aria-hidden="true"></i></div>
+							<p class="comm_widget_user_profile_content_element_content_social_network_name">Youtube</p>
+						</div>
+						
+						<div class="comm_widget_user_profile_content_element_content_social_network" data-cw_type="user_profile_instagram">
+							<div class="comm_widget_user_profile_content_element_content_social_network_icon"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+							<p class="comm_widget_user_profile_content_element_content_social_network_name">Instagram</p>
+						</div>
+						<div class="clear"></div>
+						
+						<p data-cw_type="user_profile_soc_net_empty" class="comm_widget_user_profile_content_element_empty">keine sozialen Netzwerke</p>
+						
+					</div>
+					
+					<!--<p class="comm_widget_user_profile_content_element_more">Mehr anzeigen</p>-->
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<!-- DROPZONE -->
+
+<div class="cw_dropzone_single clonable" data-project_type="dropzone" data-dz_pos="">
+	<div data-project_type="dropzone_content"></div>
+	<div data-project_type="dropzone_msg">Gruppenbild ändern</div>
+	
+	<div data-project_type="dropzone_thumb">
+		<div class="dz-preview dz-file-preview">
+			<div data-project_type="dropzone_thumb_img" class="dz-details">
+				<img data-dz-thumbnail />
+			</div>
+			<div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+			<div data-project_type="dropzone_thumb_blk"></div>
+		</div>
+	</div>
+</div>
+
+<!-- UNIGROW TEAM -->
+<div id="comm_widget_plattform_support_img"><?php cms_load_img($cw_support_plattform, 0, 0, ""); ?></div>

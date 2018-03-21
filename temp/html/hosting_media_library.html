@@ -1,0 +1,179 @@
+<div id="h_lib">
+
+	<div id="h_lib_head">
+		<div id="h_lib_nav">
+			<div class="h_lib_nav_element active" title="Videos" id="h_lib_nav_video">
+				<i class="fa fa-video-camera" aria-hidden="true"></i>
+			</div>
+			<div class="h_lib_nav_element active" title="Bilder und Dokumente" id="h_lib_nav_img">
+				<i class="fa fa-files-o" aria-hidden="true"></i>
+			</div>
+			
+			<div class="h_lib_nav_element" id="h_lib_nav_upload_action">
+				<i class="fa fa-stop" aria-hidden="true"></i>
+				<span>Upload abbrechen</span>
+			</div>
+			<div class="h_lib_nav_element" title="Dateien hochladen" id="h_lib_nav_upload">
+				<i class="fa fa-upload" aria-hidden="true"></i>
+			</div>
+			<div class="h_lib_nav_element" title="Zurück" id="h_lib_nav_cancel">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+	<div id="h_lib_body">
+		
+		<div id="h_lib_nav_search">
+			<input id="h_lib_nav_search_area" type="text" placeholder="Mediathek durchsuchen" />
+		</div>
+		
+		<div id="h_lib_body_list">
+			<div id="h_lib_body_list_details">
+
+				<div class="h_lib_details_element clonable">
+					<div class="h_lib_details_element_rows h_lib_details_element_icon">
+						<i class="fa fa-video-camera h_lib_details_element_icon_video" aria-hidden="true"></i>
+						<img class="h_lib_details_element_icon_img" src="" alt="Libary Image" />
+						<i class="fa fa-file-pdf-o h_lib_details_element_icon_pdf" aria-hidden="true"></i>
+						<i class="fa fa-file-o h_lib_details_element_icon_doc" aria-hidden="true"></i>
+					</div>
+					<div class="h_lib_details_element_rows h_lib_details_element_name" title="<?=$filename;?>">
+						<p class="h_lib_details_element_val"></p>
+					</div>
+					<div class="h_lib_details_element_rows h_lib_details_element_size">
+						<p class="h_lib_details_element_val"></p>
+					</div>
+					<div class="h_lib_details_element_rows h_lib_details_element_timestamp">
+						<p class="h_lib_details_element_val" data-lib_timestamp="<?=$lib_row2["timestamp"];?>"><?=$lib_row2["timestamp"];?></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="h_lib_body_list_details_msg" id="h_lib_body_list_details_empty">
+					<p class="h_lib_body_list_details_msg_text">deine Bibliothek ist leer</p>
+					<p class="h_lib_body_list_details_msg_button" id="h_lib_body_list_details_empty_upload"><i class="fa fa-upload" aria-hidden="true"></i> jetzt hochladen</p>
+				</div>
+
+				<div class="h_lib_body_list_details_msg" id="h_lib_body_list_details_no_results">
+					<p class="h_lib_body_list_details_msg_text">Keine Ergebnisse</p>
+					<p class="h_lib_body_list_details_msg_button" id="h_lib_body_list_details_no_results_reset"><i class="fa fa-undo" aria-hidden="true"></i> Filtereinstellungen zurücksetzen</p>
+				</div>
+			</div>
+		</div>
+		
+		<div id="h_lib_body_upload">
+			<div id="h_lib_body_upload_dropzone">
+				<div id="h_lib_body_upload_dropzone_content"></div>
+				<div id="h_lib_body_upload_dropzone_msg">
+					<span class="h_lib_body_upload_dropzone_msg_element" id="h_lib_body_upload_dropzone_msg_standard">zum Upload klicken oder Dateien hierhin ziehen</span>
+					<span class="h_lib_body_upload_dropzone_msg_element" id="h_lib_body_upload_dropzone_msg_drag">Dateien hierhin ziehen</span>
+				</div>
+			</div>
+		</div>
+		
+		<div id="h_lib_body_preview">
+			<div id="h_lib_body_preview_img">
+				<img id="h_lib_body_preview_img_img" src="" />
+				<div id="h_lib_body_preview_img_video">
+					<div id="h_lib_body_preview_img_video_content">
+						<video width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline></video>
+						<div id="h_lib_body_preview_img_video_content_dropzone"></div>
+					</div>
+					<div id="h_lib_body_preview_img_video_encoding">
+						<div id="h_lib_body_preview_img_video_encoding_inner">
+							<p id="h_lib_body_preview_img_video_encoding_inner_headline">Video wird encodiert</p>
+							<span>Bitte versuche es in ein paar Minuten nochmal.</span>
+						</div>
+					</div>
+				</div>
+				<i id="h_lib_body_preview_img_pdf" class="fa fa-file-pdf-o" aria-hidden="true"></i>
+				<i id="h_lib_body_preview_img_doc" class="fa fa-file-o" aria-hidden="true"></i>
+			</div>
+			<div id="h_lib_body_preview_name">
+				<div id="h_lib_body_preview_name_input">
+					<input type="text" id="h_lib_body_preview_name_input_area" placeholder="Dateiname" />
+					<span id="h_lib_body_preview_name_input_type"></span>
+					<div class="clear"></div>
+				</div>
+				<div id="h_lib_body_preview_name_submit">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="h_lib_body_preview_info">
+				<table>
+					<tr id="h_lib_body_preview_info_size">
+						<td>Dateigröße: </td>
+						<td id="h_lib_body_preview_info_size_val"></td>
+					</tr>
+					<tr id="h_lib_body_preview_info_timestamp">
+						<td>Upload: </td>
+						<td id="h_lib_body_preview_info_timestamp_val"></td>
+					</tr>
+					<tr id="h_lib_body_preview_info_res">
+						<td>Auflösung: </td>
+						<td id="h_lib_body_preview_info_res_val"></td>
+					</tr>
+					<tr id="h_lib_body_preview_info_duration">
+						<td>Länge: </td>
+						<td id="h_lib_body_preview_info_duration_val"></td>
+					</tr>
+				</table>
+			</div>
+			<a href="">
+				<div class="h_lib_body_preview_button" id="h_lib_body_preview_button_download">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					<span>herunterladen</span>
+				</div>
+			</a>
+			<div class="h_lib_body_preview_button" id="h_lib_body_preview_button_remove">
+				<i class="fa fa-trash" aria-hidden="true"></i>
+				<span>löschen</span>
+			</div>
+		</div>
+		
+	</div>
+	
+		
+	<div id="h_lib_dropzone_element">
+		<div class="dz-preview dz-file-preview h_lib_dropzone_element">
+			<div class="dz-details">
+				<div class="h_lib_dropzone_element_img h_lib_dropzone_element_rows">
+					<div class="h_lib_dropzone_element_img_icon h_lib_dropzone_element_img_pdf">
+						<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+					</div>
+					<div class="h_lib_dropzone_element_img_icon h_lib_dropzone_element_img_video">
+						<i class="fa fa-video-camera" aria-hidden="true"></i>
+					</div>
+					<img data-dz-thumbnail />
+					<div class="h_lib_dropzone_element_img_remove">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div class="dz-filename h_lib_dropzone_element_filename h_lib_dropzone_element_rows"><span data-dz-name></span></div>
+				<div class="dz-size h_lib_dropzone_element_size h_lib_dropzone_element_rows" data-dz-size></div>
+				<div class="dz-progress h_lib_dropzone_element_progress h_lib_dropzone_element_rows"><div class="dz-upload h_lib_dropzone_element_progress_element" data-dz-uploadprogress></div></div>
+				
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="h_lib_video_thumb_dropzone clonable" data-project_type="dropzone" data-dz_pos="">
+		<div data-project_type="dropzone_content"></div>
+		<div data-project_type="dropzone_msg">Videothumbnail hochladen/ändern</div>
+		
+		<div data-project_type="dropzone_thumb">
+			<div class="dz-preview dz-file-preview">
+				<div data-project_type="dropzone_thumb_img" class="dz-details">
+					<img data-dz-thumbnail />
+				</div>
+				<div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+				<div data-project_type="dropzone_thumb_blk"></div>
+			</div>
+		</div>
+	</div>
+	
+</div>

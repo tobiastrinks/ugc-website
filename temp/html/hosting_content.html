@@ -1,0 +1,162 @@
+<?php
+	if($kurs_status == "online"){
+?>
+	<div id="hosting_headline">
+		KURSINHALTE
+	</div>
+<?php
+	}
+?>
+<div id="hosting_content">
+	
+	<div class="hosting_content_row" id="hosting_content_lessons">
+		<div class="hosting_content_row_title">
+			Lektionen
+		</div>
+		
+		<div id="h_content_lesson_list"></div>
+		
+		<div class="h_content_lesson_element_input">
+			<div class="h_content_lesson_input">
+				<form action="javascript:void(0);" autocomplete="off">
+					<input type="text" class="h_content_lesson_input_area" placeholder="Neue Lektion erstellen" />
+				</form>
+			</div>
+			<div class="h_content_element_submit">
+				<i class="fa fa-check" aria-hidden="true"></i>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="h_content_lesson_element clonable">
+			<div class="h_content_lesson_element_icon edit">
+				<i class="fa fa-pencil" aria-hidden="true"></i>
+			</div>
+			<div class="h_content_lesson_element_title"></div>
+			<div class="h_content_lesson_element_icon">
+				<i class="fa fa-eye-slash h_content_lesson_element_icons_visibility" aria-hidden="true" title="nicht veröffentlicht"></i>
+			</div>
+			<div class="clear"></div>
+			
+			<div class="h_content_lesson_element_module">
+				
+				<div class="h_content_lesson_element_module_list"></div>
+				
+				<div class="h_content_module_element clonable" data-c_id="">
+					<div class="h_content_module_element_title"></div>
+					<div class="h_content_module_element_icons">
+						<i class="fa fa-laptop h_content_module_element_icons_preview" aria-hidden="true" title="als kostenlose Kursvorschau markiert"></i><i class="fa fa-eye-slash h_content_module_element_icons_visibility" aria-hidden="true" title="nicht veröffentlicht"></i>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="h_content_module_element_input">
+					<div class="h_content_lesson_input">
+						<form action="javascript:void(0);" autocomplete="off">
+							<input type="text" class="h_content_lesson_input_area" placeholder="Neues Modul erstellen" />
+						</form>
+					</div>
+					<div class="h_content_element_submit">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hosting_content_row" id="hosting_content_edit">
+		<div class="hosting_content_row_title">
+			Bearbeiten
+		</div>
+		
+		<div id="hosting_content_edit_module">
+			<div id="hosting_content_edit_title">
+				<div id="hosting_content_edit_title_input">
+					<form action="javascript:void(0);" autocomplete="off">
+						<input type="text" id="hosting_content_edit_title_input_area" placeholder="Name des Moduls" />
+					</form>
+				</div>
+				<div id="hosting_content_edit_title_submit">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="hosting_content_edit_video">
+				<div id="hosting_content_edit_video_drop">
+					<div id="hosting_content_edit_video_drop_inner">
+						Video aus Mediathek hier hin ziehen
+					</div>
+				</div>
+				<div id="hosting_content_edit_video_content">
+					<video width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline></video>
+				</div>
+			</div>
+			<div id="hosting_content_edit_video_remove">
+				Video aus Modul entfernen
+			</div>
+				
+			<div id="hosting_content_edit_descr">
+				<form action="javascript:void(0);" autocomplete="off">
+					<textarea id="hosting_content_edit_descr_area" placeholder="Was gibt es über das Modul zu erklären?"><?=$h_rows["descr"];?></textarea>
+					<div id="hosting_content_edit_descr_submit">Übernehmen</div>
+				</form>
+			</div>
+			
+			<div id="hosting_content_edit_settings" class="hosting_content_row_element">
+				<div class="hosting_content_edit_settings_headline">Einstellungen</div>
+				<div id="hosting_content_edit_settings_dripin">
+					<i class="fa fa-angle-double-right" aria-hidden="true"></i> Drip-In (in Arbeit)
+				</div>
+				
+				<div id="hosting_content_edit_settings_visibility" class="hosting_content_edit_settings_buttons half" title="Sichtbarkeit festlegen.">
+					<i class="fa fa-eye" aria-hidden="true"></i>
+					<span>sichtbar</span>
+				</div>
+				<div id="hosting_content_edit_settings_preview" class="hosting_content_edit_settings_buttons half" title="Als Kursvorschau markieren.">
+					<i class="fa fa-laptop" aria-hidden="true"></i>
+					<span>Kursvorschau</span>
+				</div>
+				<div class="clear"></div>
+				
+				<div id="hosting_content_edit_settings_remove" class="hosting_content_edit_settings_buttons"><span>Modul löschen</span></div>
+			</div>
+		</div>
+		
+		<div id="hosting_content_edit_lesson">
+			
+			<div id="hosting_content_edit_lesson_settings" class="hosting_content_row_element">
+				<div class="hosting_content_edit_settings_headline">Lektion bearbeiten</div>
+				
+				<div id="hosting_content_edit_lesson_settings_title">
+					<div id="hosting_content_edit_lesson_settings_title_input">
+						<form action="javascript:void(0);" autocomplete="off">
+							<input type="text" id="hosting_content_edit_lesson_settings_title_input_area" placeholder="Name der Lektion" />
+						</form>
+					</div>
+					<div id="hosting_content_edit_lesson_settings_title_submit">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+				<div id="hosting_content_edit_lesson_settings_visibility" class="hosting_content_edit_settings_buttons" title="Sichtbarkeit festlegen.">
+					<i class="fa fa-eye" aria-hidden="true"></i>
+					<span>sichtbar</span>
+				</div>
+				
+				<div id="hosting_content_edit_lesson_settings_remove" class="hosting_content_edit_settings_buttons"><span>Lektion löschen</span></div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="hosting_content_row" id="hosting_content_media">
+		<div class="hosting_content_row_title">
+			Mediathek
+		</div>
+		
+		<div class="hosting_content_media_content">
+			<?php include($home_dir."temp/html/hosting_media_library.html"); ?>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>

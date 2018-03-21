@@ -1,0 +1,170 @@
+<?php
+	if(mysqli_num_rows($kurs_tile_ergebnis) > 0){
+		?>
+		<ul class="kurs_tile_element_wrapper_ul">
+		<?php
+		while($kurs_list_row = $kurs_tile_ergebnis->fetch_assoc()){
+		
+			//get thumbnail
+			$kurs_list_thumbnail_filename = "";
+			
+			$kurs_list_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$kurs_list_row["thumbnail"]."'");
+			if(mysqli_num_rows($kurs_list_ergebnis2) > 0){
+				
+				while($kurs_list_row2 = $kurs_list_ergebnis2->fetch_assoc()){
+					$kurs_list_thumbnail_filename = $kurs_list_row2["filename"];
+				}
+			}
+			
+			//get user_icon
+			$kurs_list_user_icon_filename = 0;
+			
+			$kurs_list_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID IN (SELECT icon FROM user WHERE user_key='".$kurs_list_row["user_key"]."')");
+			if(mysqli_num_rows($kurs_list_ergebnis2) > 0){
+				
+				while($kurs_list_row2 = $kurs_list_ergebnis2->fetch_assoc()){
+					$kurs_list_user_icon_filename = $kurs_list_row2["filename"];
+				}
+			}
+			
+			//get user_info
+			$kurs_list_user_fname 		= "";
+			$kurs_list_user_lname 		= "";
+			$kurs_list_user_descr 		= "";
+			$kurs_list_user_username 	= "";
+
+			$kurs_list_ergebnis2 = $mysqli_project->query("SELECT fname, lname, descr, username FROM user WHERE user_key='".$kurs_list_row["user_key"]."'");
+			if(mysqli_num_rows($kurs_list_ergebnis2) > 0){
+				
+				while($kurs_list_row2 = $kurs_list_ergebnis2->fetch_assoc()){
+					$kurs_list_user_fname 		= $kurs_list_row2["fname"];
+					$kurs_list_user_lname 		= $kurs_list_row2["lname"];
+					$kurs_list_user_descr 		= $kurs_list_row2["descr"];
+					$kurs_list_user_username 	= $kurs_list_row2["username"];
+				}
+			}
+			
+			//get head_img
+			$kurs_list_head_img = "";
+			
+			$kurs_list_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID IN (SELECT media_id FROM kurse_media WHERE ID IN (SELECT kurse_media_id FROM kurse_temp_content WHERE pos='head_img' AND kurs_id='".$kurs_list_row["ID"]."'))");
+			if(mysqli_num_rows($kurs_list_ergebnis2) > 0){
+				
+				while($kurs_list_row2 = $kurs_list_ergebnis2->fetch_assoc()){
+					$kurs_list_head_img = $kurs_list_row2["filename"];
+				}
+			}
+			if($device == "desktop"){
+			?>
+				<li class="kurs_tile_element_wrapper" data-course_id="<?=$kurs_list_row["ID"];?>">
+					<div class="kurs_tile_element_price" onclick="location.href='kurs.html?p=<?= urlencode($kurs_list_row["name"]); ?>';" title="<?=$kurs_list_row["name"];?>">
+						<div class="kurs_tile_element_price_inner">
+							<div class="kurs_tile_element_price_content">
+								<?php product_price($kurs_list_row["ID"]); ?>
+							</div>
+						</div>												
+					</div>
+					<div class="kurs_tile_element">
+						<div class="kurs_tile_element_bg">
+							<a href="kurs.html?p=<?= urlencode($kurs_list_row["name"]); ?>">
+								<img src="<?=$home_dir;?>temp/media/project/kurse_thumb/<?=$kurs_list_thumbnail_filename;?>" alt="Kursthumbnail" />
+							</a>
+						</div>
+						<div class="kurs_tile_element_text">
+							<div class="kurs_tile_element_text_title" title="<?=$kurs_list_row["name"];?>">
+								<span class="kurs_tile_element_text_title_inner">
+									<?=$kurs_list_row["name"];?>
+								</span>
+							</div>
+							<div class="kurs_tile_element_text_hover">
+								<div class="kurs_tile_element_text_center">
+									<div class="kurs_tile_element_text_descr">
+										<div class="kurs_tile_element_text_descr_head">
+											<span class="kurs_tile_element_text_descr_head_name">Beschreibung</span>
+											<span class="kurs_tile_element_text_descr_head_stars">
+												<?php
+													$kurs_review_arr = product_avg_review($kurs_list_row["ID"]);
+													
+													for($kurs_list_x=0; $kurs_list_x<$kurs_review_arr[0]; $kurs_list_x++){
+														?><i class="fa fa-star" aria-hidden="true"></i><?php
+													}
+													for($kurs_list_x=0; $kurs_list_x<$kurs_review_arr[1]; $kurs_list_x++){
+														?><i class="fa fa-star-o" aria-hidden="true"></i><?php
+													}
+												?>
+												(<?=$kurs_review_arr[2];?>)
+											</span>
+											<div class="clear"></div>
+										</div>
+										<div class="kurs_tile_element_text_descr_body">
+											<?=$kurs_list_row["descr"];?>
+										</div>
+									</div>
+									<div class="kurs_tile_element_text_creator">
+										<div class="kurs_tile_element_text_creator_img">
+											<div class="kurs_tile_element_text_creator_img_inner">
+												<a href="user.html?u=<?=$kurs_list_user_username;?>">
+													<?php if($kurs_list_user_icon_filename != 0){ ?>
+														<img src="<?=$home_dir;?>temp/media/project/cw_icon/<?=$kurs_list_user_icon_filename;?>" alt="Erstellerbild" />
+													<?php } else{ ?>
+														<i class="fa fa-user" aria-hidden="true"></i>
+													<?php } ?>
+												</a>
+											</div>
+										</div>
+										<div class="kurs_tile_element_text_creator_text">
+											<p class="kurs_tile_element_text_creator_text_headline">Kursersteller</p>
+											<div class="kurs_tile_element_text_creator_text_content">
+												<a href="user.html?u=<?=$kurs_list_user_username;?>">
+													<i class="fa fa-angle-double-right" aria-hidden="true"></i> <?=$kurs_list_user_fname." ".$kurs_list_user_lname;?>
+												</a>
+											</div>
+										</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="kurs_tile_element_text_button" onclick="window.location = 'kurs.html?p=<?= urlencode($kurs_list_row["name"]); ?>'">
+									<i class="fa fa-angle-double-right" aria-hidden="true"></i> zur Produktseite
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			<?php
+			}
+			else{
+			?>
+				<li class="kurs_tile_element_wrapper" data-course_id="<?=$kurs_list_row["ID"];?>">
+					<div class="kurs_tile_element_price" onclick="location.href='kurs.html?p=<?= urlencode($kurs_list_row["name"]); ?>';" title="<?=$kurs_list_row["name"];?>">
+						<div class="kurs_tile_element_price_inner">
+							<div class="kurs_tile_element_price_content">
+								<?php product_price($kurs_list_row["ID"]); ?>
+							</div>
+						</div>												
+					</div>
+					<div class="kurs_tile_element">
+						<div class="kurs_tile_element_bg">
+							<a href="kurs.html?p=<?= urlencode($kurs_list_row["name"]); ?>">
+								<img src="<?=$home_dir;?>temp/media/project/kurse_thumb/<?=$kurs_list_thumbnail_filename;?>" alt="Kursthumbnail" />
+							</a>
+						</div>
+						<div class="kurs_tile_element_title">
+							<div class="kurs_tile_element_title_rows kurs_tile_element_title_img">
+								<a href="user.html?u=<?=$kurs_list_user_username;?>">
+									<img src="<?=$home_dir;?>temp/media/project/cw_icon/<?=$kurs_list_user_icon_filename;?>" alt="Erstellerbild" />
+								</a>
+							</div>
+							<p class="kurs_tile_element_title_rows kurs_tile_element_title_text"><?=$kurs_list_row["name"];?></p>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</li>
+			<?php
+			}
+		}
+		?>
+		<div class="clear"></div>
+		</ul>
+		<?php
+	}
+?>

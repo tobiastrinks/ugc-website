@@ -1,0 +1,72 @@
+<div class="control_dashboard_rows">
+	<div class="control_dashboard_rows_mobile_element">
+		<div class="control_dashboard_rows_title">
+			<span data-cmstype="text_short" data-cmspos="control_profile_headline" data-cmsglobal="1"><?=$control_profile_headline;?></span>
+		</div>
+		
+		<div class="control_dashboard_widget square" id="control_dashboard_icon_wrapper">
+			<div class="control_dashboard_widget_square">
+				<div class="control_dashboard_widget_bg" id="control_dashboard_icon">
+					<?php
+						if($user_img != 0){
+							?>
+							<img src="<?=$home_dir."temp/media/project/".$user_img;?>" alt="Profilbild <?=$row_c_d["fname"];?>" />
+							<?php
+						}
+						else{
+							?>
+							<i class="fa fa-user" aria-hidden="true"></i>
+							<?php
+						}
+					?>
+				</div>
+				<div id="control_dashboard_icon_dropzone"></div>
+			</div>
+		</div>
+		
+		<div class="control_dashboard_widget no_hover">
+			<div class="control_dashboard_widget_title"><?=$row_c_d["fname"];?> <?=$row_c_d["lname"];?></div>
+			<div class="control_dashboard_widget_text">
+				<form action="javascript:void(0);" autocomplete="off">
+					<textarea placeholder="Lass die Community etwas über dich wissen. ;)" id="control_dashboard_widget_profile_descr_input"><?php echo str_replace("<br />", "", $row_c_d["descr"]); ?></textarea>
+				</form>
+				<div id="control_dashboard_widget_profile_descr_submit">Speichern</div>
+			</div>
+		</div>
+		
+		<?php
+			for($x_soc_net=0; $x_soc_net<4; $x_soc_net++){
+			
+				$icon_soc_net = 0;
+			
+				if($x_soc_net == 0)
+					$output_soc_net = "facebook";
+				if($x_soc_net == 1)
+					$output_soc_net = "twitter";
+				if($x_soc_net == 2){
+					$output_soc_net = "youtube";
+					$icon_soc_net 	= "youtube-play";
+				}
+				if($x_soc_net == 3)
+					$output_soc_net = "instagram";
+					
+				if($icon_soc_net == 0)
+					$icon_soc_net = $output_soc_net;
+		?>
+			<div id="control_dashboard_social_net_<?=$output_soc_net;?>" class="control_dashboard_widget half square control_dashboard_social_net" data-socnet_type="<?=$output_soc_net;?>">
+				<div class="control_dashboard_widget_square">
+					<div class="control_dashboard_widget_center">
+						<i class="fa fa-<?=$icon_soc_net;?>" aria-hidden="true"></i>
+					</div>
+					<div class="control_dashboard_widget_subline absolute">
+						<input type="text" placeholder="Link" value="<?=$row_c_d[$output_soc_net."_link"];?>" class="control_dashboard_social_net_input" />
+						<span class="control_dashboard_social_net_submit"><i class="fa fa-check" aria-hidden="true"></i></span>
+					</div>
+				</div>
+			</div>
+		<?php
+			}
+		?>
+		<div class="clear"></div>
+	</div>
+</div>

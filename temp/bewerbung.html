@@ -1,0 +1,288 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+?>
+
+<div id="content" data-kurs_id="<?=$_SESSION["kurs_application"];?>">
+	
+	<div id="ke_bg" data-cmstype="img" data-cmspos="ke_bg" data-cms_img_align="cover_center"><?php cms_load_img($ke_bg, 0, 0, ""); ?></div>
+
+	<div id="content_inner">
+	
+		<div id="ke_nav" data-cmstype="wrapper" data-cmscat="ke_nav">
+			<div class="ke_nav_element" data-pageid="ke_1" data-cmstype="text_short" data-cmspos="ke_nav1"><?=$ke_nav1;?></div>
+			<div class="ke_nav_element border"></div>
+			<div class="ke_nav_element" data-pageid="ke_2" data-cmstype="text_short" data-cmspos="ke_nav2"><?=$ke_nav2;?></div>
+			<div class="ke_nav_element border"></div>
+			<div class="ke_nav_element" data-pageid="ke_3" data-cmstype="text_short" data-cmspos="ke_nav3"><?=$ke_nav3;?></div>
+			<div class="clear"></div>
+		</div>
+		
+		<div id="ke_1" class="ke_page">
+			<div class="ke_page_content">
+				
+				<div class="ke_page_content_headline" data-cmstype="text_short" data-cmspos="ke_1_headline"><?=$ke_1_headline;?></div>
+				<div class="ke_page_content_subline" data-cmstype="text_short" data-cmspos="ke_1_subline"><?=$ke_1_subline;?></div>
+				
+				<form action="javascript:void(0);" autocomplete="off">
+					<div class="ke_page_content_inner" id="ke_1_content">
+						<div class="ke_1_rows" id="ke_1_row1">
+							<div id="ke_1_thumbnail_wrapper">
+								<div id="ke_1_thumbnail">
+									<i class="fa fa-picture-o" aria-hidden="true"></i>
+									<div id="ke_1_thumbnail_img" data-ke_type="thumbnail"></div>
+									<div id="ke_1_thumbnail_dropzone"></div>
+								</div>
+							</div>
+						</div>
+						<div class="ke_1_rows" id="ke_1_row2">
+							<div id="ke_1_title">
+								<input type="text" id="ke_1_title_input" class="ke_page_input" placeholder="Kursname" data-ke_type="name" />
+							</div>
+							<div id="ke_1_descr">
+								<textarea class="ke_page_input" id="ke_1_descr_input" placeholder="Beschreibung" data-ke_type="descr"></textarea>
+							</div>
+						</div>
+						<div class="clear"></div>
+						<div id="ke_1_cat">
+							<div id="ke_1_cat_headline">WÄHLE DEINE KATEGORIE</div>
+							<div id="ke_1_cat_content" data-ke_type="cat">
+								<?php
+									$bew_cat = [];
+									
+									$bew_ergebnis = $mysqli_project->query("SELECT ID, title, icon FROM category ORDER BY title ASC");
+									while($bew_row = $bew_ergebnis->fetch_assoc()){
+										$bew_cat[count($bew_cat)] = $bew_row;
+									}
+									
+									
+									for($bew_x=0; $bew_x<count($bew_cat); $bew_x++){
+										?>
+										<div class="ke_1_cat_element" data-ke_cat="<?=$bew_cat[$bew_x]["ID"];?>" title="<?=$bew_cat[$bew_x]["title"];?>">
+											<div class="ke_1_cat_element_inner">
+												<div class="ke_1_cat_element_img" data-cmspos="cat_<?=$bew_cat[$bew_x]["ID"];?>" data-cmstype="img" data-cmsglobal="1"><?php cms_load_img(${"cat_".$bew_cat[$bew_x]["ID"]}, 500, 500, ""); ?></div>
+											</div>
+										</div>
+										<?php
+									}
+								?>
+								<div class="clear"></div>
+								<?php
+									for($bew_x=0; $bew_x<count($bew_cat); $bew_x++){
+								?>
+									<div class="ke_1_cat_descr" data-ke_cat="<?=$bew_cat[$bew_x]["ID"];?>">
+										<?=$bew_cat[$bew_x]["icon"];?>
+										<?=$bew_cat[$bew_x]["title"];?>
+									</div>
+								<?php
+									}
+								?>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="ke_continue"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+			</div>
+		</div>
+		<div id="ke_2" class="ke_page">
+			<div class="ke_page_content">
+				
+				<div class="ke_page_content_headline" data-cmstype="text_short" data-cmspos="ke_2_headline"><?=$ke_2_headline;?></div>
+				<div class="ke_page_content_subline" data-cmstype="text_short" data-cmspos="ke_2_subline"><?=$ke_2_subline;?></div>
+				
+				<div class="ke_page_content_inner">
+					<form action="javascript:void(0);" autocomplete="off">
+						<div class="ke_2_rows" id="ke_2_free" data-ke_price_model="free">
+							<div class="ke_2_rows_inner">
+								<div class="ke_2_flip_wrapper">
+									<div class="ke_2_flip">
+										<figure class="ke_2_rows_inner_1">
+											<div class="ke_2_flip_title" data-cmstype="text_short" data-cmspos="ke_2_flip_title_free"><?=$ke_2_flip_title_free;?></div>
+										</figure>
+										<figure class="ke_2_rows_inner_2">
+											<div class="ke_2_flip_content">
+												<p class="ke_2_flip_subheadline">Kostenlos verfügbar stellen.</p>
+											</div>
+										</figure>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="ke_2_rows" id="ke_2_fix" data-ke_price_model="fix">
+							<div class="ke_2_rows_inner">
+								<div class="ke_2_flip_wrapper">
+									<div class="ke_2_flip">
+										<figure class="ke_2_rows_inner_1">
+											<div class="ke_2_flip_title" data-cmstype="text_short" data-cmspos="ke_2_flip_title_fix"><?=$ke_2_flip_title_fix;?></div>
+										</figure>
+										<figure class="ke_2_rows_inner_2">
+											<div class="ke_2_flip_content">
+												<div class="ke_2_flip_content_title" data-cmstype="text_short" data-cmspos="ke_2_flip_title_fix"><?=$ke_2_flip_title_fix;?></div>
+												<p class="ke_2_flip_subheadline">Einmalzahlung</p>
+												<input id="ke_2_fix_onetime_input" type="text" placeholder="Preis in EUR" />
+												<p class="ke_2_flip_subheadline">Ratenzahlung (optional)</p>
+												<input id="ke_2_fix_rate1_input" type="text" placeholder="mtl. Rate in EUR" class="ke_2_flip_input_rate" />
+												<input id="ke_2_fix_rate2_input" type="number" placeholder="Monate" min="1" class="ke_2_flip_input_rate" />
+											</div>
+										</figure>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="ke_2_rows" id="ke_2_abo" data-ke_price_model="abo">
+							<div class="ke_2_rows_inner">
+								<div class="ke_2_flip_wrapper">
+									<div class="ke_2_flip">
+										<figure class="ke_2_rows_inner_1">
+											<div class="ke_2_flip_title" data-cmstype="text_short" data-cmspos="ke_2_flip_title_abo"><?=$ke_2_flip_title_abo;?></div>
+										</figure>
+										<figure class="ke_2_rows_inner_2">
+											<div class="ke_2_flip_content">
+												<div class="ke_2_flip_content_title" data-cmstype="text_short" data-cmspos="ke_2_flip_title_abo"><?=$ke_2_flip_title_abo;?></div>
+												<p class="ke_2_flip_subheadline">monatliche Abrechnung</p>
+												<input id="ke_2_abo_input" type="text" placeholder="Betrag in EUR" />
+											</div>
+										</figure>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="ke_continue"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+			</div>
+		</div>
+		<div id="ke_3" class="ke_page">
+			<div class="ke_page_content">
+				
+				<div class="ke_page_content_headline" data-cmstype="text_short" data-cmspos="ke_3_headline"><?=$ke_3_headline;?></div>
+				<div class="ke_page_content_subline" data-cmstype="text_short" data-cmspos="ke_3_subline"><?=$ke_3_subline;?></div>
+				
+				<div class="ke_page_content_inner" id="ke_3_content">
+					<div id="ke_3_title">
+						<input type="text" id="ke_3_title_input" placeholder="Name des Moduls" />
+					</div>
+					<div id="ke_3_dropzone">
+						<div id="ke_3_dropzone_inner"></div>
+						<div id="ke_3_dropzone_upload"></div>
+						<div id="ke_3_dropzone_done">
+							<div class="ke_3_dropzone_screen ke_3_dropzone_prev_element dz-preview dz-file-preview">
+								<div class="ke_3_dropzone_screen_icon">
+									<i class="fa fa-check" aria-hidden="true"></i>
+								</div>
+								<div class="ke_3_dropzone_screen_content">
+									<div class="ke_3_dropzone_upload_filename"></div>
+								</div>
+							</div>
+						</div>
+						<div id="ke_3_dropzone_prev_temp">
+							<div class="ke_3_dropzone_screen ke_3_dropzone_prev_element dz-preview dz-file-preview">
+								<div class="ke_3_dropzone_screen_icon">
+									<div class="ke_3_dropzone_upload_progress"></div>
+									<p><span class="ke_3_dropzone_upload_progress_val">0</span>%</p>
+								</div>
+								<div class="ke_3_dropzone_screen_content">
+									<div class="ke_3_dropzone_upload_filename">
+										<span data-dz-name></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ke_3_dropzone_screen" id="ke_3_dropzone_empty">
+							<div class="ke_3_dropzone_screen_icon">
+								<i class="fa fa-video-camera" aria-hidden="true"></i>
+							</div>
+							<div class="ke_3_dropzone_screen_content">
+								Video hierhin ziehen oder hier klicken zum Upload
+							</div>
+						</div>
+					</div>
+					<div id="ke_3_descr">
+						<form action="javascript:void(0);" autocomplete="off">
+							<textarea id="ke_3_descr_input" placeholder="Was gibt es über das Modul zu erklären?"></textarea>
+						</form>
+					</div>
+				</div>
+				<div id="ke_submit_wrapper">
+					<div id="ke_submit" class="ke_continue">
+						<span>FERTIG</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="ke_dropzone_single clonable" data-project_type="dropzone" data-dz_pos="">
+			<div data-project_type="dropzone_content"></div>
+			<div data-project_type="dropzone_msg">Thumbnail einfügen</div>
+			
+			<div data-project_type="dropzone_thumb">
+				<div class="dz-preview dz-file-preview">
+					<div data-project_type="dropzone_thumb_img" class="dz-details">
+						<img data-dz-thumbnail />
+					</div>
+					<div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+					<div data-project_type="dropzone_thumb_blk"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="ke_submit_steps" class="blk_steps">
+			<div class="blk_steps_bg"></div>
+			<div class="blk_steps_content">
+			
+				<div class="blk_steps_content_inner">
+				
+					<div class="blk_steps_content_page active">
+						<div class="blk_steps_content_page_headline">
+							<span>EIN PAAR FRAGEN NOCH :)</span>
+						</div>
+						<div class="blk_steps_content_page_subline">
+							<span>Welche Menschen wird dein Kurs ansprechen?</span>
+						</div>
+						<div class="blk_steps_content_page_content">
+							<textarea class="ke_3_questions_element_textarea" data-ke_question="1" placeholder="Deine Antwort"></textarea>
+						</div>
+						<div class="blk_steps_content_page_button">
+							WEITER
+						</div>
+					</div>
+					
+					<div class="blk_steps_content_page">
+						<div class="blk_steps_content_page_headline">
+							<span>FAST GESCHAFFT</span>
+						</div>
+						<div class="blk_steps_content_page_subline">
+							<span>Was möchtest Du als Coach zur Unigrow Community beitragen?</span>
+						</div>
+						<div class="blk_steps_content_page_content">
+							<textarea class="ke_3_questions_element_textarea" data-ke_question="2" placeholder="Deine Antwort"></textarea>
+						</div>
+						<div class="blk_steps_content_page_button">
+							WEITER
+						</div>
+					</div>
+					
+					<div class="blk_steps_content_page">
+						<div class="blk_steps_content_page_headline">
+							<span>LETZTE FRAGE</span>
+						</div>
+						<div class="blk_steps_content_page_subline">
+							<span>Was willst Du für dich selbst mit diesem Kurs erreichen?</span>
+						</div>
+						<div class="blk_steps_content_page_content">
+							<textarea class="ke_3_questions_element_textarea" data-ke_question="3" placeholder="Deine Antwort"></textarea>
+						</div>
+						<div class="blk_steps_content_page_button" id="application_submit">
+							BEWERBUNG ABSENDEN
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>

@@ -1,0 +1,563 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+?>
+
+<div id="content">
+	
+	<?php 
+		include($home_dir."temp/html/marketplace_search.html");
+		include($home_dir."temp/html/marketplace_header.html");
+		
+		//----search
+		if(isset($_GET["s"])){
+			
+			function search( $research ){
+				
+				global $search;
+				
+				$matches = [];
+				$m_x = 0;
+				$m_bool = false;
+				
+				for($x=0; $x<count($research); $x++){
+				
+					$research[$x]["str"] = strtolower($research[$x]["str"]);
+					
+					$research_arr = str_replace("-"," ", $research[$x]["str"]);
+					$research_arr = str_replace(" ","-", $research_arr);
+					$research_arr = str_replace(" ","", $research_arr);
+					
+					$research_arr = explode("-", $research_arr);
+					
+					$m_bool = false;
+					
+					for($y=0; $y<count($research_arr); $y++){
+						
+						for($z=0; $z<count($search); $z++){
+							if(startsWith($research_arr[$y], $search[$z])){
+								
+								if(!isset($matches[$m_x])){
+									$matches[$m_x]["id"] 		= $research[$x]["id"];
+									$matches[$m_x]["matches"] 	= 1;
+								}
+								else{
+									$matches[$m_x]["matches"]++;
+								}
+								$m_bool = true;
+							}
+						}
+					}
+					
+					if($m_bool == true)
+						$m_x++;
+				}
+				
+				if(count($matches) > 0){
+					
+					return $matches;
+				}
+				else
+					return false;
+			}
+			function search_add( &$result, &$result_counter, $add_array, $weight ){
+			
+				for($x=0; $x<count($add_array); $x++){
+				
+					$duplicate = false;
+					$duplicate_x = 0;
+					
+					for($y=0; $y<count($result); $y++){
+					
+						if($result[$y]["id"] == $add_array[$x]["id"]){
+							$duplicate = true;
+							$duplicate_x = $y;
+						}
+					}
+					
+					if(!$duplicate){
+						$result[$result_counter]["id"] 		= $add_array[$x]["id"];
+						$result[$result_counter]["matches"] 	= $add_array[$x]["matches"]*$weight;
+						$result_counter++;
+					}
+					else{
+						$result[$duplicate_x]["matches"]	+= $add_array[$x]["matches"]*$weight;
+					}
+				}
+			}
+			function search_order( &$result ){
+				
+				//order by matches
+				for($x=0; $x<count($result); $x++){
+					
+					$max = 0;
+					$max_x = 0;
+					
+					for($y=$x; $y<count($result); $y++){
+						
+						if($result[$y]["matches"] > $max){
+							$max = $result[$y]["matches"];
+							$max_x = $y;
+						}
+					}
+					
+					$cache			= $result[$x];
+					$result[$x] 	= $result[$max_x];
+					$result[$max_x]	= $cache;
+				}
+			}
+			$search_str = $_GET["s"];
+			
+			$search_str = mb_strtolower($search_str);
+			$search_str = str_replace("&", "-und-", $search_str);
+			$search_str = str_replace(" ", "", $search_str);
+			
+			$search_str = str_replace("ae", "ä", $search_str);
+			$search_str = str_replace("ue", "ü", $search_str);
+			$search_str = str_replace("oe", "ö", $search_str);
+			
+			$search_str = htmlentities( $search_str, ENT_QUOTES);
+			
+			$search = explode("-", $search_str);
+			
+			$search_kurse = [];
+		
+			//-------general
+			$search_result = [];
+			$s_r_x = 0;
+			
+			
+			//-------kategorien
+			$s_category = false;
+			
+			$s_cat = [];
+			$s_x = 0;
+			
+			$s_ergebnis = $mysqli_project->query("SELECT ID, title FROM category");
+			if(mysqli_num_rows($s_ergebnis) > 0){
+				
+				while($s_row = $s_ergebnis->fetch_assoc()){
+					
+					$s_cat[$s_x]["id"] 	= $s_row["ID"];
+					$s_cat[$s_x]["str"] = str_replace("und ", "", $s_row["title"]);
+					$s_cat[$s_x]["str"] = str_replace("& ", "", $s_cat[$s_x]["str"]);
+					
+					$s_x++;
+				}
+				
+				$s_cat_result = search( $s_cat );
+				
+				if(count($s_cat_result) == 1){
+					
+					$s_category = $s_cat_result[0]["id"];
+				}
+			}
+			
+			//------------name
+			$s_name 		= [];
+			$s_keywords 	= [];
+			$s_ersteller 	= [];
+			$s_x = 0;
+			
+			$s_ergebnis = $mysqli_project->query("SELECT ID, name, user_key FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+			if(mysqli_num_rows($s_ergebnis) > 0){
+				
+				while($s_row = $s_ergebnis->fetch_assoc()){
+					
+					$s_name[$s_x]["id"] 		= $s_row["ID"];
+					$s_name[$s_x]["str"] 		= $s_row["name"];
+					
+					$s_x++;
+				}
+				
+				$s_name_result = search( $s_name );
+				if($s_name_result)
+					search_add( $search_result, $s_r_x, $s_name_result, 100 );
+			}
+			
+			//------------keywords
+			$s_ergebnis = $mysqli_project->query("SELECT kurs_id, keywords FROM kurse_marketplace WHERE status='online' AND keywords!=''");
+			if(mysqli_num_rows($s_ergebnis) > 0){
+				
+				$s_x = 0;
+				
+				while($s_row = $s_ergebnis->fetch_assoc()){
+					
+					$s_keywords[$s_x]["id"] 	= $s_row["kurs_id"];
+					$s_keywords[$s_x]["str"] 	= $s_row["keywords"];
+					
+					$s_x++;
+				}
+				$s_keyword_counter 			= 0;
+				$s_keyword_split			= [];
+				$s_keyword_split_counter	= [];
+				
+				for($s_x=0; $s_x<count($s_keywords); $s_x++){
+					
+					$s_keywords_explode = explode(",", $s_keywords[$s_x]["str"]);
+					
+					for($s_y=0; $s_y<count($s_keywords_explode); $s_y++){
+						
+						if(!isset($s_keyword_split_counter[$s_y]))
+							$s_keyword_split_counter[$s_y] = 0;
+						
+						$s_keyword_split[$s_y][$s_keyword_split_counter[$s_y]] 			= $s_keywords[$s_x];
+						$s_keyword_split[$s_y][$s_keyword_split_counter[$s_y]]["str"] 	= $s_keywords_explode[$s_y];
+						
+						$s_keyword_split_counter[$s_y]++;
+						
+						if($s_y > $s_keyword_counter)
+							$s_keyword_counter = $s_y;
+					}
+				}
+				
+				$s_keyword_split_result = [];
+				
+				for($s_x=0; $s_x<$s_keyword_counter+1; $s_x++){
+					$s_keyword_split_result[$s_x] = search( $s_keyword_split[$s_x] );
+				}
+				
+				$s_keyword_result = [];
+				$s_keyword_result_x = 0;
+				
+				for($s_x=0; $s_x<count($s_keyword_split_result); $s_x++){
+				
+					for($s_y=0; $s_y<count($s_keyword_split_result[$s_x]); $s_y++){
+						
+						if($s_keyword_split_result[$s_x][$s_y] != false){
+							
+							//if isset id
+							$s_id_pos = -1;
+							for($s_z=0; $s_z<count($s_keyword_result); $s_z++){
+								
+								if($s_keyword_split_result[$s_x][$s_y]["id"] == $s_keyword_result[$s_z]["id"]){
+									$s_id_pos = $s_z;
+								}
+							}
+							
+							if($s_id_pos != -1){
+								$s_keyword_result[$s_id_pos]["matches"] += $s_keyword_split_result[$s_x][$s_y]["matches"];
+							}
+							else{
+								$s_keyword_result[$s_keyword_result_x] = $s_keyword_split_result[$s_x][$s_y];
+								$s_keyword_result_x++;
+							}
+						}
+					}
+				}
+				
+				search_add( $search_result, $s_r_x, $s_keyword_result, 10 );
+			}
+			
+			
+			search_order( $search_result );
+			
+			
+			$search_result_id = [];
+			
+			for($s_x=0; $s_x<count($search_result); $s_x++){
+				
+				$search_result_id[$s_x] = $search_result[$s_x]["id"];
+			}
+			
+			if(count($search_result_id) == 0)
+				$search_result_id = [0];
+			
+			$search_ergebnis_gen = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (". implode(",", $search_result_id) .")");
+			$search_ergebnis_gen_anzahl = mysqli_num_rows($search_ergebnis_gen);
+			
+			
+			//------creator search
+			$search_result_creator = [];
+			$search_result_creator_x = 0;
+			
+			$search_ergebnis_creator = 0;
+			
+			$search_ergebnis_creator = [];
+			
+			$s_ergebnis = $mysqli_project->query("SELECT user_key, fname, lname FROM user WHERE user_key IN (SELECT user_key FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online'))");
+			if(mysqli_num_rows($s_ergebnis) > 0){
+				
+				$s_creator = [];
+				$s_creator_x = 0;
+				
+				while($s_row = $s_ergebnis->fetch_assoc()){
+					
+					$s_creator[$s_creator_x]["id"] 	= $s_row["user_key"];
+					$s_creator[$s_creator_x]["str"] = $s_row["fname"];
+					
+					$s_creator_x++;
+					
+					$s_creator[$s_creator_x]["id"] 	= $s_row["user_key"];
+					$s_creator[$s_creator_x]["str"] = $s_row["lname"];
+					
+					$s_creator_x++;
+				}
+				
+				$s_creator_result = search($s_creator);
+				
+				search_add( $search_result_creator, $search_result_creator_x, $s_creator_result, 1 );
+				search_order( $search_result_creator );
+				
+				for($s_x=0; $s_x<count($search_result_creator); $s_x++){
+					$search_ergebnis_creator[$s_x] = $mysqli_project->query("SELECT * FROM kurse WHERE user_key='".$search_result_creator[$s_x]["id"]."' AND ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+					$search_result_creator[$s_x] = "'".$search_result_creator[$s_x]["id"]."'";
+				}
+			}
+			
+			$search_ergebnis_creator_anzahl = [];
+			$search_ergebnis_creator_bool = false;
+			
+			for($s_x=0; $s_x<count($search_ergebnis_creator); $s_x++){
+				$search_ergebnis_creator_anzahl[$s_x] = mysqli_num_rows($search_ergebnis_creator[$s_x]);
+				
+				if($search_ergebnis_creator_anzahl[$s_x] != 0)
+					$search_ergebnis_creator_bool = true;
+			}
+			
+			if($search_ergebnis_creator_bool == false)
+				$search_ergebnis_creator_anzahl = 0;
+			
+			
+			//ähnliche kurse
+			$search_ergebnis_cat = false;
+			
+			if($s_category == false){
+			
+				$s_cat_counter = [];
+				
+				if($search_ergebnis_gen_anzahl > 0)
+					$s_cat_ergebnis = $mysqli_project->query("SELECT category_id FROM kurse WHERE ID IN (". implode(",", $search_result_id) .")");
+				else
+					$s_cat_ergebnis = $mysqli_project->query("SELECT category_id FROM kurse WHERE user_key IN (". implode(",", $search_result_creator) .") AND ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+				
+				if(mysqli_num_rows($s_cat_ergebnis) > 0){
+					
+					while($search_row1 = $s_cat_ergebnis->fetch_assoc()){
+						
+						if(isset($s_cat_counter[$search_row1["category_id"]]))
+							$s_cat_counter[$search_row1["category_id"]]++;
+						else
+							$s_cat_counter[$search_row1["category_id"]] = 1;
+					}
+					
+					$s_max_cat = 0;
+					$s_max_val = 0;
+					
+					foreach($s_cat_counter as $key => $value){
+						
+						if($s_cat_counter[$key] > $s_max_val){
+							$s_max_cat = $key;
+							$s_max_val = $s_cat_counter[$key];
+						}
+					}
+					
+					$s_category = $s_max_cat;
+				}
+			}
+			
+			if($s_category){
+				
+				if($search_ergebnis_gen_anzahl > 0)
+					$search_ergebnis_cat = $mysqli_project->query("SELECT * FROM kurse WHERE ID NOT IN (". implode(",", $search_result_id) .") AND category_id='".$s_category."' AND ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+				else
+					$search_ergebnis_cat = $mysqli_project->query("SELECT * FROM kurse WHERE user_key NOT IN (". implode(",", $search_result_creator) .") AND category_id='".$s_category."' AND ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+				
+				$s_ergebnis = $mysqli_project->query("SELECT title FROM category WHERE ID='".$s_category."'");
+				if(mysqli_num_rows($s_ergebnis) > 0){
+					while($s_row = $s_ergebnis->fetch_assoc()){
+						$s_cat_name = $s_row["title"];
+					}
+				}
+			}
+			if($search_ergebnis_cat)
+				$search_ergebnis_cat_anzahl = mysqli_num_rows($search_ergebnis_cat);
+			else
+				$search_ergebnis_cat_anzahl = 0;
+	?>
+	
+		<div id="search_body">
+		
+			<?php
+				if(isset($_GET["cat"]) AND $_GET["cat"] == 1)
+					$search_ergebnis_gen_anzahl = 0;
+					
+				//kurse
+				if($search_ergebnis_gen_anzahl > 0){
+			?>
+				<div class="search_result_element">
+					<div class="search_result_element_head">
+						<div class="search_result_element_head_text"><?=$search_ergebnis_gen_anzahl;?> ERGEBNIS<?php if($search_ergebnis_gen_anzahl != 1){ ?>SE<?php } ?></div>
+					</div>
+					<div class="search_result_element_body">
+						<?php
+							$kurs_tile_ergebnis = $search_ergebnis_gen;
+							include($home_dir."temp/html/kurs_tile.html");
+						?>
+					</div>
+				</div>
+			<?php
+				}
+				else if($search_ergebnis_cat_anzahl == 0 AND $search_ergebnis_creator_anzahl == 0){
+			?>
+				<div class="search_result_element">
+					<div class="search_result_element_head">
+						<div class="search_result_element_head_text">keine Ergebnisse</div>
+					</div>
+					<div class="search_result_element_body">
+						<div class="search_result_element_body_text">
+							Diese Suche ergab leider <span class="search_highlight">keine Ergebnisse</span>. Vielleicht interessiert dich das:
+						</div>
+						<?php
+							$kurs_tile_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online') ORDER BY rand() LIMIT 30");
+							include($home_dir."temp/html/kurs_tile.html");
+						?>
+					</div>
+				</div>
+			<?php
+				}
+				
+				//creator
+				if($search_ergebnis_creator_anzahl != 0){
+					?>
+					<div class="search_result_element" id="search_result_creator">
+						<div class="search_result_element_head">
+							<div class="search_result_element_head_text">Ergebnisse in <span class="search_highlight">Kursersteller</span></div>
+						</div>
+						<div class="search_result_element_body">
+							<?php
+								$s_e_3_x = 0;
+							
+								$search_ergebnis_user = $mysqli_project->query("SELECT user_key, fname, lname, icon, icon_type, descr, username FROM user WHERE user_key IN (".implode(",", $search_result_creator).")");
+								while($search_row_user = $search_ergebnis_user->fetch_assoc()){
+									?>
+										<div class="search_result_creator_element">
+											<div class="search_result_creator_profile search_result_creator_element_rows">
+												<div class="search_result_creator_profile_img">
+													<?php
+														if($search_row_user["icon_type"] == "img"){
+															
+															$search_ergebnis_user2 = $mysqli_project->query("SELECT filename FROM media WHERE ID=".$search_row_user["icon"]);
+															if(mysqli_num_rows($search_ergebnis_user2)){
+																
+																while($search_row_user2 = $search_ergebnis_user2->fetch_assoc()){
+																	?>
+																	<a href="user.html?u=<?=$search_row_user["username"];?>">
+																		<img src="<?=$home_dir;?>temp/media/project/<?=$search_row_user2["filename"];?>" alt="<?=$search_row_user["fname"];?> <?=$search_row_user["lname"];?>" />
+																	</a>
+																	<?php
+																}
+															}
+														}
+														else{
+															?>
+															<div class="search_result_creator_profile_img_i">
+																<i class="fa fa-user" aria-hidden="true"></i>
+															</div>
+															<?php
+														}
+													?>
+												</div>
+												<div class="search_result_creator_profile_text">
+													<div class="search_result_creator_profile_text_inner" data-cw_user_key="<?=$search_row_user["user_key"];?>">
+														<div class="search_result_creator_profile_text_button search_result_creator_profile_text_button_profile" title="Nutzerprofil" onclick="window.location = 'user.html?u=<?=$search_row_user["username"];?>'">
+															<i class="fa fa-user" aria-hidden="true"></i>
+														</div>
+														<?php
+															$s_ergebnis_user2 = $mysqli_project->query("SELECT type, rights FROM user_msg_settings WHERE user_key='".$search_row_user["user_key"]."' AND type IN ('private', 'support')");
+															if(mysqli_num_rows($s_ergebnis_user2) > 0){
+																
+																$s_ersteller = false;
+																
+																$s_ergebnis_user3 = $mysqli_project->query("SELECT ID FROM kurse WHERE user_key='".$_SESSION["lc_user_key"]."' AND ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online')");
+																if(mysqli_num_rows($s_ergebnis_user3) > 0){
+																	
+																	$s_ersteller = true;
+																}
+																
+																while($s_row_user2 = $s_ergebnis_user2->fetch_assoc()){
+																	
+																	if($s_row_user2["type"] == "private" AND ($s_row_user2["rights"] == "all" OR ($s_row_user2["rights"] == "creator" AND $s_ersteller == true))){
+																?>
+																	<div class="search_result_creator_profile_text_button search_result_creator_profile_text_button_msg" title="Nachricht senden" data-cw_type="user_contact_private">
+																		<i class="fa fa-comment" aria-hidden="true"></i>
+																	</div>
+																<?php
+																	}
+																	if($s_row_user2["type"] == "support" AND ($s_row_user2["rights"] == "all" OR ($s_row_user2["rights"] == "creator" AND $s_ersteller == true))){
+																?>
+																	<div class="search_result_creator_profile_text_button search_result_creator_profile_text_button_support" title="Frage stellen" data-cw_type="user_contact_support">
+																		<i class="fa fa-question" aria-hidden="true"></i>
+																	</div>
+																<?php
+																	}
+																}
+															}
+														?>
+													</div>
+												</div>
+											</div>
+											<div class="search_result_creator_kurse search_result_creator_element_rows">
+											
+												<div class="search_result_creator_kurse_head">
+													<p class="search_result_creator_kurse_head_name">
+														<a href="user.html?u=<?=$search_row_user["username"];?>">
+															<?=$search_row_user["fname"];?> <?=$search_row_user["lname"];?>
+														</a>
+													</p>
+												</div>
+												<div class="search_result_creator_kurse_body">
+													<?php
+														$kurs_tile_ergebnis = $search_ergebnis_creator[$s_e_3_x];
+														include($home_dir."temp/html/kurs_tile.html");
+													?>
+												</div>
+											</div>
+											<div class="clear"></div>
+										</div>
+									<?php
+									$s_e_3_x++;
+								}
+							?>
+						</div>
+					</div>
+					<?php
+				}
+				
+				//category
+				if($search_ergebnis_cat_anzahl > 0){
+			?>
+				<div class="search_result_element">
+					<div class="search_result_element_head">
+						<div class="search_result_element_head_text">
+							<?php
+								if($search_ergebnis_gen_anzahl > 0 OR $search_ergebnis_creator_anzahl != 0){
+							?>
+								ähnliche Kurse aus <span class="search_highlight"><?=$s_cat_name;?></span>
+							<?php
+								}
+								else{
+							?>
+								Kurse aus <span class="search_highlight"><?=$s_cat_name;?></span>
+							<?php
+								}
+							?>
+						</div>
+					</div>
+					<div class="search_result_element_body">
+						<?php
+							$kurs_tile_ergebnis = $search_ergebnis_cat;
+							include($home_dir."temp/html/kurs_tile.html");
+						?>
+					</div>
+				</div>
+			<?php
+				}
+			?>
+		</div>
+		<?php
+		}
+		include($home_dir."temp/html/footer.html");
+	?>
+</div>

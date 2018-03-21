@@ -1,0 +1,30 @@
+<div class="control_nav">
+	<div class="control_nav_bar">
+		<?php
+			if($device == "desktop"){
+		?>
+			<?php if(isset($_SESSION["login"]) OR (isset($_SESSION["reg_confirm"]) AND $_SESSION["reg_confirm"] = "confirm")){ ?>
+				<div class="control_nav_bar_elements control_nav_bar_logout">Logout</div>
+			<?php } if(isset($_SESSION["login"])){ ?>
+				<div class="control_nav_bar_elements control_nav_bar_kurserstellung">Kurs anbieten</div>
+			<?php } ?>
+			<div class="control_nav_bar_elements control_nav_bar_marketplace">Marktplatz</div>
+		<?php
+			}
+			else{
+		?>
+			<?php if(isset($_SESSION["login"])){ ?>
+				<div class="control_nav_bar_elements control_nav_bar_logout">
+					<i class="fa fa-sign-out" aria-hidden="true"></i>
+				</div>
+				<div class="control_nav_bar_elements control_nav_bar_marketplace">
+					<i class="fa fa-home" aria-hidden="true"></i>
+				</div>
+			<?php } ?>
+		<?php
+			}
+		?>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>

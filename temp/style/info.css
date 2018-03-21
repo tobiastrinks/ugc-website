@@ -1,0 +1,160 @@
+/*general*/
+#nav_button_home{
+	right: 3% !important;
+}
+#wrapper.mobile #nav_button_home{
+	right: 5px !important;
+}
+
+#info_headimg{
+	position: relative;
+	height: 300px;
+	overflow: hidden;
+}
+#wrapper.mobile #info_headimg{
+	height: 200px;
+}
+
+#info{
+	position: relative;
+	width: 80%;
+	margin-left: 10%;
+}
+#wrapper.mobile #info{
+	width: 90%;
+	margin-left: 5%;
+}
+#info_headline{
+	position: absolute;
+	left: 0px;
+	bottom: 100%;
+	padding: 20px 0px;
+	width: 100%;
+	font-size: 250%;
+}
+#wrapper.mobile #info_headline{
+	font-size: 150%;
+}
+#info_content_img:before{
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+#info_content_img{
+	position: absolute;
+	top: 80px;
+	left: 40%;
+	width: 50%;
+	max-width: 500px;
+	overflow: hidden;
+	border-radius: 1000px;
+}
+#info_content_img_inner{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+#info_content{
+	padding: 20px 0px;
+	max-width: 1000px;
+}
+#info_content h2{
+	font-size: 120%;
+	margin-top: 50px;
+	margin-bottom: 0px;
+}
+#info_content p{
+	margin: 20px 0px;
+}
+#info_content a{
+	color: #c66200;
+	text-decoration: none;
+}
+/*hr*/
+.info_hr{
+	width: 100%;
+	margin: 100px 0px;
+}
+#wrapper.mobile .info_hr{
+	margin: 80px 0px;
+}
+.info_hr.clonable{
+	display: none;
+}
+.info_hr_logo{
+	height: 30px;
+	width: 70px;
+	text-align: center;
+	float: left;
+}
+.info_hr_logo_img{
+	height: 100%;
+	position: relative;
+}
+.info_hr_logo_img img{
+	height: 100%;
+}
+.info_hr_line{
+	float: left;
+	height: 1px;
+	margin: 14px 0px;
+	background-color: rgba(0,0,0,0.3);
+}
+.info_hr_line1{
+	width: 100px;
+}
+.info_hr_line2{
+	width: calc(100% - 170px);
+}
+
+
+/*datenschutz*/
+#info[data-info_page='datenschutz'] #info_content_img{
+	display: none;
+}
+#info[data-info_page='datenschutz'] li{
+	margin: 20px 0px;
+}
+
+/*agb*/
+#info[data-info_page='agb'] #info_content_img{
+	display: none;
+}
+#info[data-info_page='agb'] li{
+	margin: 20px 0px;
+}
+
+/*agb*/
+#info[data-info_page='ersteller-agb'] #info_content_img{
+	display: none;
+}
+#info[data-info_page='ersteller-agb'] li{
+	margin: 20px 0px;
+}
+
+/*cookies*/
+#info[data-info_page='cookies'] #info_content_img{
+	display: none;
+}
+#info[data-info_page='cookies'] table{
+	border-collapse: collapse;
+}
+#info[data-info_page='cookies'] table td{
+	vertical-align: top;
+	padding: 10px;
+}
+#info[data-info_page='cookies'] table p{
+	margin: 0px;
+}
+#info[data-info_page='cookies'] table td{
+	border-bottom: 1px solid #000;
+}
+#info[data-info_page='cookies'] table tr:last-child td{
+	border-bottom: none;
+}
+#info[data-info_page='cookies'] table tr td:first-child{
+	border-right: 1px solid #000;
+	padding-left: 0px;
+}

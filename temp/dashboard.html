@@ -1,0 +1,90 @@
+<?php
+	$active_page = "dashboard";
+	include($home_dir."temp/html/nav.html"); 
+?>
+
+<div id="content">
+	<div id="dashboard">	
+	
+		<header>
+			<div id="dashboard_pb" class="dashboard_header_row" data-cmstype="img" data-cmspos="test_pb" data-cms_img_align="cover_center"><?php cms_load_img($test_pb, 0,0,""); ?></div>
+			
+			<div id="dashboard_headline" class="dashboard_header_row">
+				<h1>DASHBOARD</h1>
+				<p id="dashboard_headline_msg">Willkommen zurück Marco!</p>
+			</div>
+			
+			<div class="clear"></div>
+		</header>
+		
+		<div id="dashboard_content">
+			
+			<div id="dashboard_content_kurse" class="dashboard_content_rows">
+				
+				<div class="dashboard_content_widget">
+				
+					<div class="dashboard_content_widget_headline">DEINE KURSE</div>
+					
+					<div class="dashboard_content_widget_content">
+						
+						<div class="dashboard_course">
+							<div class="dashboard_course_icon">
+								<div class="dashboard_course_icon_bg" data-cmstype="img" data-cmspos="test_course" data-cms_img_align="cover_center"><?php cms_load_img($test_course, 0,0,""); ?></div>
+								<div class="dashboard_course_not">1</div>
+								<div class="dashboard_course_icon_progress" data-db_progress="60"></div>
+							</div>
+							
+							<p class="dashboard_course_title">Werde zum Podcast-Helden</p>
+						</div>
+						
+						<!--<p class="dashboard_content_kurs_widget_subline">...im Marketplace stöbern</p>-->
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				
+				<div class="dashboard_content_widget">
+				
+					<div class="dashboard_content_widget_headline">ERSTELLTE KURSE</div>
+					
+					<div class="dashboard_content_widget_content">
+						
+						<div class="dashboard_course">
+							<div class="dashboard_course_icon">
+								<div class="dashboard_course_icon_bg" data-cmstype="img" data-cmspos="test_course" data-cms_img_align="cover_center"><?php cms_load_img($test_course, 0,0,""); ?></div>
+								<div class="dashboard_course_not">1</div>
+								<div class="dashboard_course_icon_progress" data-db_progress="60"></div>
+							</div>
+							
+							<p class="dashboard_course_title">Werde zum Podcast-Helden</p>
+						</div>
+						
+						<!--<p class="dashboard_content_kurs_widget_subline">...im Marketplace stöbern</p>-->
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div id="dashboard_content_newsfeed" class="dashboard_content_rows">
+				
+				<div class="dashboard_content_widget">
+				
+					<div class="dashboard_content_widget_headline">NEWSFEED</div>
+					
+					<div class="dashboard_content_widget_content">
+						
+					</div>
+					
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+	</div>
+</div>
+
+<?php
+	include($home_dir."temp/html/comm_widget_old.html");
+?>

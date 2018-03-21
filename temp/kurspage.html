@@ -1,0 +1,81 @@
+<?php
+	
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+	
+	include($home_dir."temp/html/marketplace_search.html");
+	
+	//product_price
+	$product_price = product_price(0,1);
+	if($product_price["price_model"] != "free")
+		$product_price = $product_price["price_1"];
+	else
+		$product_price = 0;
+		
+	//product_member
+	$product_member = "false";
+	
+	$product_ergebnis = $mysqli_project->query("SELECT rights FROM user_kurse WHERE user_key='".$_SESSION["lc_user_key"]."' AND kurs_id='".$product_kurs_id."'");
+	if(mysqli_num_rows($product_ergebnis) > 0){
+		
+		while($product_row = $product_ergebnis->fetch_assoc()){
+			
+			$product_member = $product_row["rights"];
+		}
+	}
+	
+	$_SESSION["buy_id"] = $product_kurs_id;
+?>
+
+<div id="content">
+	<div id="content_inner" data-product_id="<?=$product_kurs_id;?>" data-product_url="<?=$_GET['p'];?>" data-creator_key="<?=$product_kurs_creator;?>" data-member="<?=$product_member;?>" data-price="<?=$product_price;?>">
+		
+		<?php
+			include($product_temp);
+		?>
+	</div>
+	<?php
+		include($home_dir."temp/html/footer.html");
+	?>
+</div>
+
+<div data-ug_alert="review_comments_public">
+	Ich stimme zu, dass diese und zukünftig durch mich abgegebene Rezensionen und 
+	Kommentare zu Online-Kursen und Modulen mit meinem vollständigen Namen und 
+	meinem Profilbild für alle Benutzer dieser Website, einschließlich nicht 
+	registrierter Besucher sichtbar sind.
+	<br /><br />
+	Du kannst diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen.
+</div>
+
+<div id="product_video_preview">
+	<div id="product_video_preview_inner">
+		<div id="product_video_preview_inner_video"></div>
+		<div id="product_video_preview_inner_button">
+			<div id="product_video_preview_inner_button_close">Schließen</div>
+		</div>
+		<video class="clonable" width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline></video>
+	</div>
+</div>
+
+<div id="buy" class="blk_steps">
+	<div class="blk_steps_bg"></div>
+	<div class="blk_steps_content">
+	
+		<div class="blk_steps_content_inner">
+		
+			<div class="blk_steps_content_page active" id="join_steps_ty">
+				<div class="blk_steps_content_page_content">
+					<div id="buy_elopage">
+						<div id="buy_elopage_logo" data-cmstype="img" data-cmspos="buy_elopage_logo"><?php cms_load_img($buy_elopage_logo, 0, 0, "");?></div>
+						<div id="buy_elopage_subline" data-cmstype="text_long" data-cmspos="buy_elopage_subline"><?=$buy_elopage_subline;?></div>
+						
+						<div class="buy_elopage_button" id="buy_elopage_button_cancel">zurück</div>
+						<div class="buy_elopage_button" id="buy_elopage_button_continue">WEITER ZU ELOPAGE</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

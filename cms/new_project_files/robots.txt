@@ -1,0 +1,9 @@
+User-agent: * 
+Disallow: /*.pdf$
+Disallow: /*.exe$
+Disallow: /*.zip$
+Disallow: /*.rar$
+Disallow: /*.doc$
+Disallow: /*.xls$
+Disallow: /cms/
+Disallow: /temp/

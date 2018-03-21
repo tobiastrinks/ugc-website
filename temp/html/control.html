@@ -1,0 +1,367 @@
+<?php
+	$user_img = 0;
+	$control_ergebnis = $mysqli_project->query("SELECT icon FROM user WHERE user_key='".$_SESSION["lc_user_key"]."' AND icon_type='img'");
+	if(mysqli_num_rows($control_ergebnis) > 0){
+		
+		while($control_row = $control_ergebnis->fetch_assoc()){
+			
+			$control_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$control_row["icon"]."'");
+			if(mysqli_num_rows($control_ergebnis2) > 0){
+				
+				while($control_row2 = $control_ergebnis2->fetch_assoc()){
+					
+					$user_img = $control_row2["filename"];
+				}
+			}
+		}
+	}
+?>
+
+<div id="cookies">
+	<div id="cookies_inner">
+		<div class="cookies_rows" id="cookies_icon" data-cmstype="img" data-cmspos="cookies_img" data-cmsglobal="1"><?php cms_load_img($cookies_img, 0, 0, "");?></div>
+		<div class="cookies_rows" id="cookies_text" data-cmstype="text_long" data-cmspos="cookies_text" data-cmsglobal="1"><?=$cookies_text;?></div>
+		<div class="cookies_rows" id="cookies_button">
+			<div class="cookies_button_element" id="cookies_button_accept">ZUSTIMMEN</div>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div id="ug_alert">
+	<div id="ug_alert_inner">
+		<div id="ug_alert_headline"></div>
+		<div id="ug_alert_hr">
+			<div class="ug_alert_hr_line" id="ug_alert_hr_line1"></div>
+			<div id="ug_alert_hr_logo">
+				<div id="ug_alert_hr_logo_img" data-cmspos="ug_alert_hr_logo_img" data-cmstype="img" data-cmsglobal="1"><?php cms_load_img($ug_alert_hr_logo_img, 0, 0, ""); ?></div>
+			</div>
+			<div class="ug_alert_hr_line" id="ug_alert_hr_line2"></div>
+			<div class="clear"></div>
+		</div>
+		
+		<div id="ug_alert_content"></div>
+		<div id="ug_alert_footer">
+			<div class="ug_alert_buttons" id="ug_alert_buttons_accept"></div>
+			<div class="ug_alert_buttons" id="ug_alert_buttons_decline"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+	
+<div id="nav_buttons">
+	<?php
+		if(	$filename == "search.html" OR 
+			$filename == "kurs.html" OR 
+			$filename == "mitgliederbereich.html" OR 
+			$filename == "user.html" OR
+			$filename == "impressum.html" OR
+			$filename == "agb.html" OR
+			$filename == "ersteller-agb.html" OR
+			$filename == "datenschutz.html"){
+	?>
+			<div class="nav_button" id="nav_button_home" title="Startseite" onclick="window.location = 'index.html'">
+				<i class="fa fa-home" aria-hidden="true"></i>
+			</div>
+	<?php
+		}
+	?>
+</div>
+
+<?php
+	$control_nf_ergebnis = $mysqli_project->query("SELECT ID FROM msg_post_not WHERE user_key='".$_SESSION["lc_user_key"]."' AND type='user'");
+	$control_nf_anzahl = mysqli_num_rows($control_nf_ergebnis);
+?>
+
+<div id="control_open" class="nav_button" title="<?php if(isset($_SESSION["login"])){ ?>Dashboard<?php }else{ ?>Login<?php } ?>">
+	<?php
+		if($user_img != 0){
+			?>
+			<img src="<?=$home_dir;?>temp/media/project/cw_icon/<?=$user_img;?>" alt="Profilbild" />
+			<?php
+		}
+		else{
+			?>
+			<i class="fa fa-user" aria-hidden="true"></i>
+			<?php
+		}
+	?>
+	
+	<?php
+		$control_not = 0;
+		$control_not += $control_nf_anzahl;
+		
+		if(isset($_SESSION["reply_not"]["user"]))
+			$control_not += count($_SESSION["reply_not"]["user"]);
+		
+		if(isset($_SESSION["reply_not"]["kurs"])){
+			foreach($_SESSION["reply_not"]["kurs"] as $key => $value){
+				$control_not += count($value);
+			}
+		}
+		
+		if($control_not > 0){
+	?>
+		<div id="control_open_not">
+			<?=$control_not;?>
+		</div>
+	<?php } ?>
+</div>
+
+<?php
+	if(isset($_SESSION["login"])){
+		include($home_dir."temp/html/welcome.html");
+		include($home_dir."temp/html/application_result.html");
+	}
+	
+	if(isset($_GET["pwr"])){
+		include($home_dir."temp/html/password_reset.html");
+	}
+
+	include($home_dir."temp/html/agb_ersteller.html");
+
+	// control_open
+	$control_open;
+	if (!isset($_SESSION["login"]) AND !isset($_SESSION["reg_confirm"]))
+		$control_open = "login";
+	else
+		$control_open = "dashboard";
+?>
+
+<div id="control" data-user_key="<?=$_SESSION["lc_user_key"];?>"<?php if(isset($_GET["p"]) AND $_GET["p"] == "kennenlernen"){ ?> class="demo"<?php } ?>>
+	
+	<div id="control_inner">
+		<div class="control_background_wrapper" data-cmstype="wrapper" data-cmscat="control_background">
+			<?php if($device == "desktop"){ ?>
+				<div class="control_background" id="control_login_bg" data-cmstype="img" data-cmspos="control_login_bg" data-cmsglobal="1"><?php cms_load_img($control_login_bg, 0, 0, ""); ?></div>
+				<div class="control_background" id="control_dashboard_bg" data-cmstype="img" data-cmspos="control_dashboard_bg" data-cmsglobal="1"><?php cms_load_img($control_dashboard_bg, 0, 0, ""); ?></div>
+			<?php } else if($device == "mobile"){ ?>
+				<div class="control_background" id="control_login_bg" data-cmstype="img" data-cmspos="control_login_bg_mob" data-cmsglobal="1"><?php cms_load_img($control_login_bg_mob, 0, 0, ""); ?></div>
+				<div class="control_background" id="control_dashboard_bg" data-cmstype="img" data-cmspos="control_dashboard_bg_mob" data-cmsglobal="1"><?php cms_load_img($control_dashboard_bg_mob, 0, 0, ""); ?></div>
+			<?php } ?>
+		</div>
+		
+		<div id="control_nav_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		
+		<div id="control_login" class="control_element<?php if( $control_open == 'login' ){ ?> load<?php } ?>" data-cmstype="wrapper" data-cmscat="control_login">
+			
+			<?php
+				include($home_dir."temp/html/control_nav.html");
+			?>
+			
+			<div class="control_element_inner">
+				<?php
+					if( $control_open == 'login' ){
+					?>
+						<div id="control_login_top">
+							
+							<?php
+								if($device == "mobile"){
+							?>	
+								<span id="demo_open_mobile">
+									Unigrow kennenlernen
+								</span>
+							<?php
+								}
+							?>
+							
+							<div id="control_login_form_login_wrapper" class="control_login_form active">
+								
+								<form id="control_login_form_login" action="javascript:void(0);">
+								
+									<p class="control_login_form_headline">Anmelden</p>
+									<p class="control_login_form_button">...du bist neu hier?</p>
+									<div class="clear"></div>
+									
+									<input type="text" id="control_login_form_login_username" placeholder="E-Mail" required />
+									<input type="password" id="control_login_form_login_pw" placeholder="Passwort" required />
+									<span id="control_login_form_login_pw_reset">Passwort vergessen?</span>
+									
+									<button type="submit" class="control_login_form_submit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+								
+								</form>
+								
+							</div>
+							
+							<div id="control_login_form_register_wrapper" class="control_login_form">
+								
+								<form class="control_login_form_register" action="javascript:void(0);">
+								
+									<p class="control_login_form_headline">Registrieren</p>
+									<p class="control_login_form_button">...du bist bereits registriert?</p>
+									<div class="clear"></div>
+									
+									<input type="text" class="control_login_form_register_fname" placeholder="Vorname" required />
+									<input type="text" class="control_login_form_register_lname" placeholder="Nachname" required />
+									<div class="clear"></div>
+									<input type="email" class="control_login_form_register_email" placeholder="E-Mail" required />
+									<input type="password" class="control_login_form_register_pw" placeholder="Passwort" required />
+									
+									<?php
+										include($home_dir."temp/html/register_data_policy.html");
+									?>
+									
+									<button type="submit" class="control_login_form_submit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+								
+								</form>
+								
+							</div>
+						</div>
+						
+						<div id="control_login_bottom">
+							<?php
+								include($home_dir."temp/html/demo.html");
+							?>
+						</div>
+					<?php
+					}
+				?>
+			</div>
+		</div>
+		
+		<div id="control_dashboard" class="control_element<?php if( $control_open == 'dashboard' ){ ?> load<?php } ?>" data-cmstype="wrapper" data-cmscat="control_dashboard">
+			
+			<?php
+				include($home_dir."temp/html/control_nav.html");
+			?>
+			
+			<div class="control_element_inner">
+			
+			<?php
+				if(isset($_SESSION["reg_confirm_user_key"])){
+					$ergebnis_control_dashboard = $mysqli_project->query("	SELECT 	fname, lname FROM user WHERE user_key='".$_SESSION["reg_confirm_user_key"]."'");
+					if(mysqli_num_rows($ergebnis_control_dashboard) == 1){														
+						while($row_c_d = $ergebnis_control_dashboard->fetch_assoc()){
+							
+							include($home_dir."temp/html/control_d_confirm.html");
+						}
+					}
+				}
+				else{
+					$ergebnis_control_dashboard = $mysqli_project->query("	SELECT 	fname, lname, descr, 
+																					facebook_link, twitter_link, youtube_link, instagram_link
+																			FROM 	user
+																			WHERE	user_key='".$_SESSION["lc_user_key"]."'");
+																			
+					if(mysqli_num_rows($ergebnis_control_dashboard) == 1){														
+						while($row_c_d = $ergebnis_control_dashboard->fetch_assoc()){
+							
+							if($device == "desktop"){
+								include($home_dir."temp/html/control_d_profile.html");
+								include($home_dir."temp/html/control_d_newsfeed.html");
+								include($home_dir."temp/html/control_d_courses.html");
+						?>
+								<div class="clear"></div>
+						<?php
+							}
+							else{
+								include($home_dir."temp/html/control_d_courses.html");
+								include($home_dir."temp/html/control_d_newsfeed.html");
+								include($home_dir."temp/html/control_d_profile.html");
+							}
+						}
+					}
+				}
+			?>
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="project_msg_blk"></div>
+<div id="project_msg">
+	<div id="pmsg_close">
+		<i class="fa fa-times" aria-hidden="true"></i>
+	</div>
+	<div id="project_msg_inner">
+		<div id="project_msg_inner_content">
+			<div id="pmsg_content" data-pmsg_type="header">
+				<div class="pmsg_content_rows" id="pmsg_content_icon" data-pmsg_type="icon">
+					<img src="" />
+				</div>
+				<div class="pmsg_content_rows" id="pmsg_content_text">
+					<div id="pmsg_content_subject" data-pmsg_type="subject"></div>
+					<div id="pmsg_content_timestamp" data-pmsg_type="timestamp"></div>
+					<div class="clear"></div>
+					
+					<div id="pmsg_content_type" data-pmsg_type="type"></div>
+					<div id="pmsg_content_content" data-pmsg_type="content"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="pmsg_comment">
+				<div class="pmsg_comment_headline">Kommentare</div>
+				<div data-pmsg_type="input" class="pmsg_comment_element">
+					<div data-pmsg_type="user_icon"></div>
+					<textarea data-pmsg_type="input_area" placeholder="Was sagst du dazu?" data-placeholder_first="Schreibe den ersten Kommentar zu diesem Thema."></textarea>
+					<div data-pmsg_type="input_submit" title="Kommentar abgeben"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+					<div class="clear"></div>
+				</div>
+				<div class="pmsg_comment_content" data-pmsg_type="comment_list"></div>
+				<div data-pmsg_type="more">weitere laden</div>
+				
+				<div class="pmsg_comment_element clonable" data-pmsg_type="comment_element">
+				
+					<div class="pmsg_comment_element_rows" data-pmsg_type="user_icon"></div>
+					<div class="pmsg_comment_element_rows pmsg_comment_element_text">
+						<div data-pmsg_type="user_name"></div>
+						<div data-pmsg_type="timestamp"></div>
+						<div class="clear"></div>
+						
+						<div data-pmsg_type="content"></div>
+						
+						<span class="pmsg_comment_element_reply_button" data-pmsg_type="reply_button">
+							<span class="pmsg_comment_element_reply_button_counter" data-pmsg_type="reply_counter"></span> Antworten <i class="fa fa-angle-down" aria-hidden="true"></i>
+						</span>
+						<div class="clear"></div>
+						
+						<div class="pmsg_comment_element_reply" data-pmsg_type="reply_area">
+							
+							<div data-pmsg_type="input" class="pmsg_comment_element_reply_element">
+								<div data-pmsg_type="user_icon"></div>
+								<textarea data-pmsg_type="input_area" placeholder="Antworten"></textarea>
+								<div data-pmsg_type="input_submit" title="Antworten"><i class="fa fa-angle-down" aria-hidden="true"></i></div>
+								<div class="clear"></div>
+							</div>
+							
+							<div class="pmsg_comment_element_reply_content" data-pmsg_type="reply_list"></div>
+							<div data-pmsg_type="more">weitere laden</div>
+							
+							<div class="pmsg_comment_element_reply_element clonable" data-pmsg_type="reply_element">
+							
+								<div class="pmsg_comment_element_reply_element_rows pmsg_comment_element_reply_element_icon" data-pmsg_type="user_icon"></div>
+								<div class="pmsg_comment_element_reply_element_rows pmsg_comment_element_reply_element_text">
+									<div data-pmsg_type="user_name"></div>
+									<div data-pmsg_type="timestamp"></div>
+									<div class="clear"></div>
+									
+									<div data-pmsg_type="content"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="control_dropzone_single clonable" data-project_type="dropzone" data-dz_pos="">
+	<div data-project_type="dropzone_content"></div>
+	<div data-project_type="dropzone_msg">Profilbild ändern</div>
+	
+	<div data-project_type="dropzone_thumb">
+		<div class="dz-preview dz-file-preview">
+			<div data-project_type="dropzone_thumb_img" class="dz-details">
+				<img data-dz-thumbnail />
+			</div>
+			<div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+			<div data-project_type="dropzone_thumb_blk"></div>
+		</div>
+	</div>
+</div>

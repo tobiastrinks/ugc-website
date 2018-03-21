@@ -1,0 +1,20 @@
+<?php
+	
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+?>
+
+<div id="content">
+	<div id="content_inner">
+		<div id="buy_bg" data-cmstype="img" data-cmspos="ke_bg" data-cms_img_align="cover_center" data-cmsglobal="1"><?php cms_load_img($ke_bg, 0, 0, ""); ?></div>
+		<div id="buy_content" data-kurs_id="<?=$_SESSION["buy_id"];?>">
+			
+			<div id="buy_elopage_subline" data-cmstype="text_long" data-cmspos="buy_elopage_subline"><?=$buy_elopage_subline;?></div>
+			
+		</div>
+	</div>
+	<?php
+		include($home_dir."temp/html/footer.html"); 
+	?>
+</div>

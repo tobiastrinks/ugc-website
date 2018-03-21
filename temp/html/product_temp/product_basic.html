@@ -1,0 +1,179 @@
+<div class="product_basic">
+	
+	<div class="product_basic_header">
+		<div class="product_basic_header_img" data-pcms_type="img" data-pcms_pos="product_head_img" data-cms_img_align="cover_center"><?php product_img("product_head_img"); ?></div>
+		<div class="product_basic_header_text">
+			<div class="product_basic_header_text_inner" data-pcms_type="text" data-pcms_pos="product_title"><?php product_text("product_title", "ÜBERSCHRIFT"); ?></div>
+		</div>
+	</div>
+	
+	<div class="product_basic_descr">
+	
+		<div class="product_basic_descr_kurs">
+			<div class="product_basic_descr_kurs_inner">
+			
+				<div class="product_basic_descr_kurs_rows product_basic_descr_kurs_rows_img">
+					<div class="product_basic_descr_kurs_rows_inner">
+						<div class="product_basic_descr_kurs_img_wrapper">
+							<div class="product_basic_descr_kurs_img"><?php product_thumb(); ?></div>
+							<div class="product_basic_descr_kurs_price">
+								<div class="product_basic_descr_kurs_price_text">
+									<?php product_price(); ?>
+								</div>
+								<div class="product_basic_descr_kurs_price_button">
+									<div class="product_basic_descr_kurs_price_button_inner" data-product_type="member">
+										<i class="fa fa-play" aria-hidden="true"></i>
+										<p class="product_basic_descr_kurs_price_button_inner_text">MITGLIEDERBEREICH</p>
+									</div>
+									<div class="product_basic_descr_kurs_price_button_inner" data-product_type="buy">
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+										<p class="product_basic_descr_kurs_price_button_inner_text">JETZT KAUFEN</p>
+									</div>
+									<div class="product_basic_descr_kurs_price_button_inner" data-product_type="free">
+										<i class="fa fa-sign-in" aria-hidden="true"></i>
+										<p class="product_basic_descr_kurs_price_button_inner_text">BEITRETEN</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="product_basic_descr_kurs_rows product_basic_descr_kurs_rows_text">
+					<div class="product_basic_descr_kurs_rows_inner">
+						<div class="product_basic_descr_kurs_text">
+							<div class="product_basic_descr_kurs_text_headline" data-pcms_type="text" data-pcms_pos="product_kurs_text_headline"><?php product_text("product_kurs_text_headline", "Beschreibung"); ?></div>
+							<div class="product_basic_descr_kurs_text_content" data-pcms_type="text" data-pcms_pos="product_kurs_text_content"><?php product_text("product_kurs_text_content", "Schreibe hier etwas über deinen Kurs."); ?></div>
+							<div class="product_basic_descr_kurs_text_buy" data-product_type="buy">
+								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+								<span data-pcms_type="text" data-pcms_pos="product_kurs_text_buy"><?php product_text("product_kurs_text_buy", "jetzt kaufen")?></span>
+							</div>
+							<div class="product_basic_descr_kurs_text_buy" data-product_type="free">
+								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+								<span data-pcms_type="text" data-pcms_pos="product_kurs_text_free"><?php product_text("product_kurs_text_free", "jetzt beitreten")?></span>
+							</div>
+							<div class="product_basic_descr_kurs_text_buy" data-product_type="member">
+								<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+								<span>Mitgliederbereich</span>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<div class="product_basic_descr_creator">
+			
+			<div class="product_basic_descr_creator_inner">
+				<?php
+					if($device == "desktop"){
+				?>
+					<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_icon1">
+						<div class="product_basic_descr_creator_icon_wrapper">
+							<div class="product_basic_descr_creator_icon1" data-pcms_type="img" data-pcms_pos="product_ersteller_img" data-cms_img_align="cover_center"><?php product_img("product_ersteller_img"); ?></div>
+						</div>
+					</div>
+					<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_text">
+						<div class="product_basic_descr_creator_rows_text_bubble">
+							<div class="product_basic_descr_creator_rows_text_bubble_tail">
+								<img src="<?=$home_dir;?>temp/media/basic/bubble_tail_left.png" alt="bubble tail" />
+							</div>
+							<div class="product_basic_descr_creator_rows_text_bubble_inner">
+								<div class="product_basic_descr_creator_rows_text_bubble_content" data-pcms_type="text" data-pcms_pos="product_creator_text_content"><?php product_text("product_creator_text_content", "Lass deine Kunden mehr über dich wissen. ;)"); ?></div>
+							</div>
+						</div>
+						
+						<div class="product_basic_descr_creator_rows_text_bubble right">
+							<div class="product_basic_descr_creator_rows_text_bubble_tail">
+								<img src="<?=$home_dir;?>temp/media/basic/bubble_tail_right.png" alt="bubble tail" />
+							</div>
+							<div class="product_basic_descr_creator_rows_text_bubble_inner product_basic_descr_creator_support">
+								<div class="product_basic_descr_creator_rows_text_bubble_content">
+									<textarea class="product_basic_descr_creator_support_textarea" placeholder="Du hast eine Frage?"></textarea>
+									<div class="product_basic_descr_creator_support_submit"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_icon2">
+						<div class="product_basic_descr_creator_icon_wrapper">
+							<div class="product_basic_descr_creator_icon2"></div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				<?php
+					}
+					else{
+				?>
+					<div class="product_basic_descr_creator_mobile_creator">
+						<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_icon">
+							<div class="product_basic_descr_creator_icon_wrapper">
+								<div class="product_basic_descr_creator_icon1" data-pcms_type="img" data-pcms_pos="product_ersteller_img" data-cms_img_align="cover_center"><?php product_img("product_ersteller_img"); ?></div>
+							</div>
+						</div>
+						<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_text">
+							<div class="product_basic_descr_creator_rows_text_bubble_tail">
+								<img src="<?=$home_dir;?>temp/media/basic/bubble_tail_left.png" alt="bubble tail" />
+							</div>
+							<div class="product_basic_descr_creator_rows_text_bubble_inner">
+								<div class="product_basic_descr_creator_rows_text_bubble_content" data-pcms_type="text" data-pcms_pos="product_creator_text_content"><?php product_text("product_creator_text_content", "Lass deine Kunden mehr über dich wissen. ;)"); ?></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="product_basic_descr_creator_mobile_user">
+						<div class="product_basic_descr_creator_rows right product_basic_descr_creator_rows_text">
+							<div class="product_basic_descr_creator_rows_text_bubble_tail">
+								<img src="<?=$home_dir;?>temp/media/basic/bubble_tail_right.png" alt="bubble tail" />
+							</div>
+							<div class="product_basic_descr_creator_rows_text_bubble_inner product_basic_descr_creator_support">
+								<div class="product_basic_descr_creator_rows_text_bubble_content">
+									<textarea class="product_basic_descr_creator_support_textarea" placeholder="Du hast eine Frage?"></textarea>
+									<div class="product_basic_descr_creator_support_submit"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						<div class="product_basic_descr_creator_rows product_basic_descr_creator_rows_icon">
+							<div class="product_basic_descr_creator_icon_wrapper">
+								<div class="product_basic_descr_creator_icon2"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				<?php
+					}
+				?>
+			</div>
+		</div>
+		
+		<div class="product_basic_inhalte_head">
+			<div class="product_basic_inhalte_head_img" data-pcms_type="img" data-pcms_pos="product_inhalte_head_img" data-cms_img_align="cover_center"><?php product_img("product_inhalte_head_img"); ?></div>
+			<div class="product_basic_inhalte_head_text"><span data-pcms_type="text" data-pcms_pos="product_kurs_inhalte_headline"><?php product_text("product_kurs_inhalte_headline", "Kursinhalte")?></span></div>
+		</div>
+		
+		<div class="product_basic_inhalte">
+			<div class="product_basic_inhalte_inner">
+				<?php
+					product_inhalte();
+				?>
+			</div>
+		</div>
+		
+		<div class="product_basic_inhalte_head">
+			<div class="product_basic_inhalte_head_img" data-pcms_type="img" data-pcms_pos="product_inhalte_head_img2" data-cms_img_align="cover_center"><?php product_img("product_inhalte_head_img2"); ?></div>
+			<div class="product_basic_inhalte_head_text"><span data-pcms_type="text" data-pcms_pos="product_kurs_reviews_headline"><?php product_text("product_kurs_reviews_headline", "Das sagen Kursnutzer")?></span></div>
+		</div>
+		
+		<div class="product_basic_review">
+			<div class="product_basic_review_inner">
+				<?php
+					include($home_dir."temp/html/review.html");
+				?>
+			</div>
+		</div>
+	</div>
+</div>

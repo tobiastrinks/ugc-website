@@ -1,0 +1,30 @@
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+.clear{
+	clear: both;
+	float: none;
+}
+
+#wrapper{
+	position: fixed;
+	visibility: hidden;
+	width: 100%;
+	overflow: hidden;
+}
+
+#loading{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	z-index: 9999;
+}
+
+*[data-cmstype='clone_element']{
+	position: relative;
+}

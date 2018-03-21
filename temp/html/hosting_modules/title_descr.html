@@ -1,0 +1,23 @@
+<div id="h_dashboard_info_text" class="hosting_content_row_element">
+    <form action="javascript:void(0);" autocomplete="off">
+        <div id="h_dashboard_info_text_name" class="h_input_element">
+            <div class="h_input_element_rows1">
+                <label for="h_dashboard_info_text_name_input">Titel</label>
+            </div>
+            <div class="h_input_element_rows2">
+                <input id="h_dashboard_info_text_name_input" type="text" value="<?=$h_rows["name"];?>" placeholder="Kursname" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="h_dashboard_info_text_descr" class="h_input_element">
+            <div class="h_input_element_rows1">
+                <label for="h_dashboard_info_text_descr_input">Beschreibung</label>
+            </div>
+            <div class="h_input_element_rows2">
+                <textarea id="h_dashboard_info_text_descr_input" placeholder="Was erwartet uns in deinem Kurs?"><?= str_replace("<br />", "", $h_rows["descr"]);?></textarea>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+    <div id="h_dashboard_info_text_submit">Übernehmen</div>
+</div>

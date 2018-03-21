@@ -1,0 +1,242 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+	
+	if(isset($_GET["pg"]) AND is_file($home_dir."temp/html/hosting_".$_GET["pg"].".html"))
+		$dashboard_page = $_GET["pg"];
+
+	$hosting_modules = $home_dir."temp/html/hosting_modules";
+?>
+
+
+
+<div id="content">
+	
+	<div id="hosting_bg" data-cmstype="img" data-cmspos="hosting_bg" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img($hosting_bg, 0, 0, ""); ?></div>
+	
+	<div id="content_inner" data-hosting_id="<?=$_SESSION["kurs_hosting"];?>">
+		
+		<?php
+			$h_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID='".$_SESSION["kurs_hosting"]."'");
+			if(mysqli_num_rows($h_ergebnis) > 0){
+			
+				while($h_rows = $h_ergebnis->fetch_assoc()){
+		?>
+			<div id="hosting_nav">
+				<div class="hosting_nav_element<?php if($dashboard_page == "dashboard"){ ?> active<?php } ?>" data-page="dashboard">
+					<div class="hosting_nav_icon">
+						<i class="fa fa-th-large" aria-hidden="true"></i>
+					</div>
+					<div class="hosting_nav_text">
+						<span data-cmstype="text_short" data-cmspos="hosting_nav_dashboard"><?=$hosting_nav_dashboard;?></span>
+					</div>
+				</div>
+				<div class="hosting_nav_element<?php if($dashboard_page == "content"){ ?> active<?php } ?>" data-page="content">
+					<div class="hosting_nav_icon">
+						<i class="fa fa-list" aria-hidden="true"></i>
+					</div>
+					<div class="hosting_nav_text">
+						<span data-cmstype="text_short" data-cmspos="hosting_nav_content"><?=$hosting_nav_content;?></span>
+					</div>
+				</div>
+				<div class="hosting_nav_element<?php if($dashboard_page == "pages"){ ?> active<?php } ?>" data-page="pages">
+					<div class="hosting_nav_icon">
+						<i class="fa fa-files-o" aria-hidden="true"></i>
+					</div>
+					<div class="hosting_nav_text">
+						<span data-cmstype="text_short" data-cmspos="hosting_nav_pages"><?=$hosting_nav_pages;?></span>
+					</div>
+				</div>
+				<div class="hosting_nav_element<?php if($dashboard_page == "marketing"){ ?> active<?php } ?>" data-page="marketing">
+					<div class="hosting_nav_icon">
+						<i class="fa fa-line-chart" aria-hidden="true"></i>
+					</div>
+					<div class="hosting_nav_text">
+						<span data-cmstype="text_short" data-cmspos="hosting_nav_marketing"><?=$hosting_nav_marketing;?></span>
+					</div>
+				</div>
+				<div class="hosting_nav_element<?php if($dashboard_page == "users"){ ?> active<?php } ?>" data-page="users">
+					<div class="hosting_nav_icon">
+						<i class="fa fa-users" aria-hidden="true"></i>
+					</div>
+					<div class="hosting_nav_text">
+						<span data-cmstype="text_short" data-cmspos="hosting_nav_users"><?=$hosting_nav_users;?></span>
+					</div>
+				</div>
+			</div>
+		
+			<?php
+				
+					$h_ergebnis2 = $mysqli_project->query("SELECT status, keywords FROM kurse_marketplace WHERE kurs_id='".$_SESSION["kurs_hosting"]."'");
+					if(mysqli_num_rows($h_ergebnis2) > 0){
+						while($h_rows2 = $h_ergebnis2->fetch_assoc()){
+							
+							$kurs_status 	= $h_rows2["status"];
+							$kurs_keywords 	= $h_rows2["keywords"];
+						}
+					}
+					
+					if($kurs_status == "offline"){
+					?>
+					
+						<div id="h_publish">
+				
+							<div id="h_publish_submit_wrapper">
+								<div id="h_publish_submit" class="hosting_content_row_element">
+									<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+									<span id="h_publish_submit_button">Veröffentlichen</span>
+									<span id="h_publish_submit_help">Hilfe anfordern</span>
+								</div>
+							</div>
+							
+							<div id="h_publish_tasks">
+								
+								<div class="h_publish_element" id="h_publish_tasks_informations" onclick="window.location='hosting.html?pg=dashboard'">
+									<div class="h_publish_element_icon h_publish_element_rows">
+										<i class="fa fa-info-circle" aria-hidden="true"></i>
+									</div>
+									<div class="h_publish_element_content h_publish_element_rows">
+										<p class="h_publish_element_title">Informationen</p>
+										<p class="h_publish_element_descr">Wähle dein Thumbnail, deine Beschreibung und deine Kategorie.</p>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="h_publish_element" id="h_publish_tasks_inhalte" onclick="window.location='hosting.html?pg=content'">
+									<div class="h_publish_element_icon h_publish_element_rows">
+										<i class="fa fa-list" aria-hidden="true"></i>
+									</div>
+									<div class="h_publish_element_content h_publish_element_rows">
+										<p class="h_publish_element_title">Inhalte</p>
+										<p class="h_publish_element_descr">Lade dein Videomaterial hoch und erstelle Lektionen und Module.</p>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="h_publish_element" id="h_publish_tasks_seiten" onclick="window.location='hosting.html?pg=pages'">
+									<div class="h_publish_element_icon h_publish_element_rows">
+										<i class="fa fa-files-o" aria-hidden="true"></i>
+									</div>
+									<div class="h_publish_element_content h_publish_element_rows">
+										<p class="h_publish_element_title">Seiten</p>
+										<p class="h_publish_element_descr">Erstelle eine Produktseite für den Unigrow Marketplace.</p>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						
+						</div>
+						
+						<div class="blk_steps" id="h_publish_action_wrapper">
+							<div class="blk_steps_close" id="h_publish_action_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+							<div class="blk_steps_bg" id="h_publish_action_blk"></div>
+							<div class="blk_steps_content" id="h_publish_action">
+							
+								<div class="blk_steps_content_inner" id="h_publish_action_inner">
+								
+									<div class="blk_steps_content_page h_publish_action_page active" id="h_publish_action_page1">
+										<div class="blk_steps_content_page_headline h_publish_action_page_headline">
+											<span>GLEICH GESCHAFFT</span>
+										</div>
+										<div class="blk_steps_content_page_subline h_publish_action_page_subline">
+											<span>...noch ein letzter Schritt</span>
+										</div>
+										<div class="blk_steps_content_page_content h_publish_action_page_content">
+											<div id="h_publish_keywords" class="hosting_content_row_element" data-keywords="<?=$kurs_keywords;?>">
+												<div class="hosting_content_row_element_title">
+													Keywords
+												</div>
+												<div class="hosting_content_row_element_content">
+													<div class="h_marketing_keywords_subline">
+														Wähle 5 Wörter unter denen dein Kurs im Marketplace gefunden werden kann.
+														<p class="h_marketing_keywords_subline2"><i class="fa fa-angle-right" aria-hidden="true"></i> Vermeide Bestandteile des Kurstitels.</p>
+													</div>
+													<div class="h_marketing_keywords_input">
+														<form action="javascript:void(0);" autocomplete="off">
+															<div class="h_marketing_keywords_input_area"><input type="text" placeholder="Keyword" /></div>
+															<button class="h_marketing_keywords_input_submit" type="submit"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+															<div class="clear"></div>
+														</form>
+													</div>
+													<div class="h_marketing_keywords_content">
+														<div class="h_marketing_keywords_element clonable">
+															<i class="fa fa-times h_marketing_keywords_element_remove" aria-hidden="true"></i>
+															<span class="h_marketing_keywords_element_text"></span>
+														</div>
+														<div class="h_marketing_keywords_content_list"></div>
+														<div class="clear"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="blk_steps_content_page_button h_publish_action_page_button">
+											JETZT VERÖFFENTLICHEN
+										</div>
+									</div>
+									
+									<div class="blk_steps_content_page h_publish_action_page" id="h_publish_action_page2">
+										<div class="blk_steps_content_page_headline h_publish_action_page_headline">
+											<span>EUER CHATROOM</span>
+										</div>
+										<div class="blk_steps_content_page_subline h_publish_action_page_subline">
+											<span>...hier werden all deine Kursnutzer erscheinen.</span>
+										</div>
+										<div class="blk_steps_content_page_content h_publish_action_page_content"></div>
+										<div class="blk_steps_content_page_button h_publish_action_page_button">
+											Weiter
+										</div>
+									</div>
+									
+									<div class="blk_steps_content_page h_publish_action_page" id="h_publish_action_page3">
+										<div class="blk_steps_content_page_headline h_publish_action_page_headline">
+											<span>FERTIG</span>
+										</div>
+										<div class="blk_steps_content_page_subline h_publish_action_page_subline">
+											<span>...dein Kurs ist nun online. Viel Erfolg!</span>
+										</div>
+										<div class="blk_steps_content_page_content h_publish_action_page_content">
+										<?php
+											$kurs_tile_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID='".$_SESSION["kurs_hosting"]."'");
+											include($home_dir."temp/html/kurs_tile.html");
+										?>
+										</div>
+										<div class="blk_steps_content_page_button h_publish_action_page_button" onclick="window.location = 'hosting.html?pg=dashboard'">
+											zurück zum Kurshosting
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php
+					}
+					else{
+					?>
+						<div id="h_header_buttons" class="header_buttons">
+							<div class="header_buttons_inner">
+								<div id="h_header_memberarea" class="header_buttons_element">
+									<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+									<span>Mitgliederbereich</span>
+								</div>
+								<div id="h_header_productpage" class="header_buttons_element" onclick="window.location = 'kurs.html?p=<?=str_replace(" ","-", $h_rows["name"]);?>'">
+									<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+									<span>Produktseite</span>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					<?php
+					}
+					
+					include($home_dir."temp/html/hosting_".$dashboard_page.".html");
+				}
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					window.location = "index.html";
+				</script>
+				<?php
+			}
+		?>
+	</div>
+</div>

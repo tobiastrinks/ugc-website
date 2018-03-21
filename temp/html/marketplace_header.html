@@ -1,0 +1,26 @@
+<div id="marketplace_header">
+	<div id="marketplace_header_img" data-cmstype="img" data-cmspos="marketplace_head" cms_img_align="cover_center" data-cms_global="1"><?php cms_load_img($marketplace_head, 0, 0, ""); ?></div>
+	<div id="marketplace_header_blk"></div>
+	
+	<div id="marketplace_header_content">
+		<div id="marketplace_header_logo" onclick="window.location = 'index.html'">
+			<div class="marketplace_header_logo_rows" id="marketplace_header_logo_img" data-cmstype="img" data-cmspos="marketplace_head_logo" data-cms_global="1"><?php cms_load_img($marketplace_head_logo, 0, 0, ""); ?></div>
+			<div class="marketplace_header_logo_rows" id="marketplace_header_logo_text">
+				<p id="marketplace_header_logo_text1">UNIGROW</p>
+				<p id="marketplace_header_logo_text2">MARKETPLACE</p>
+			</div>
+		</div>
+		
+		<div id="marketplace_header_text_wrapper">
+			<div id="marketplace_header_search_input_wrapper">
+				<form action="javascript:void(0);" autocomplete="off">
+					<input id="marketplace_header_search_input" placeholder="Suchen" required value="<?php if(isset($_GET["s"])){ echo str_replace("-"," ", $_GET["s"]); } ?>" />
+					<button id="marketplace_header_search_submit" type="submit">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+					<div class="clear"></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

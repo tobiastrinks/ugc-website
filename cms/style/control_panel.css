@@ -1,0 +1,181 @@
+@import 'https://fonts.googleapis.com/css?family=Exo+2';
+*{
+	font-family: 'Exo 2', sans-serif;
+}
+body{
+	background-image: linear-gradient(to right, white 0%, #a7ccff 50%, white 100%);
+}
+#wrapper{
+	margin: 0px 20px;
+}
+
+/* header */
+#cms_cp_header{
+	text-align: center;
+}
+#cms_cp_logo{
+	width: 100px;
+}
+#cms_cp_headline{
+	font-size: 28px;
+	margin: 8px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid white;
+}
+
+/* body */
+.cms_cp_submit{
+	font-size: 18px;
+	padding: 10px;
+	text-align: center;
+	background-color: rgba(0,0,0,0.2);
+	margin: 0px auto;
+}
+.cms_cp_submit:hover{
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+}
+
+/* login */
+#cms_cp_login{
+	padding-top: 80px;
+	text-align: center;
+}
+#cms_cp_login input{
+	margin: 10px;
+	padding: 10px;
+	font-size: 18px;
+	width: 300px;
+	text-align: center;
+}
+#cms_cp_login_button{
+	margin-top: 30px;
+	width: 300px;
+}
+#cms_cp_login_button_error{
+	color: red;
+	display: none;
+}
+#cms_cp_login_button_success{
+	color: green;
+	display: none;
+}
+
+/* new_project */
+#cms_cp_new_project{
+	padding-top: 80px;
+	text-align: left;
+}
+.cms_cp_new_project_form{
+	margin-bottom: 80px;
+}
+.cms_cp_new_project_form_body{
+	width: 720px;
+	margin: 0px auto;
+	padding: 50px 0px;
+	background-color: rgba(0,0,0,0.05);
+}
+#cms_cp_new_project table{
+	width: 500px;
+	margin: 0px auto;
+}
+#cms_cp_new_project table td{
+	padding: 10px;
+	font-size: 18px;
+}
+#cms_cp_new_project table input{
+	padding: 8px;
+	font-size: 18px;
+	width: 100%;
+}
+#cms_cp_new_project_button{
+	width: 700px;
+}
+#cms_cp_domain_change{
+	text-align: center;
+}
+#cms_cp_domain_change_old_domain{
+	padding: 8px;
+	font-size: 18px;
+	width: 500px;
+	text-align: center;
+}
+#cms_cp_domain_change_button{
+	width: 700px;
+}
+
+
+/* edit_project */
+.cms_cp_edit_row{
+	margin: 50px auto;
+}
+.cms_cp_edit_row_headline{
+	font-size: 25px;
+	text-align: center;
+	margin: 0px;
+	padding: 10px;
+}
+.cms_cp_edit_row table{
+	margin: 5px auto;
+	border: none;
+	border-collapse: collapse;
+}
+.cms_cp_edit_row table tr{
+	background-color: rgba(0,0,0,0.05);
+}
+.cms_cp_edit_row table tr:first-child{
+	background-color: rgba(0,0,0,0.2);
+	font-weight: bold;
+}
+.cms_cp_edit_row table tr:first-child td{
+	padding: 5px 10px;
+}
+.cms_cp_edit_row table tr td{
+	padding: 0px;
+	border-bottom: 1px solid #8a8a8a;
+}
+.cms_cp_edit_row table tr:last-child td, .cms_cp_edit_row table tr:first-child td{
+	border: none;
+}
+.cms_cp_edit_row input{
+	background-image: url(../img/transparent.png);
+	background-color: transparent;
+	border: none;
+	padding: 5px 10px;
+	font-size: 15px;
+}
+.cms_cp_edit_row table tr.selected{
+	background-color: rgba(255,255,255,0.4);
+}
+
+.cms_cp_edit_db_remove{
+	text-align: center;
+	display: none;
+	font-size: 17px;
+	padding: 10px;
+	margin: 0px auto;
+	background-color: rgba(255,255,255,0.3);
+	width: 1060px;
+}
+.cms_cp_edit_db_remove:hover{
+	cursor: pointer;
+	background-color: rgba(255,255,255,0.6);
+}
+
+/* specific */
+.cms_cp_edit_row table[data-cms_table='temp'] input[data-cms_field='name'],
+.cms_cp_edit_row table[data-cms_table='temp'] input[data-cms_field='html_url']{
+	width: 200px;
+}
+.cms_cp_edit_row table[data-cms_table='temp'] input[data-cms_field='css_filename'],
+.cms_cp_edit_row table[data-cms_table='temp'] input[data-cms_field='js_filename']{
+	width: 300px;
+}
+
+.cms_cp_edit_row table[data-cms_table='user'] input[data-cms_field='username'],
+.cms_cp_edit_row table[data-cms_table='user'] input[data-cms_field='pw'],
+.cms_cp_edit_row table[data-cms_table='user'] input[data-cms_field='rights'],
+.cms_cp_edit_row table[data-cms_table='user'] input[data-cms_field='name']{
+	width: 250px;
+}

@@ -1,0 +1,5 @@
+class livechat {
+    public connect() {
+
+    }
+}

@@ -1,0 +1,147 @@
+<div class="control_dashboard_rows" id="control_dashboard_rows_newsfeed">
+	
+	<div class="control_dashboard_rows_mobile_element">
+	
+		<?php
+			$c_reply_not_ref = &$_SESSION["reply_not"]["user"];
+		
+			if(count($c_reply_not_ref) > 0){
+		?>
+			<div id="control_newsfeed_not_wrapper">
+				<div class="control_dashboard_rows_title">
+					<span data-cmstype="text_short" data-cmspos="control_comments_headline" data-cmsglobal="1"><?=$control_comments_headline;?></span>
+					<div class="control_dashboard_rows_title_notification control_dashboard_notification" id="control_newsfeed_not_counter">
+						<?=count($c_reply_not_ref);?>
+					</div>
+				</div>
+				
+				<div id="control_newsfeed_not" class="control_dashboard_widget no_hover">
+					
+					<div class="newsfeed_not" data-not_type="user">
+						<?php if(count($c_reply_not_ref) > 0){ ?>
+							<div class="newsfeed_readall" id="newsfeed_not_readall">
+								<span>alle gelesen</span>
+								<i class="fa fa-envelope-o" aria-hidden="true"></i>
+							</div>
+						<?php } ?>
+					<?php
+						
+						for($c_x=0; $c_x<count($c_reply_not_ref); $c_x++){
+							
+							$c_reply_not = &$c_reply_not_ref[$c_x];
+							
+							$c_reply_not_user = $c_reply_not["user_name"];
+							if($c_reply_not["user_number"] > 1)
+								$c_reply_not_user .= " und ".($c_reply_not["user_number"]-1)." weitere";
+							
+							?>
+								<div class="newsfeed_element" data-not_id="<?=$c_reply_not["not_id"];?>" data-not_type="<?=$c_reply_not["type"];?>" data-not_msg_id="<?=$c_reply_not["id"];?>" data-not_number="<?=$c_reply_not["user_number"];?>">
+									<div class="newsfeed_rows newsfeed_icon">
+										<?php if($c_reply_not["type"] == "review"){ ?>
+											<i class="fa fa-star" aria-hidden="true"></i>
+										<?php } else if($c_reply_not["type"] == "comment"){ ?>
+											<i class="fa fa-commenting" aria-hidden="true"></i>
+										<?php } else if($c_reply_not["type"] == "reply"){ ?>
+											<i class="fa fa-comments" aria-hidden="true"></i>
+										<?php } ?>
+									</div>
+									<div class="newsfeed_text newsfeed_rows">
+										<p class="newsfeed_subject newsfeed_rows1" title="<?=strip_tags($c_reply_not["subject"]);?>"><?=$c_reply_not["subject"];?></p>
+										<p class="newsfeed_timestamp newsfeed_rows2" data-lc_transl="timestamp"><?=$c_reply_not["timestamp"];?></p>
+										<div class="clear"></div>
+										
+										<p class="newsfeed_subline newsfeed_rows1" title="<?=strip_tags($c_reply_not_user);?>"><?=$c_reply_not_user;?></p>
+										
+										<p class="newsfeed_comments newsfeed_rows2 newsfeed_not_read" title="als gelesen markieren">
+											<i class="fa fa-envelope-o" aria-hidden="true"></i>
+											<i class="fa fa-check" aria-hidden="true"></i></span>
+										</p>
+										<div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+								</div>
+								
+							<?php
+						}
+					?>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		<?php } ?>
+	</div>	
+	
+		
+	<div class="control_dashboard_rows_mobile_element">
+		
+		<div class="control_dashboard_rows_title">
+			<span data-cmstype="text_short" data-cmspos="control_newsfeed_headline" data-cmsglobal="1"><?=$control_newsfeed_headline;?></span>
+			<?php if($control_nf_anzahl > 0){ ?>
+				<div class="control_dashboard_rows_title_notification control_dashboard_notification" id="control_newsfeed_post_counter">
+					<?=$control_nf_anzahl;?>
+				</div>
+			<?php } ?>
+		</div>
+		
+		<?php if(rights($_SESSION["lc_user_key"], "unigrow_post")){ ?>
+			<div class="control_dashboard_widget no_hover">
+				
+				<div id="control_dashboard_unigrow_post_title" class="control_dashboard_widget_title">Nachricht als UNIGROW</div>
+				
+				<div id="control_dashboard_unigrow_post" class="control_dashboard_widget_text">
+					
+					<div id="control_dashboard_unigrow_post_dest">
+						<p class="control_dashboard_unigrow_post_dest_element active" data-unigrow_dest="user">an alle</p>
+						<p class="control_dashboard_unigrow_post_dest_element" data-unigrow_dest="creator">nur an Kursersteller</p>
+					</div>
+					
+					<input type="text" placeholder="Betreff" id="control_dashboard_unigrow_post_subject" />
+					<textarea placeholder="Nachricht" id="control_dashboard_unigrow_post_content"></textarea>
+					<div id="control_dashboard_unigrow_post_submit">Senden</div>
+				</div>
+			</div>
+		<?php } ?>
+		
+		<div id="control_newsfeed_widget" class="control_dashboard_widget no_hover">
+			
+			<div id="control_newsfeed_wrapper" class="newsfeed_wrapper" data-newsfeed_type="user">
+				<?php if($control_nf_anzahl > 0){ ?>
+					<div class="newsfeed_readall" id="newsfeed_post_readall">
+						<span>alle gelesen</span>
+						<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					</div>
+				<?php } ?>
+				
+				<div class="newsfeed_list"></div>
+				<div class="newsfeed_more">ältere laden</div>
+				
+				<div class="newsfeed_element clonable">
+					
+					<div class="newsfeed_rows newsfeed_icon">
+						<img src="" />
+					</div>
+					<div class="newsfeed_text newsfeed_rows">
+						<p class="newsfeed_subject newsfeed_rows1" title=""></p>
+						<p class="newsfeed_timestamp newsfeed_rows2" data-lc_transl="timestamp"></p>
+						<div class="clear"></div>
+						
+						<p class="newsfeed_subline newsfeed_rows1" title=""></p>
+						
+						<p class="newsfeed_comments newsfeed_rows2"><span class="newsfeed_comments_counter"></span> <i class="fa fa-comments" aria-hidden="true"></i></p>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+					
+				</div>
+				
+			</div>
+			
+			<div id="control_newsfeed_widget_empty">
+				hier erscheinen Nachrichten von deinen Coaches und Unigrow
+			</div>
+			
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+</div>

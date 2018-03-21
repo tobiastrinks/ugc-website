@@ -1,0 +1,65 @@
+<div id="join_steps" class="blk_steps">
+	<div class="blk_steps_bg"></div>
+	<div class="blk_steps_content">
+	
+		<div class="blk_steps_content_inner">
+		
+			<div class="blk_steps_content_page active" id="join_steps_ty">
+				<div class="blk_steps_content_page_headline">
+					<span>WILLKOMMEN</span>
+				</div>
+				<div class="blk_steps_content_page_subline">
+					<span>...wir stellen vor: dein Coach!</span>
+				</div>
+				<div class="blk_steps_content_page_content">
+					<?php
+						$join_ergebnis = $mysqli_project->query("SELECT filename FROM media WHERE ID IN (SELECT icon FROM user WHERE user_key IN (SELECT user_key FROM kurse WHERE ID='".$join_kurs_id."'))");
+						if(mysqli_num_rows($join_ergebnis) > 0){
+							
+							while($join_row = $join_ergebnis->fetch_assoc()){
+								?>
+								<img src="<?=$home_dir;?>temp/media/project/<?=$join_row["filename"];?>" alt="Profilbild" />
+								<?php
+							}
+						}
+					?>
+				</div>
+				<div class="blk_steps_content_page_button">
+					WEITER
+				</div>
+			</div>
+			
+			<div class="blk_steps_content_page" id="join_steps_chatroom">
+				<div class="blk_steps_content_page_headline">
+					<span>KURSCHATROOM</span>
+				</div>
+				<div class="blk_steps_content_page_subline">
+					<span>...kommuniziere mit anderen Teilnehmern und deinem Coach.</span>
+				</div>
+				<div class="blk_steps_content_page_content"></div>
+				<div class="blk_steps_content_page_button">
+					WEITER
+				</div>
+			</div>
+			
+			<div class="blk_steps_content_page" id="join_steps_leaderboard">
+				<div class="blk_steps_content_page_headline">
+					<span>LEADERBOARD</span>
+				</div>
+				<div class="blk_steps_content_page_subline">
+					<span>...teile deinen Fortschritt.</span>
+				</div>
+				<div class="blk_steps_content_page_content">
+					<div id="join_steps_leaderboard_descr">
+						Das Leaderboard zeigt dir den Fortschritt anderer Teilnehmer. Du hast ein Problem an einer bestimmten Stelle?
+						Verbinde dich mit deinen Mitstreitern, die bereits weiter vorangeschritten sind!
+					</div>
+					<div id="join_steps_leaderboard_img" data-cmstype="img" data-cmspos="join_steps_leaderboard_img"><?php cms_load_img($join_steps_leaderboard_img, 0, 0, ""); ?></div>
+				</div>
+				<div class="blk_steps_content_page_button">
+					JETZT LOSLEGEN
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,328 @@
+<?php
+	
+	$m_premember = 0;
+	$m_ergebnis = $mysqli_project->query("SELECT ID FROM user_kurse WHERE user_key='".$_SESSION["lc_user_key"]."' AND kurs_id='".$_SESSION["kurs_memberarea"]."' AND rights='premember'");
+	if(mysqli_num_rows($m_ergebnis) > 0){
+		$m_premember = 1;
+		while($m_row = $m_ergebnis->fetch_assoc()){
+			$mysqli_project->query("UPDATE user_kurse SET rights='0' WHERE ID='".$m_row["ID"]."'");
+		}
+	}
+	
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+	
+	
+	$m_kurse = [];
+	
+	$m_ergebnis = $mysqli_project->query("SELECT name, thumbnail FROM kurse WHERE ID='".$_SESSION["kurs_memberarea"]."'");
+	if(mysqli_num_rows($m_ergebnis) > 0){
+		while($m_row = $m_ergebnis->fetch_assoc()){
+			
+			$m_kurse["name"] 		= $m_row["name"];
+			$m_kurse["thumbnail"] 	= $m_row["thumbnail"];
+			
+			$m_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$m_row["thumbnail"]."'");
+			if(mysqli_num_rows( $m_ergebnis2 ) > 0){
+				
+				while($m_row2 = $m_ergebnis2->fetch_assoc()){
+					
+					$m_kurse["thumbnail_filename"] = $m_row2["filename"];
+				}
+			}
+		}
+		
+		$m_ergebnis = $mysqli_project->query("SELECT progress FROM user_kurse WHERE kurs_id='".$_SESSION["kurs_memberarea"]."' AND user_key='".$_SESSION["lc_user_key"]."'");
+		if(mysqli_num_rows( $m_ergebnis ) > 0){
+			
+			while($m_row = $m_ergebnis->fetch_assoc()){
+				
+				$m_kurse["progress"] = $m_row["progress"];
+			}
+		}
+	
+		$join_kurs_id		= $_SESSION["kurs_memberarea"];
+		$join_kurs_img 		= $m_kurse["thumbnail_filename"];
+		include($home_dir."temp/html/beitreten.html");
+?>
+
+<div id="content">
+
+	<div data-ug_alert="leaderboard_share_progress">
+		Hiermit stimme ich zu, dass UNIGROW Informationen über meinen Kursfortschritt in allen 
+		meinen beigetretenen Online-Kursen und Modulen anderen registrierten Benutzern dieser 
+		Webseite und meinem jeweiligen Coach in Form von prozentualen Fortschrittsbalken (Leaderboard) zur Verfügung stellt. 
+		<br /><br />
+		Diese Einwilligung ist jederzeit mit Wirkung für die Zukunft widerruflich. 
+		Mir ist bewusst, dass mir ohne eine entsprechende Einwilligung das Leaderboard mit den 
+		Informationen über meinen eigenen Kursfortschritt  und den Kursfortschritt anderer Benutzer 
+		nicht zur Verfügung steht.
+	</div>
+	
+	<div id="memberarea_headimg" data-cmstype="img" data-cmspos="hosting_bg" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img($hosting_bg, 0, 0, ""); ?></div>
+	
+	<div id="memberarea_progress_bar" data-progress="<?=$m_kurse["progress"];?>">
+		<div id="memberarea_progress_bar_inner"></div>
+	</div>
+	
+	<div id="content_inner">
+	
+		<div id="memberarea" data-kurs_id="<?=$_SESSION["kurs_memberarea"];?>" data-premember="<?=$m_premember;?>">
+			
+			<div id="m_headline"><?=$m_kurse["name"];?></div>
+			
+			<?php
+				if(	mysqli_num_rows($mysqli_project->query("SELECT ID FROM user_kurse WHERE user_key='".$_SESSION["lc_user_key"]."' AND kurs_id='".$_SESSION["kurs_memberarea"]."' AND rights='admin'")) AND
+					$device == "desktop"){
+			?>
+				<div id="m_header_buttons" class="header_buttons">
+					<div class="header_buttons_inner">
+						<div id="m_header_hosting" class="header_buttons_element">
+							<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+							<span>Hosting Oberfläche</span>
+						</div>
+							<div id="m_header_productpage" class="header_buttons_element" onclick="window.location = 'kurs.html?p=<?=str_replace(" ","-", $m_kurse["name"]);?>'">
+							<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+							<span>Produktseite</span>
+						</div>
+						<div id="m_header_home" class="header_buttons_element" onclick="window.location = 'index.html'">
+							<i class="fa fa-angle-double-right" aria-hidden="true"></i>
+							<span>Marktplatz</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			<?php
+				}
+			?>
+			
+			<div id="m_nav">
+				<?php
+					if($device == "mobile"){
+				?>
+					<div id="m_nav_blk"></div>
+				<?php
+					}
+				?>
+				<div id="m_nav_content">
+					<div id="m_nav_content_inner">
+						
+						<div class="m_nav_element m_nav_upper_element" id="m_nav_leaderboard" data-upper_id="leaderboard">
+							Leaderboard
+						</div>
+					
+					<?php
+						$m_lesson_counter = 1;
+						$m_module_counter = 1;
+					
+						$m_lesson_ergebnis = $mysqli_project->query("SELECT ID, title FROM kurse_lesson WHERE kurs_id='".$_SESSION["kurs_memberarea"]."' AND visibility='1' ORDER BY pos ASC");
+						if(mysqli_num_rows($m_lesson_ergebnis) > 0){
+							
+							while($m_lesson_row = $m_lesson_ergebnis->fetch_assoc()){
+								?>
+								<div class="m_nav_element m_nav_lesson_element" data-m_id="<?=$m_lesson_row["ID"];?>">
+								
+								<?php
+									$m_lesson_user_ergebnis = $mysqli_project->query("SELECT status FROM user_kurse_content WHERE type='lesson' AND content_id='".$m_lesson_row["ID"]."' AND user_key='".$_SESSION["lc_user_key"]."'");
+									while($m_lesson_user_row = $m_lesson_user_ergebnis->fetch_assoc()){
+								?>
+										<div class="m_nav_lesson_element_inner">
+											<div class="m_nav_lesson_element_title" title="<?=$m_lesson_row["title"];?>">
+												<span class="m_nav_lesson_element_title_number"><?=$m_lesson_counter;?></span>
+												<span class="m_nav_lesson_element_title_text"><?=$m_lesson_row["title"];?></span>
+											</div>
+											<div class="m_nav_lesson_element_icon">
+												<i class="fa fa-check-circle-o m_nav_lesson_element_check<?php if($m_lesson_user_row["status"] == "done"){ ?> active<?php } ?>" aria-hidden="true" title="Lektion abgeschlossen"></i>
+											</div>
+											<div class="clear"></div>
+										</div>
+								<?php
+									}
+										$m_module_ergebnis = $mysqli_project->query("SELECT ID, title FROM kurse_module WHERE kurs_id='".$_SESSION["kurs_memberarea"]."' AND lesson_id=".$m_lesson_row["ID"]." AND visibility='1' ORDER BY pos ASC");
+										if(mysqli_num_rows($m_module_ergebnis) > 0){
+								?>
+											<div class="m_nav_lesson_element_module">
+												<?php
+													while($m_module_row = $m_module_ergebnis->fetch_assoc()){
+														
+														$m_module_user_ergebnis = $mysqli_project->query("SELECT status, progress FROM user_kurse_content WHERE type='module' AND content_id='".$m_module_row["ID"]."' AND user_key='".$_SESSION["lc_user_key"]."'");
+														while($m_module_user_row = $m_module_user_ergebnis->fetch_assoc()){
+												?>
+															<div class="m_nav_element m_nav_module_element" data-m_id="<?=$m_module_row["ID"];?>">
+																<div class="m_nav_module_element_title" title="<?=$m_module_row["title"];?>">
+																	<span class="m_nav_module_element_title_number"><?=$m_lesson_counter;?>.<?=$m_module_counter;?></span>
+																	<span class="m_nav_module_element_title_text"><?=$m_module_row["title"];?></span>
+																</div>
+																<div class="m_nav_module_element_icon<?php if($m_module_user_row["status"] == "locked"){ ?> active<?php } ?>" id="m_nav_module_element_icon_locked">
+																	<i class="fa fa-lock" aria-hidden="true" title="noch nicht freigeschalten"></i>
+																</div>
+																<div class="m_nav_module_element_icon<?php if($m_module_user_row["status"] == "done"){ ?> active<?php } ?>" id="m_nav_module_element_icon_done">
+																	<i class="fa fa-check" aria-hidden="true" title="Modul abgeschlossen"></i>
+																</div>
+																<div class="m_nav_module_element_progress<?php if($m_module_user_row["status"] == "progress" && $m_module_user_row["progress"] != "0"){ ?> active<?php } ?>" data-m_progress="<?=$m_module_user_row["progress"];?>">
+																	<div class="m_nav_module_element_progress_bar">
+																		<div class="m_nav_module_element_progress_bar_inner"></div>
+																	</div>
+																</div>
+																<div class="clear"></div>
+															</div>
+												<?php
+															$m_module_counter++;
+														}
+													}
+												?>
+											</div>
+										<?php
+										}
+									?>
+								</div>
+						<?php
+								$m_lesson_counter++;
+								$m_module_counter = 1;
+							}
+						}
+					?>
+					</div>
+				</div>
+			</div>
+			<div id="m_content">
+				
+				<div id="m_content_leaderboard" class="m_content_element" data-upper_id="leaderboard">
+					
+					<div id="m_content_leaderboard_head">
+						<div id="m_content_leaderboard_head_text">
+							<i id="m_content_leaderboard_head_text_bars" class="fa fa-bars" aria-hidden="true"></i>
+							Leaderboard
+						</div>
+						<div id="m_content_leaderboard_head_status"></div>
+					</div>
+					
+					<div id="m_content_leaderboard_body">
+						<?php
+							$m_lb_ergebnis = $mysqli_project->query("SELECT user_key, progress FROM user_kurse WHERE kurs_id='".$_SESSION["kurs_memberarea"]."' AND rights!='admin' AND user_key IN (SELECT user_key FROM consents WHERE subject='leaderboard_share_progress' AND status=1) ORDER BY progress ASC");
+							
+							if(mysqli_num_rows($m_lb_ergebnis) > 0){
+							
+								//preload user_contact
+								$m_lb_row_cache = [];
+								$m_lb_user_key = [];	
+								
+								while($m_lb_row = $m_lb_ergebnis->fetch_assoc()){
+									
+									$m_lb_row_cache[ count($m_lb_row_cache) ] 	= $m_lb_row;
+									$m_lb_user_key[ count($m_lb_user_key) ]		= $m_lb_row["user_key"];
+								}
+								
+								
+								for($m_lb_row_x=0; $m_lb_row_x<count($m_lb_row_cache); $m_lb_row_x++){
+									
+									$m_lb_row = $m_lb_row_cache[$m_lb_row_x];
+									
+									$m_lb_ergebnis2 = $mysqli_project->query("SELECT icon, fname, lname FROM user WHERE user_key='".$m_lb_row["user_key"]."'");
+									while($m_lb_row2 = $m_lb_ergebnis2->fetch_assoc()){
+										
+										?>
+										<div class="m_content_leaderboard_element" data-cw_link="user_profile" data-cw_user_key="<?=$m_lb_row["user_key"];?>" >
+											
+											<div class="m_content_leaderboard_element_progress">
+												<div class="m_content_leaderboard_element_progress_bar" data-progress="<?=$m_lb_row["progress"];?>"></div>
+												<div class="m_content_leaderboard_element_progress_val">
+													<span class="m_content_leaderboard_element_progress_val_number"><?=$m_lb_row["progress"];?></span>%
+												</div>
+											</div>
+											
+											<div class="m_content_leaderboard_element_rows m_content_leaderboard_element_icon">
+												<?php
+													if($m_lb_row2["icon"] != 0){
+														$m_lb_ergebnis3 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$m_lb_row2["icon"]."'");
+														if(mysqli_num_rows($m_lb_ergebnis3)){
+															while($m_lb_row3 = $m_lb_ergebnis3->fetch_assoc()){
+													?>
+																<img src="<?=$home_dir;?>temp/media/project/cw_icon/<?=$m_lb_row3["filename"];?>" alt="<?=$m_lb_row2["fname"]." ".$m_lb_row2["lname"];?>" />
+													<?php
+															}
+														}
+													}
+													else{
+												?>
+													<i class="fa fa-user" aria-hidden="true"></i>
+												<?php
+													}
+												?>
+											</div>
+											<div class="m_content_leaderboard_element_rows m_content_leaderboard_element_status" data-lc_type="user_status" data-lc_user_key="<?=$m_lb_row["user_key"];?>">
+												<div class="m_content_leaderboard_element_rows_inner">
+													<span data-lc_type="user_status_online"><i class="fa fa-circle" aria-hidden="true"></i></span>
+													<span data-lc_type="user_status_offline"><i class="fa fa-circle" aria-hidden="true"></i></span>
+												</div>
+											</div>
+											<div class="m_content_leaderboard_element_rows m_content_leaderboard_element_text">
+												<div class="m_content_leaderboard_element_rows_inner">	
+													<div class="m_content_leaderboard_element_text_name">
+														<?=$m_lb_row2["fname"]." ".$m_lb_row2["lname"];?>
+													</div>
+												</div>
+											</div>
+											<div class="m_content_leaderboard_element_rows m_content_leaderboard_element_contact">
+												<div data-cw_type="user_contact" data-cw_user_key="<?=$m_lb_row["user_key"];?>" class="m_content_leaderboard_element_rows_inner">
+													<i data-cw_type="user_contact_private" data-cw_user_key="<?=$m_lb_row["user_key"];?>" class="fa fa-comment" aria-hidden="true"></i>
+													<i data-cw_type="user_contact_support" data-cw_user_key="<?=$m_lb_row["user_key"];?>" class="fa fa-question-circle" aria-hidden="true"></i>
+												</div>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<?php
+									}
+								}
+							}
+						?>
+					</div>
+					
+				</div>
+				
+				<div id="m_content_module" class="m_content_element">
+					<div id="m_content_module_title">
+						<div id="m_content_module_title_number"><i class="fa fa-bars" aria-hidden="true"></i><span id="m_content_module_title_lesson"></span>.<span id="m_content_module_title_module"></span></div>
+						<div id="m_content_module_title_text">
+							<span id="m_content_module_title_content"></span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div id="m_content_module_video">
+						<video width="640" height="360" style="max-width:100%;" preload="none" controls playsinline webkit-playsinline></video>
+					</div>
+					
+					<div id="m_content_module_video_footer">
+						<div class="m_content_module_video_footer_element" id="m_content_module_video_prev">
+							<i class="fa fa-chevron-left" aria-hidden="true"></i>
+						</div>
+						<div class="m_content_module_video_footer_element" id="m_content_module_video_next">
+							<span>Modul abschließen</span>
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div id="m_content_module_descr">
+						<p id="m_content_module_descr_headline">Beschreibung</p>
+						<div id="m_content_module_descr_content"></div>
+					</div>
+					
+					<div id="m_content_module_comments">
+						<div id="m_content_module_comments_inner">
+							<?php
+								include($home_dir."temp/html/pmsg_comment.html");
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>
+<?php
+	}
+?>

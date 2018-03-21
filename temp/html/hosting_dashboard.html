@@ -1,0 +1,178 @@
+<?php
+	if($kurs_status == "online"){
+?>
+	<div id="hosting_headline">
+		DASHBOARD
+	</div>
+<?php
+	}
+?>
+<div id="hosting_content" data-kurs_status="<?=$kurs_status;?>">
+		<?php
+			if($kurs_status == "online"){
+		?>
+		<div class="hosting_content_row" id="h_dashboard_general">
+			<div class="hosting_content_row_title" data-cmstype="text_short" data-cmspos="h_dashboard_general"><?=$h_dashboard_general;?></div>
+			
+			<?php include($hosting_modules."/thumbnail.html"); ?>
+			<?php include($hosting_modules."/title_descr.html"); ?>
+			<?php include($hosting_modules."/category.html"); ?>
+			
+		</div>
+		<div class="hosting_content_row" id="h_dashboard_newsfeed">
+			
+			<?php
+				$h_reply_not_ref = &$_SESSION["reply_not"]["kurs"][$_SESSION["kurs_hosting"]];
+			?>
+			
+			<div class="hosting_content_row_title" data-cmstype="text_short" data-cmspos="h_dashboard_newsfeed_not_title">
+				<?php if(count($h_reply_not_ref) > 0){ ?>
+					<span id="h_dashboard_newsfeed_not_counter" class="hosting_content_row_title_not"><?=count($h_reply_not_ref);?></span>
+				<?php } ?>
+				<span><?=$h_dashboard_newsfeed_not_title;?></span>
+			</div>
+			
+			<div id="h_dashboard_newsfeed_not" class="hosting_content_row_element newsfeed_not" data-not_type="kurs" data-not_kurs_id="<?=$_SESSION["kurs_hosting"];?>">
+				
+				<?php if(count($h_reply_not_ref) > 0){ ?>
+					<div class="newsfeed_readall" id="h_dashboard_newsfeed_not_readall">
+						<span>alle gelesen</span>
+						<i class="fa fa-envelope-o" aria-hidden="true"></i>
+					</div>
+				<?php } ?>
+				
+				<div class="newsfeed_empty<?php if(count($h_reply_not_ref) == 0){ ?> active<?php } ?>">
+					keine Benachrichtigungen vorhanden
+				</div>
+				
+				<?php
+					for($h_x=0; $h_x<count($h_reply_not_ref); $h_x++){
+						
+						$h_reply_not = &$h_reply_not_ref[$h_x];
+						
+						$h_reply_not_user = $h_reply_not["user_name"];
+						if($h_reply_not["user_number"] > 1)
+							$h_reply_not_user .= " und ".($h_reply_not["user_number"]-1)." weitere";
+						
+						?>
+							<div class="newsfeed_element" data-not_id="<?=$h_reply_not["not_id"];?>" data-not_type="<?=$h_reply_not["type"];?>" data-not_msg_id="<?=$h_reply_not["id"];?>" data-not_number="<?=$h_reply_not["user_number"];?>">
+								<div class="newsfeed_rows newsfeed_icon">
+									<?php if($h_reply_not["type"] == "review"){ ?>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									<?php } else if($h_reply_not["type"] == "comment"){ ?>
+										<i class="fa fa-commenting" aria-hidden="true"></i>
+									<?php } else if($h_reply_not["type"] == "reply"){ ?>
+										<i class="fa fa-comments" aria-hidden="true"></i>
+									<?php } ?>
+								</div>
+								<div class="newsfeed_text newsfeed_rows">
+									<p class="newsfeed_subject newsfeed_rows1" title="<?=strip_tags($h_reply_not["subject"]);?>"><?=$h_reply_not["subject"];?></p>
+									<p class="newsfeed_timestamp newsfeed_rows2" data-lc_transl="timestamp"><?=$h_reply_not["timestamp"];?></p>
+									<div class="clear"></div>
+									
+									<p class="newsfeed_subline newsfeed_rows1" title="<?=strip_tags($h_reply_not_user);?>"><?=$h_reply_not_user;?></p>
+									
+									<p class="newsfeed_comments newsfeed_rows2 newsfeed_not_read" title="als gelesen markieren">
+										<i class="fa fa-envelope-o" aria-hidden="true"></i>
+										<i class="fa fa-check" aria-hidden="true"></i></span>
+									</p>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						<?php
+					}
+				?>
+			</div>
+			
+			
+			<div class="hosting_content_row_title" data-cmstype="text_short" data-cmspos="h_dashboard_newsfeed_post_title"><?=$h_dashboard_newsfeed_post_title;?></div>
+	
+			<div id="h_dashboard_newsfeed_post" class="hosting_content_row_element">
+				<input type="text" id="h_dashboard_newsfeed_post_subject" placeholder="Betreff"></textarea>
+				<textarea id="h_dashboard_newsfeed_post_content" placeholder="Nachricht an alle Kursteilnehmer"></textarea>
+				<div id="h_dashboard_newsfeed_post_submit">Senden</div>
+			</div>
+			
+			<div id="h_dashboard_newsfeed_post_list" class="hosting_content_row_element">
+				<div id="h_dashboard_newsfeed_post_list_inner" class="newsfeed_wrapper">
+					<div class="newsfeed_list"></div>
+					<div class="newsfeed_more">ältere laden</div>
+					
+					<div class="newsfeed_element clonable">
+						
+						<div class="newsfeed_rows newsfeed_icon">
+							<img src="" />
+						</div>
+						<div class="newsfeed_text newsfeed_rows">
+							<p class="newsfeed_subject newsfeed_rows1" title=""></p>
+							<p class="newsfeed_timestamp newsfeed_rows2" data-lc_transl="timestamp"></p>
+							<div class="clear"></div>
+							
+							<p class="newsfeed_subline newsfeed_rows1" title=""></p>
+							
+							<p class="newsfeed_comments newsfeed_rows2"><span class="newsfeed_comments_counter"></span> <i class="fa fa-comments" aria-hidden="true"></i></p>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="hosting_content_row" id="h_dashboard_stats">
+			<div class="hosting_content_row_title" data-cmstype="text_short" data-cmspos="h_dashboard_stats_title"><?=$h_dashboard_stats_title;?></div>
+			
+		</div>
+		<?php
+			}
+			else{
+				
+				$h_thumbnail_done 	= false;
+				$h_info_done		= false;
+				$h_pricing_done		= false;
+				
+				if($h_rows["thumbnail"] != 0){
+					$h_thumbnail_done = true;
+				}
+				if($h_rows["name"] != "" && $h_rows["descr"] != "" && $h_rows["category_id"] != ""){
+					$h_info_done = true;
+				}
+				if($h_rows["price_model"] != ""){
+					$h_pricing_done = true;
+				}
+		?>
+		
+		<div class="hosting_content_row" id="h_dashboard_thumbnail">
+			<div class="hosting_content_row_title">
+				<span class="check_publish<?php if($h_thumbnail_done == true){ ?> active<?php } ?>"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+				<span data-cmstype="text_short" data-cmspos="h_dashboard_thumbnail_title"><?=$h_dashboard_thumbnail_title;?></span>
+			</div>
+			
+			<?php include($hosting_modules."/thumbnail.html"); ?>
+		</div>
+		
+		<div class="hosting_content_row" id="h_dashboard_info">
+		
+			<div class="hosting_content_row_title">
+				<span class="check_publish<?php if($h_info_done == true){ ?> active<?php } ?>"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+				<span data-cmstype="text_short" data-cmspos="h_dashboard_info_title"><?=$h_dashboard_info_title;?></span>
+			</div>
+			
+			<?php include($hosting_modules."/title_descr.html"); ?>
+			<?php include($hosting_modules."/category.html"); ?>
+		</div>
+
+		<div class="hosting_content_row">
+			<div class="hosting_content_row_title">
+				<span class="check_publish<?php if($h_pricing_done == true){ ?> active<?php } ?>"><i class="fa fa-check-circle" aria-hidden="true"></i></span>
+				<span data-cmstype="text_short" data-cmspos="h_dashboard_pricing_title"><?=$h_dashboard_pricing_title;?></span>
+			</div>
+			<?php include($hosting_modules."/price.html"); ?>
+		</div>
+		<?php
+			}
+		?>
+	<div class="clear"></div>
+	
+</div>

@@ -1,0 +1,37 @@
+<div id="h_dashboard_info_thumbnail" class="hosting_content_row_element">
+
+    <div id="h_dashboard_info_thumbnail_i">
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
+    </div>
+    <div id="h_dashboard_info_thumbnail_img">
+        <?php
+            if($h_rows["thumbnail"] != "0"){
+                $h_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$h_rows["thumbnail"]."'");
+                    if(mysqli_num_rows($h_ergebnis2) > 0){
+
+                    while($h_rows2 = $h_ergebnis2->fetch_assoc()){
+                    ?>
+                    <img src="<?=$home_dir;?>temp/media/project/kurse_thumb/<?=$h_rows2["filename"];?>" alt="Kursthumbnail" />
+                    <?php
+                    }
+                }
+            }
+        ?>
+    </div>
+    <div id="h_dashboard_info_thumbnail_dropzone"></div>
+</div>
+
+<div class="h_dashboard_dropzone_single clonable" data-project_type="dropzone" data-dz_pos="">
+    <div data-project_type="dropzone_content"></div>
+    <div data-project_type="dropzone_msg">Thumbnail einfügen/ändern</div>
+
+    <div data-project_type="dropzone_thumb">
+        <div class="dz-preview dz-file-preview">
+            <div data-project_type="dropzone_thumb_img" class="dz-details">
+                <img data-dz-thumbnail />
+            </div>
+            <div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+            <div data-project_type="dropzone_thumb_blk"></div>
+        </div>
+    </div>
+</div>

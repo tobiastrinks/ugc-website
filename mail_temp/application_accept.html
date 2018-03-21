@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head itemscope itemtype="http://schema.org/WebSite">
+    <meta charset="utf-8">
+    <title itemprop="name">Passwort zurücksetzen.</title>
+    <link href="https://fonts.googleapis.com/css?family=Sansita" rel="stylesheet" />
+
+    <style>
+        body{
+            background-color: #f3f1ed;
+            font-size: 20px;
+        }
+        .clear{
+            clear: both;
+        }
+
+        a{
+            color: #c66200;
+        }
+
+        #wrapper{
+            font-family: 'Sansita', sans-serif;
+            width: 95%;
+            max-width: 900px;
+            margin: 0px auto;
+        }
+
+        #head{
+            margin: 50px 0px 20px 0px;
+        }
+        #head_title{
+            padding: 0px;
+            margin: 0px;
+            margin-bottom: 40px;
+            font-size: 200%;
+            text-align: center;
+        }
+        .head_line_line{
+            float: left;
+            padding-top: 15px;
+            border-bottom: 1px solid #000;
+        }
+        .head_line_line1{
+            width: 40%;
+        }
+        .head_line_line2{
+            width: 40%;
+        }
+        .head_line_logo{
+            float: left;
+            width: 20%;
+            height: 30px;
+            text-align: center;
+        }
+        .head_line_logo img{
+            height: 100%;
+        }
+
+        #content{
+            margin: 70px 0px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        #content_text{
+            display: inline-block;
+            width: 95%;
+            margin: 0px 2.5%;
+            max-width: 400px;
+            text-align: justify;
+            vertical-align: top;
+            margin-bottom: 50px;
+        }
+        #content_img{
+            display: inline-block;
+            width: 95%;
+            margin: 0px 2.5%;
+            vertical-align: top;
+            max-width: 300px;
+        }
+        #content_img img{
+            width: 80%;
+            opacity: 0.95;
+            border-radius: 1000px;
+        }
+
+        #footer{
+            border-top: 1px solid #cbcbcb;
+            padding-top: 15px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        #footer_icons{
+            margin: 30px 0px;
+        }
+        .footer_icons_element{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 0px 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.05);
+            border-radius: 100px;
+        }
+        .footer_icons_element:hover{
+            cursor: pointer;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .footer_icons_element img{
+            width: 100%;
+            height: 100%;
+        }
+        #footer_text{
+            color: #5e5e5e;
+        }
+        .footer_text_element{
+            font-size: 80%;
+            margin: 0px;
+        }
+        #footer_text_element_mail{
+            margin-bottom: 10px;
+        }
+        #footer_text_element_mail a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper">
+
+    <div id="head">
+        <p id="head_title">GUTE NACHRICHTEN</p>
+
+        <div id="head_line">
+            <div class="head_line_line1 head_line_line"></div>
+            <div class="head_line_logo">
+                <img src="https://beta.unigrow.de/mail_temp/logo_black.png" />
+
+            </div>
+            <div class="head_line_line2 head_line_line"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="content_text">
+            DEINE BEWERBUNG WURDE ANGENOMMEN<br /><br />
+            Hey {{fname}},<br /><br />
+            {{reason}}<br /><br />
+            Melde dich jetzt an, um mit deinem Kurs voll durchzustarten: <a href="https://beta.unigrow.de/">https://beta.unigrow.de/</a><br /><br />
+            Marco und Tobi von Unigrow
+        </div><div id="content_img">
+
+        <img src="{{kursthumb}}" alt=""/>
+    </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="footer">
+        <div id="footer_icons">
+            <a href="http://facebook.de">
+                <div class="footer_icons_element">
+                    <img src="https://beta.unigrow.de/mail_temp/facebook.png" alt="f"/>
+                </div>
+            </a>
+            <a href="http://youtube.de">
+                <div class="footer_icons_element">
+                    <img src="https://beta.unigrow.de/mail_temp/yt.png" alt="yt"/>
+                </div>
+            </a>
+        </div>
+        <div id="footer_text">
+            <p class="footer_text_element" id="footer_text_element_mail"><a href="mailto:hello@unigrow.de">hello@unigrow.de</a></p>
+            <p class="footer_text_element">Unigrow UG (haftungsbeschränkt)</p>
+            <p class="footer_text_element">Obergasse 8</p>
+            <p class="footer_text_element">09648 Mittweida</p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

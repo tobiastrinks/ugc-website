@@ -1,0 +1,25 @@
+<div id="h_dashboard_info_cat" class="hosting_content_row_element">
+
+    <div id="h_dashboard_info_cat_headline">Deine Kategorie</div>
+
+        <?php
+            $h_ergebnis2 = $mysqli_project->query("SELECT ID, title FROM category ORDER BY title ASC");
+            $x=0;
+            while($h_row2 = $h_ergebnis2->fetch_assoc()){
+
+                ${"cat_".$h_row2["ID"]};
+
+                $selected = "";
+
+                if($h_rows["category_id"] == $h_row2["ID"])
+                $selected = " selected";
+            ?>
+                <div class="h_dashboard_info_cat_element<?=$selected;?>" data-h_cat="<?=$h_row2["ID"];?>" title="<?=$h_row2["title"];?>">
+                    <div class="h_dashboard_info_cat_element_img" data-cmspos="cat_<?=$h_row2["ID"];?>" data-cmstype="img" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img( ${"cat_".$h_row2["ID"]}, 200, 200, ""); ?></div>
+                </div>
+            <?php
+                $x++;
+            }
+        ?>
+    <div class="clear"></div>
+</div>

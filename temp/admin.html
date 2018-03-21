@@ -1,0 +1,241 @@
+<?php
+	include($home_dir."temp/html/control.html");
+	include($home_dir."temp/html/comm_widget.html");
+?>
+
+<div id="content">
+	<div id="content_inner">
+		<div id="admin">
+			<?php
+				if(rights($_SESSION["lc_user_key"], "root")){
+			?>
+				<h1>Admin Oberfläche</h1>
+				
+				<h2>Bewerbungen</h2>
+				
+				<table class="admin_table" id="admin_table_applications">
+					<tr>
+						<td>Kursthumb</td>
+						<td>Name</td>
+						<td>Ersteller</td>
+						<td>Timestamp</td>
+						<td class="admin_table_applications_questions">Welche Menschen wird Dein Kurs ansprechen?</td>
+						<td class="admin_table_applications_questions">Was möchtest Du als Coach zur Unigrow Community beitragen?</td>
+						<td class="admin_table_applications_questions">Was willst Du für dich selbst mit diesem Kurs erreichen?</td>
+						<td>Aktionen</td>
+					</tr>
+					<?php
+						$ergebnis = $mysqli_project->query("SELECT ID, name, user_key, thumbnail, price_model, price_1 FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_application WHERE timestamp!=0 ORDER BY timestamp ASC) AND ID IN (SElECT kurs_id FROM kurse_marketplace WHERE status='application')");
+						if(mysqli_num_rows($ergebnis) > 0){
+							while($row = $ergebnis->fetch_assoc()){
+							?>
+							<tr class="admin_table_element" data-kurs_id="<?=$row["ID"];?>">
+								<td class="admin_table_thumb">
+								<?php
+									//get thumbnail
+									if($row["thumbnail"] != null){
+										$ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$row["thumbnail"]."'");
+										if(mysqli_num_rows($ergebnis2) > 0){
+											while($row2 = $ergebnis2->fetch_assoc()){
+												?>
+												<img src="<?=$home_dir;?>temp/media/project/kurse_small/<?=$row2["filename"];?>" />
+												<?php
+											}
+										}
+									}
+								?>
+								</td>
+								<td>
+									<span class="admin_table_applications_hosting">
+										<?=$row["name"];?>
+									</span>
+								</td>
+								<td>
+									<?php
+										//get username
+										$ergebnis2 = $mysqli_project->query("SELECT fname, lname FROM user WHERE user_key='".$row["user_key"]."'");
+										if(mysqli_num_rows($ergebnis2) > 0){
+											while($row2 = $ergebnis2->fetch_assoc()){
+												?>
+												<a href="user.html?u=<?=$row["user_key"];?>-<?=$row2["fname"];?>-<?=$row2["lname"];?>" target="_blank">
+													<?=$row2["fname"];?> <?=$row2["lname"];?>
+												</a>
+												<?php
+											}
+										}
+									?>
+								</td>
+								<?php
+									//get application data
+									$ergebnis2 = $mysqli_project->query("SELECT question_1, question_2, question_3, timestamp FROM kurse_application WHERE kurs_id='".$row["ID"]."'");
+									if(mysqli_num_rows($ergebnis2) > 0){
+										while($row2 = $ergebnis2->fetch_assoc()){
+											?>
+											<td data-lc_transl="timestamp">
+												<?=$row2["timestamp"];?>
+											</td>
+											<td class="admin_table_applications_questions">
+												<?=$row2["question_1"];?>
+											</td>
+											<td class="admin_table_applications_questions">
+												<?=$row2["question_2"];?>
+											</td>
+											<td class="admin_table_applications_questions">
+												<?=$row2["question_3"];?>
+											</td>
+											<?php
+										}
+									}
+								?>
+								<td class="admin_table_actions">
+									<i class="fa fa-share application_reply_open" aria-hidden="true"></i>
+								</td>
+							</tr>
+							<?php
+							}
+						}
+					?>
+				</table>
+				
+				<div id="application_reply">
+					<div id="application_reply_close">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</div>
+					<div id="application_reply_headline">
+						Bewerbung beantworten
+					</div>
+					<div id="application_reply_subline"></div>
+					<textarea placeholder="Begründung" id="application_reply_textarea"></textarea>
+					<div id="application_reply_button">
+						<div class="application_reply_button_element">
+							<span data-app_reply="1">Kurs annehmen</span>
+						</div>
+						<div class="application_reply_button_element">
+							<span data-app_reply="0">Kurs ablehnen</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				<h2>Kurse</h2>
+				
+				<table class="admin_table" id="admin_table_kurse">
+					<tr>
+						<td>Thumb</td>
+						<td>Name</td>
+						<td>Ersteller</td>
+						<td>Z.-modell</td>
+						<td>Preis</td>
+						<td>Aktionen</td>
+					</tr>
+					<?php
+						$ergebnis = $mysqli_project->query("SELECT ID, name, user_key, thumbnail, price_model, price_1 FROM kurse WHERE ID NOT IN (SELECT kurs_id FROM kurse_marketplace WHERE status='application') ORDER BY name ASC");
+						if(mysqli_num_rows($ergebnis) > 0){
+							while($row = $ergebnis->fetch_assoc()){
+							?>
+							<tr class="admin_table_element" data-kurs_id="<?=$row["ID"];?>">
+								<td class="admin_table_thumb">
+								<?php
+									//get thumbnail
+									if($row["thumbnail"] != null){
+										$ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$row["thumbnail"]."'");
+										if(mysqli_num_rows($ergebnis2) > 0){
+											while($row2 = $ergebnis2->fetch_assoc()){
+												?>
+												<img src="<?=$home_dir;?>temp/media/project/kurse_small/<?=$row2["filename"];?>" />
+												<?php
+											}
+										}
+									}
+								?>
+								</td>
+								<td>
+									<a href="kurs.html?p=<?= str_replace(" ","-", $row["name"]); ?>" target="_blank">
+										<?=$row["name"];?>
+									</a>
+								</td>
+								<td>
+									<?php
+										//get username
+										$ergebnis2 = $mysqli_project->query("SELECT fname, lname FROM user WHERE user_key='".$row["user_key"]."'");
+										if(mysqli_num_rows($ergebnis2) > 0){
+											while($row2 = $ergebnis2->fetch_assoc()){
+												?>
+												<a href="user.html?u=<?=$row["user_key"];?>-<?=$row2["fname"];?>-<?=$row2["lname"];?>" target="_blank">
+													<?=$row2["fname"];?> <?=$row2["lname"];?>
+												</a>
+												<?php
+											}
+										}
+									?>
+								</td>
+								<td><?=$row["price_model"];?></td>
+								<td><?=$row["price_1"];?> €</td>
+								<td class="admin_table_actions">
+									<i class="fa fa-trash kurs_remove" aria-hidden="true"></i>
+								</td>
+							</tr>
+							<?php
+							}
+						}
+					?>
+				</table>
+				
+				<h2>User</h2>
+				
+				<table class="admin_table" id="admin_table_kurse">
+					<tr>
+						<td>Thumb</td>
+						<td>user_key</td>
+						<td>Name</td>
+						<td>Username</td>
+						<td>E-Mail</td>
+						<td>Aktionen</td>
+					</tr>
+					<?php
+						$ergebnis = $mysqli_project->query("SELECT fname, lname, user_key, username, email, icon, icon_type FROM user ORDER BY fname ASC, lname ASC");
+						if(mysqli_num_rows($ergebnis) > 0){
+							while($row = $ergebnis->fetch_assoc()){
+							?>
+							<tr class="admin_table_element" data-user_key="<?=$row["user_key"];?>">
+								<td class="admin_table_thumb">
+								<?php
+									//get thumbnail
+									if($row["icon_type"] == "img"){
+										$ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$row["icon"]."'");
+										if(mysqli_num_rows($ergebnis2) > 0){
+											while($row2 = $ergebnis2->fetch_assoc()){
+												?>
+												<img src="<?=$home_dir;?>temp/media/project/cw_icon/<?=$row2["filename"];?>" />
+												<?php
+											}
+										}
+									}
+								?>
+								</td>
+								<td>
+									<?=$row["user_key"];?>
+								</td>
+								<td>
+									<a href="user.html?u=<?=$row["user_key"];?>-<?=$row["fname"];?>-<?=$row["lname"];?>" target="_blank">
+										<?=$row["fname"];?> <?=$row["lname"];?>
+									</a>
+								</td>
+								<td><?=$row["username"];?></td>
+								<td><?=$row["email"];?></td>
+								<td class="admin_table_actions">
+									<i class="fa fa-trash user_remove" aria-hidden="true" title="uneingeschränkt alles löschen"></i>
+									<i class="fa fa-eye-slash user_anonymize" aria-hidden="true" title="Daten löschen - Nachrichten anonymisieren"></i>
+								</td>
+							</tr>
+							<?php
+							}
+						}
+					?>
+				</table>
+			<?php
+				}
+			?>
+		</div>
+	</div>
+</div>

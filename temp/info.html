@@ -1,0 +1,52 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+	
+	
+	
+	if($filename == "impressum.html")
+		$info_page = "impressum";
+	if($filename == "datenschutz.html")
+		$info_page = "datenschutz";
+	if($filename == "agb.html")
+		$info_page = "agb";
+	if($filename == "ersteller-agb.html")
+		$info_page = "ersteller-agb";
+	if($filename == "cookies.html")
+		$info_page = "cookies";
+?>
+
+<div id="content">
+	
+	<div id="info_headimg" data-cmstype="img" data-cmspos="info_headimg" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img($info_headimg, 0, 0, ""); ?></div>
+	
+	<div id="content_inner">
+		<div id="info" data-info_page="<?=$info_page; ?>">
+			<div id="info_headline" data-cmspos="info_<?=$info_page;?>_headline" data-cmstype="text_short" data-cmsglobal="1"><?= ${"info_".$info_page."_headline"}; ?></div>
+			<?php
+				if($device == "desktop"){
+			?>
+				<div id="info_content_img">
+					<div id="info_content_img_inner" data-cmspos="info_<?=$info_page;?>_content_img" data-cmstype="img" data-cms_img_align="cover_center" data-cmsglobal="1"><?php cms_load_img(${"info_".$info_page."_content_img"}, 0, 0, ""); ?></div>
+				</div>
+			<?php
+				}
+			?>
+			<div id="info_content" data-cmspos="info_<?=$info_page;?>_content" data-cmstype="text_long" data-cmsglobal="1"><?= ${"info_".$info_page."_content"}; ?></div>
+		</div>
+		
+		<div class="info_hr clonable">
+			<div class="info_hr_line info_hr_line1"></div>
+			<div class="info_hr_logo">
+				<div class="info_hr_logo_img" data-cmspos="info_hr_logo_img" data-cmstype="img" data-cmsglobal="1"><?php cms_load_img($info_hr_logo_img, 0, 0, ""); ?></div>
+			</div>
+			<div class="info_hr_line info_hr_line2"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+	<?php
+		include($home_dir."temp/html/footer.html");
+	?>
+</div>

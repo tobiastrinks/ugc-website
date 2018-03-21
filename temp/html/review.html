@@ -1,0 +1,125 @@
+<div class="review">
+	
+	<?php
+		if($filename == "hosting.html" AND mysqli_num_rows( $mysqli_project->query("SELECT ID FROM review WHERE dest_type='kurs' AND dest_id='".$_SESSION["kurs_hosting"]."'") ) == 0){
+	?>
+		<div class="review_placeholder review_element">
+			<div class="review_element_icon review_element_row">
+				<div class="review_element_icon_inner"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+			</div>
+			<div class="review_element_text review_element_row">
+				<div class="review_element_text_head">
+					<div class="review_element_text_name review_element_row">Jenny Mills</div>
+					<div class="review_element_text_stars review_element_row">
+						<i class="fa fa-star star_filled" aria-hidden="true"></i>
+						<i class="fa fa-star star_filled" aria-hidden="true"></i>
+						<i class="fa fa-star star_filled" aria-hidden="true"></i>
+						<i class="fa fa-star star_filled" aria-hidden="true"></i>
+						<i class="fa fa-star-o star_empty" aria-hidden="true"></i>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="review_element_text_body">
+					<div class="review_element_text_title">
+						<span class="review_element_text_title_inner">Beispielrezension</span>
+					</div>
+					<div class="review_element_text_timestamp">7. Juli</div>
+					<div class="clear"></div>
+					<div class="review_element_text_msg">
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						<br />
+						<br />
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	<?php
+		}
+		else{
+	?>
+		<div class="review_new review_element">
+			<div class="review_element_icon review_element_row">
+				<div class="review_element_icon_inner"></div>
+			</div>
+			<div class="review_element_text review_element_row">
+				<div class="review_element_text_head">
+					<div class="review_element_text_name review_element_row">Was sagst du zum Kurs?</div>
+					<div class="review_element_text_stars review_element_row">
+						<?php
+							for($star_x=1; $star_x<6; $star_x++){
+						?>
+							<span class="review_element_text_stars_input" data-star="<?=$star_x;?>">
+								<i class="fa fa-star star_filled" aria-hidden="true"></i>
+								<i class="fa fa-star-o star_empty" aria-hidden="true"></i>
+							</span>
+						<?php
+							}
+						?>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="review_element_text_body">
+					<div class="review_element_text_title input">
+						<span class="review_element_text_title_inner">
+							<input type="text" placeholder="Titel" class="review_element_text_title_input" />
+						</span>
+					</div>
+					<div class="review_element_text_msg">
+						<textarea placeholder="Deine Rezension" class="review_element_text_content_input"></textarea>
+					</div>
+					<div class="review_new_submit">
+						<span class="review_new_submit_button">Senden</span>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="review_list"></div>
+		
+		<div class="review_element clonable">
+			<div class="review_element_icon review_element_row">
+				<div class="review_element_icon_inner"></div>
+			</div>
+			<div class="review_element_text review_element_row">
+				<div class="review_element_text_head">
+					<div class="review_element_text_name review_element_row"></div>
+					<div class="review_element_text_stars review_element_row">
+						<i class="fa fa-star star_filled" aria-hidden="true"></i>
+						<i class="fa fa-star-o star_empty" aria-hidden="true"></i>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="review_element_text_body">
+					<div class="review_element_text_title">
+						<span class="review_element_text_title_inner"></span>
+					</div>
+					<div class="review_element_text_timestamp"></div>
+					<div class="clear"></div>
+					<div class="review_element_text_msg"></div>
+					<div class="review_element_text_comment">
+						<div class="review_element_text_comment_button">
+							<i class="fa fa-angle-down" aria-hidden="true"></i>
+							<span class="review_element_text_comment_button_counter"></span>
+							<span><i class="fa fa-comments" aria-hidden="true"></i></span>
+						</div>
+						<div class="clear"></div>
+						<div class="review_element_text_comment_inner">
+							<?php
+								include($home_dir."temp/html/pmsg_comment.html");
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="review_placeholder_mp">
+			noch keine Rezensionen vorhanden
+		</div>
+	<?php
+		}
+	?>
+</div>

@@ -1,0 +1,46 @@
+<?php
+	if($kurs_status == "online"){
+?>
+	<div id="hosting_headline">
+		MARKETING
+	</div>
+<?php
+	}
+?>
+<div id="hosting_marketing">
+	
+	<div class="hosting_content_row">
+		<div class="hosting_content_row_title">
+			Marketplace
+		</div>
+		
+		<div id="h_marketing_keywords" class="hosting_content_row_element" data-keywords="<?=$kurs_keywords;?>">
+			<div class="hosting_content_row_element_title">
+				Keywords
+			</div>
+			<div class="hosting_content_row_element_content">
+				<div class="h_marketing_keywords_subline">
+					Wähle 5 Wörter unter denen dein Kurs im Marketplace gefunden werden kann.
+					<p class="h_marketing_keywords_subline2"><i class="fa fa-angle-right" aria-hidden="true"></i> Vermeide Bestandteile des Kurstitels.</p>
+				</div>
+				<div class="h_marketing_keywords_input">
+					<form action="javascript:void(0);" autocomplete="off">
+						<div class="h_marketing_keywords_input_area"><input type="text" placeholder="Keyword" /></div>
+						<button class="h_marketing_keywords_input_submit" type="submit"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="h_marketing_keywords_content">
+					<div class="h_marketing_keywords_element clonable">
+						<i class="fa fa-times h_marketing_keywords_element_remove" aria-hidden="true"></i>
+						<span class="h_marketing_keywords_element_text"></span>
+					</div>
+					<div class="h_marketing_keywords_content_list"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<?php include($hosting_modules."/price.html"); ?>
+	</div>
+	<div class="clear"></div>
+</div>

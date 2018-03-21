@@ -1,0 +1,131 @@
+<?php
+
+	if($kurs_status == "online"){
+?>
+	<div id="hosting_headline">
+		SEITENVERWALTUNG
+	</div>
+<?php
+	}
+	
+	$h_price = product_price(0, 1);
+?>
+
+<div id="hosting_content" data-kurs_status="<?=$kurs_status;?>" data-kurs_price=<?=$h_price["price_1"];?>>
+	
+	<div id="h_pages_overview">
+		
+		<div class="hosting_content_row h_pages_overview_element" data-page_type="product">
+			<div class="hosting_content_row_title">
+				<?php if($kurs_status == "offline"){ ?><span class="check_publish"><i class="fa fa-check-circle" aria-hidden="true"></i></span><?php } ?>
+				Produktseite
+			</div>
+			<div class="h_pages_overview_content">
+				<div class="h_pages_overview_content_inner">
+					<?php 
+						$h_p_ergebnis = $mysqli_project->query("SELECT type, name FROM kurse_temp WHERE type='product' AND ID IN (SELECT temp_product FROM kurse WHERE ID='".$_SESSION["kurs_hosting"]."')");
+						if(mysqli_num_rows($h_p_ergebnis) > 0){
+							
+							while($h_p_rows = $h_p_ergebnis->fetch_assoc()){
+								
+								include($home_dir."temp/html/product_temp/".$h_p_rows["type"]."_".$h_p_rows["name"].".html");
+							}
+						}
+					?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="hosting_content_row h_pages_overview_element" data-page_type="sell">
+			<div class="hosting_content_row_title">
+				<?php if($kurs_status == "offline"){ ?><span class="check_publish"><i class="fa fa-check-circle" aria-hidden="true"></i></span><?php } ?>
+				Bestellformular
+			</div>
+			<div class="h_pages_overview_content">
+				<div class="h_pages_overview_content_inner">
+					<div class="h_pages_overview_content_beta">
+						hier wird noch gebaut
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="hosting_content_row h_pages_overview_element" data-page_type="ty">
+			<div class="hosting_content_row_title">
+				<?php if($kurs_status == "offline"){ ?><span class="check_publish"><i class="fa fa-check-circle" aria-hidden="true"></i></span><?php } ?>
+				Dankeseite
+			</div>
+			<div class="h_pages_overview_content">
+				<div class="h_pages_overview_content_inner">
+					<div class="h_pages_overview_content_beta">
+						hier wird noch gebaut
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		
+	</div>
+	
+	<div id="h_pages_product" class="h_pages_edit" data-page_type="product">
+		
+		<div class="hosting_content_row h_pages_edit_temp">
+			<div class="h_pages_edit_temp_bar">
+				<div class="h_pages_edit_temp_bar_element h_pages_edit_temp_bar_back">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+					<span>Seitenübersicht</span>
+				</div>
+				<a href="<?=$home_dir."kurs.html?p=".$product_get_param;?>" target="_blank">
+					<div class="h_pages_edit_temp_bar_element h_pages_edit_temp_bar_page">
+						anschauen <i class="fa fa-external-link" aria-hidden="true"></i>
+					</div>
+				</a>
+				<!--
+				<div class="h_pages_edit_temp_bar_element h_pages_edit_temp_bar_device">
+					<span>mobile Version</span><i class="fa fa-mobile" aria-hidden="true"></i>
+				</div>-->
+				<div class="clear"></div>
+			</div>
+			<div class="h_pages_edit_temp_inner">
+				<?php include($product_temp); ?>
+			</div>
+		</div>
+		
+		<div class="hosting_content_row h_pages_edit_lib">
+			<?php include($home_dir."temp/html/hosting_media_library.html"); ?>
+		</div>
+		<div class="clear"></div>
+		
+	</div>
+	
+</div>
+
+<div class="h_pages_text_editor clonable">
+	<div class="h_pages_text_editor_cancel">
+		<i class="fa fa-times" aria-hidden="true"></i>
+	</div>
+	<div class="h_pages_text_editor_inner">
+		<textarea class="h_pages_text_editor_area"></textarea>
+		<div class="h_pages_text_editor_submit">Änderungen übernehmen</div>
+	</div>
+</div>
+
+<div class="h_pages_edit_element clonable" data-pcms_type="img">
+	<div class="h_pages_edit_element_text">Bild hierher ziehen</div>
+</div>
+
+
+<div class="h_dashboard_dropzone_single clonable" data-project_type="dropzone" data-dz_pos="">
+	<div data-project_type="dropzone_content"></div>
+	<div data-project_type="dropzone_msg">Thumbnail einfügen/ändern</div>
+	
+	<div data-project_type="dropzone_thumb">
+		<div class="dz-preview dz-file-preview">
+			<div data-project_type="dropzone_thumb_img" class="dz-details">
+				<img data-dz-thumbnail />
+			</div>
+			<div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress></div></div>
+			<div data-project_type="dropzone_thumb_blk"></div>
+		</div>
+	</div>
+</div>

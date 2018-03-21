@@ -1,0 +1,86 @@
+<?php
+	include($home_dir."temp/html/control.html"); 
+
+	include($home_dir."temp/html/comm_widget.html");
+?>
+
+<div id="content">
+	
+	<?php 
+		include($home_dir."temp/html/marketplace_search.html");
+		include($home_dir."temp/html/marketplace_header.html")
+	?>
+	
+	<div class="marketplace_section" id="marketplace_spotlight">
+		<div class="marketplace_section_headline">IM SPOTLIGHT</div>
+		<div class="marketplace_section_content">
+			<div id="marketplace_spotlight_content">
+				<?php
+					$kurs_list_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online' AND spotlight!=0 ORDER BY spotlight DESC)");
+					if(mysqli_num_rows($kurs_list_ergebnis) < 3){
+						$kurs_list_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID=33");//"SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online' ORDER BY spotlight DESC, rand()) LIMIT 5");
+					}
+					include($home_dir."temp/html/kurs_list.html");
+				?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="marketplace_section" id="marketplace_kategorien">
+		<div class="marketplace_section_headline">WAS INTERESSIERT DICH?</div>
+		<div class="marketplace_section_content">
+			
+			<?php
+				$ergebnis = $mysqli_project->query("SELECT ID, title, icon FROM category ORDER BY title ASC");
+				$x=0;
+				while($row = $ergebnis->fetch_assoc()){
+				
+					if($device == "desktop"){
+						?><div class="marketplace_kat_element_wrapper">	
+							<div class="marketplace_kat_element" data-ke_cat="<?=$row["ID"];?>" onclick="window.location = 'search.html?s=<?=str_replace(" ","-",$row["title"]);?>&cat=1'">
+								<div class="marketplace_kat_element_inner">
+									<div class="marketplace_kat_element_img" data-cmspos="cat_<?=$row["ID"];?>" data-cmstype="img" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img( ${"cat_".$row["ID"]}, 0, 0, ""); ?></div>
+									<div class="marketplace_kat_element_hover">
+										<div class="marketplace_kat_element_hover_inner">
+											<?=$row["icon"];?>
+											<p><?=$row["title"];?></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div><?php
+					}
+					else{
+						?><div class="marketplace_kat_element_wrapper">
+							<div class="marketplace_kat_element" data-ke_cat="<?=$row["ID"];?>" onclick="window.location = 'search.html?s=<?=str_replace(" ","-",$row["title"]);?>&cat=1'">
+								<div class="marketplace_kat_element_inner">
+									<div class="marketplace_kat_element_img" data-cmspos="cat_<?=$row["ID"];?>" data-cmstype="img" data-cmsglobal="1" data-cms_img_align="cover_center"><?php cms_load_img( ${"cat_".$row["ID"]}, 0, 0, ""); ?></div>
+								</div>
+							</div>
+							<div class="marketplace_kat_text">
+								<?=$row["title"];?>
+							</div>
+							<div class="clear"></div>
+						</div><?php
+					}
+					
+					$x++;
+				}
+			?>
+			
+		</div>
+	</div>
+	
+	<div class="marketplace_section" id="marketplace_bestseller">
+		<div class="marketplace_section_headline">BESTSELLER</div>
+		<div class="marketplace_section_content">
+			<?php
+				$kurs_tile_ergebnis = $mysqli_project->query("SELECT * FROM kurse WHERE ID IN (SELECT kurs_id FROM kurse_marketplace WHERE status='online' ORDER BY rand())");
+				include($home_dir."temp/html/kurs_tile.html");
+			?>
+		</div>
+	</div>
+	<?php
+		include($home_dir."temp/html/footer.html");
+	?>
+</div>

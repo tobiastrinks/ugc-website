@@ -1,0 +1,73 @@
+<?php
+	$application_ergebnis = $mysqli_project->query("SELECT kurs_id, result, reply_text FROM kurse_application WHERE user_key='".$_SESSION["lc_user_key"]."' AND kurs_id IN (SELECT kurs_id FROM kurse_marketplace WHERE status IN ('rejected', 'confirmed'))");
+	if(mysqli_num_rows($application_ergebnis) > 0){
+		while($application_row = $application_ergebnis->fetch_assoc()){
+		
+			//get user_name
+			$application_ergebnis2 = $mysqli_project->query("SELECT fname FROM user WHERE user_key='".$_SESSION["lc_user_key"]."'");
+			while($application_row2 = $application_ergebnis2->fetch_assoc()){
+				$application_fname = $application_row2["fname"];
+			}
+			
+			//get kurs_thumb
+			$application_ergebnis2 = $mysqli_project->query("SELECT filename FROM media WHERE ID=(SELECT thumbnail FROM kurse WHERE ID='".$application_row["kurs_id"]."')");
+			if(mysqli_num_rows($application_ergebnis2) > 0){
+				while($application_row2 = $application_ergebnis2->fetch_assoc()){
+					$application_thumb = $application_row2["filename"];
+				}
+			}
+	?>
+			<div id="application_result" class="blk_steps" data-kurs_id="<?=$application_row["kurs_id"];?>">
+				<div class="blk_steps_bg"></div>
+				<div class="blk_steps_content">
+					<div class="blk_steps_content_inner">
+					
+						<div class="blk_steps_content_page active">
+							<?php if($application_row["result"] == true){ ?>
+								<div class="blk_steps_content_page_headline">
+									<span>GUTE NACHRICHTEN</span>
+								</div>
+								<div class="blk_steps_content_page_subline">
+									<span>DEIN KURS WURDE ANGENOMMEN</span>
+								</div>
+							<?php } else{ ?>
+								<div class="blk_steps_content_page_headline">
+									<span>ES TUT UNS LEID</span>
+								</div>
+								<div class="blk_steps_content_page_subline">
+									<span>DEIN KURS WURDE ABGELEHNT</span>
+								</div>
+							<?php } ?>
+							<div class="blk_steps_line">
+								<div class="blk_steps_line_line"></div>
+								<div class="blk_steps_line_logo" data-cmstype="img" data-cmspos="blk_steps_line_logo" data-cmsglobal="1"><?php cms_load_img($blk_steps_line_logo, 0, 0, ""); ?></div>
+								<div class="blk_steps_line_line"></div>
+								<div class="clear"></div>
+							</div>
+							<div class="blk_steps_content_page_content">
+								<?php if(isset($application_thumb)){ ?>
+									<div class="application_result_content_thumb">
+										<img src="<?=$home_dir;?>temp/media/project/kurse_thumb/<?=$application_thumb;?>" alt="Kursthumbnail" />
+									</div>
+								<?php } ?>
+								<p class="application_result_content_headline">Hey <?=$application_fname;?>,</p>
+								<p class="application_result_content_text"><?=$application_row["reply_text"];?></p>
+								
+								<?php if($application_row["result"] == true){ ?>
+									<p class="application_result_content_subline">Wir freuen uns auf unsere Zusammenarbeit. Bei Fragen stehen wir jederzeit zur Verfügung!</p>
+								<?php } ?>
+								
+								<p class="application_result_content_subline">Marco &amp; Tobi von <br />UNIGROW</p>
+							</div>
+							<div class="blk_steps_content_page_button application_result_close">
+								SCHLIESSEN
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	<?php	
+		}
+	}
+?>

@@ -1,0 +1,153 @@
+
+2017-11-22T16:35:48+00:00 - GET - https://api.vimeo.com/videos/244073567 - []
+2017-11-22T16:35:59+00:00 - DELETE - https://api.vimeo.com/videos/244073567 - []
+2017-11-22T16:37:23+00:00 - GET - https://api.vimeo.com/me/videos?per_page=100&page=1 - []
+2017-11-22T16:54:34+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T17:03:41+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T17:10:29+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118765624?video_file_id=878615319&upgrade=true&signature=f16bed9d20a6135b8b9616333dcede2d - []
+2017-11-22T17:10:30+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T17:21:20+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118767075?video_file_id=878621454&upgrade=true&signature=c59fc223f0cac0c5edd47c5d254cc4f5 - []
+2017-11-22T17:21:20+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T17:45:03+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118769601?video_file_id=878630820&upgrade=true&signature=f0f7a894a2b7b6298fa0781454d2fcf2 - []
+2017-11-22T17:45:04+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T17:54:38+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118774365?video_file_id=878651601&upgrade=true&signature=29fbd3710ced772c5d35cc7592433f26 - []
+2017-11-22T17:54:39+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-22T18:03:52+00:00 - GET - https://api.vimeo.com/videos/244080202 - []
+2017-11-22T18:03:56+00:00 - GET - https://api.vimeo.com/videos/244082192 - []
+2017-11-22T18:03:58+00:00 - GET - https://api.vimeo.com/videos/244086089 - []
+2017-11-22T18:04:04+00:00 - GET - https://api.vimeo.com/videos/244087503 - []
+2017-11-23T08:12:14+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:13:02+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118882131?video_file_id=879061302&upgrade=true&signature=d5fe69566194d5dc65e17081855ebe60 - []
+2017-11-23T08:13:02+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:13:41+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118882252?video_file_id=879061611&upgrade=true&signature=00db5146bfcb99ce699fb710a87c9b5f - []
+2017-11-23T08:13:42+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:13:57+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118882350?video_file_id=879061776&upgrade=true&signature=739b31f03c013356c630dc48532f8e98 - []
+2017-11-23T08:18:06+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:18:19+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118882924?video_file_id=879063329&upgrade=true&signature=e2bd9fd8b9097295d702fd2a4e48f20e - []
+2017-11-23T08:19:10+00:00 - GET - https://api.vimeo.com/videos/244169990 - []
+2017-11-23T08:19:11+00:00 - GET - https://api.vimeo.com/videos/244170316 - []
+2017-11-23T08:19:16+00:00 - GET - https://api.vimeo.com/videos/244170015 - []
+2017-11-23T08:19:37+00:00 - GET - https://api.vimeo.com/videos/244170316 - []
+2017-11-23T08:21:58+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:23:51+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118883469?video_file_id=879064582&upgrade=true&signature=529966251423f2fbba7a6851d858f60f - []
+2017-11-23T08:23:51+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:24:37+00:00 - DELETE - https://api.vimeo.com/users/73517704/uploads/118883752?video_file_id=879065184&upgrade=true&signature=46b461e8a88bf6f3713ee18b9748662c - []
+2017-11-23T08:24:37+00:00 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:25:49+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118883855?video_file_id=879065439&upgrade=true&signature=c9d2ff83feab87222836fea3e6fa5c55 - []
+2017-11-23T08:25:50+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:26:10+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884063?video_file_id=879065855&upgrade=true&signature=c39259ddd942dc8a63b9c4215edc93df - []
+2017-11-23T08:26:10+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:26:49+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884107?video_file_id=879065915&upgrade=true&signature=dd6d8925b71d62abd0dadcb9cf3e1276 - []
+2017-11-23T08:26:50+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:27:08+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884218?video_file_id=879066132&upgrade=true&signature=81da0323defda18defb7e58cb2a7eb7b - []
+2017-11-23T08:27:09+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:28:02+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884264?video_file_id=879066225&upgrade=true&signature=317d274be54d8f468a1172290d4d6dae - []
+2017-11-23T08:28:03+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:29:31+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884379?video_file_id=879066525&upgrade=true&signature=6028884f40d033c75a4a09523ac9ac21 - []
+2017-11-23T08:29:32+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:29:59+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884598?video_file_id=879067008&upgrade=true&signature=bd4479d65457236044cc84a09dc51336 - []
+2017-11-23T08:30:00+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:31:23+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884676?video_file_id=879067173&upgrade=true&signature=b53b795bc99bbde66102c62148d088e0 - []
+2017-11-23T08:31:24+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:32:58+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118884893?video_file_id=879067728&upgrade=true&signature=325e4a4fda82dc17623ee24911b62066 - []
+2017-11-23T08:32:58+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:35:52+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118885114?video_file_id=879068412&upgrade=true&signature=285ee14f02b707961b16e7fbf633c7e6 - []
+2017-11-23T08:35:53+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:37:07+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118885384?video_file_id=879069645&upgrade=true&signature=59f798cc47c8bcbf06faac6c9bd24dbc - []
+2017-11-23T08:47:03+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:47:14+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118886623?video_file_id=879075173&upgrade=true&signature=672d10d22a1978370bd82b9f65e1b8ce - []
+2017-11-23T08:47:15+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:49:23+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118886650?video_file_id=879075266&upgrade=true&signature=a17c5eec9d91b9b37aace38020b19741 - []
+2017-11-23T08:49:23+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:50:21+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118886896?video_file_id=879076119&upgrade=true&signature=79afb5fd53b343432200e1ee5ce22445 - []
+2017-11-23T08:50:22+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:50:32+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118887018?video_file_id=879076571&upgrade=true&signature=e7831c97d8e862efa1ec01dd5c6c9e06 - []
+2017-11-23T08:50:33+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:54:20+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118887042?video_file_id=879076672&upgrade=true&signature=84d9d3967e92bf64852dd59024022525 - []
+2017-11-23T08:54:21+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T08:59:35+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118887481?video_file_id=879078511&upgrade=true&signature=0c2efcb9f9134cc82fc9e32eb04d6672 - []
+2017-11-23T08:59:36+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:00:51+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118888233?video_file_id=879081131&upgrade=true&signature=e20fc2fa54e22b46969f489872bd1c59 - []
+2017-11-23T09:00:52+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:01:26+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118888419?video_file_id=879081776&upgrade=true&signature=1a6e5e60f840100eab27256bb5079687 - []
+2017-11-23T09:01:27+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:01:51+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118888498?video_file_id=879082036&upgrade=true&signature=5e5eb224e14181e58a58e722daaf8994 - []
+2017-11-23T09:01:52+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:04:47+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118888549?video_file_id=879082255&upgrade=true&signature=648275c4f4a9043088cbd1e53a04c2cc - []
+2017-11-23T09:04:48+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:06:49+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118888942?video_file_id=879083590&upgrade=true&signature=f44f6b56bd10a392f17b2bfe8ace41ee - []
+2017-11-23T09:06:50+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:07:25+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118889195?video_file_id=879084627&upgrade=true&signature=82560a790d6a25674fcae1ce390b44d4 - []
+2017-11-23T09:07:25+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:08:04+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118889291?video_file_id=879084883&upgrade=true&signature=b7ee376794ead7b26c565075d954f576 - []
+2017-11-23T09:12:55+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:14:03+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118889967?video_file_id=879087603&upgrade=true&signature=10e5da6932b24ea5302d68513fe31d13 - []
+2017-11-23T09:14:04+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:15:48+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890093?video_file_id=879088262&upgrade=true&signature=b74996bee4eba1f9ee0af7e6dddd43bd - []
+2017-11-23T09:15:49+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:18:12+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890340?video_file_id=879089216&upgrade=true&signature=ea146b9579630f5cb705720e5e7fa19e - []
+2017-11-23T09:18:13+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:18:27+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890616?video_file_id=879090351&upgrade=true&signature=d8967ab1e9b32a755a1340c46d865963 - []
+2017-11-23T09:18:28+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:18:47+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890654?video_file_id=879090465&upgrade=true&signature=2f6701b2269b48f1fa5b4011a99bd9e7 - []
+2017-11-23T09:18:47+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:19:02+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890696?video_file_id=879090707&upgrade=true&signature=fa8f8f5b9d49d53d14b7d2dad92f5ff1 - []
+2017-11-23T09:19:03+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:19:52+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890732?video_file_id=879090820&upgrade=true&signature=6c37bedafd725789d0948fc31c0c8515 - []
+2017-11-23T09:19:53+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:21:28+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118890824?video_file_id=879091168&upgrade=true&signature=e18e18b1c53e340856423120cd7a81f8 - []
+2017-11-23T09:21:29+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:21:49+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118891017?video_file_id=879091975&upgrade=true&signature=298bbae361730ba4e925f76c1c42bb1b - []
+2017-11-23T09:21:50+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T09:22:38+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118891055?video_file_id=879092131&upgrade=true&signature=6b9e38ab6692164781a451ff6d5e57a8 - []
+2017-11-23T09:24:49+00:00 - 26452 - GET - https://api.vimeo.com/videos/244170764 - []
+2017-11-23T09:24:57+00:00 - 26452 - GET - https://api.vimeo.com/videos/244170820 - []
+2017-11-23T09:25:03+00:00 - 26452 - GET - https://api.vimeo.com/videos/244170947 - []
+2017-11-23T09:25:09+00:00 - 26452 - GET - https://api.vimeo.com/videos/244170973 - []
+2017-11-23T09:25:13+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171031 - []
+2017-11-23T09:25:26+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171120 - []
+2017-11-23T09:25:29+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171058 - []
+2017-11-23T09:25:35+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171246 - []
+2017-11-23T09:25:44+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171805 - []
+2017-11-23T09:25:47+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171928 - []
+2017-11-23T09:25:57+00:00 - 26452 - GET - https://api.vimeo.com/videos/244172916 - []
+2017-11-23T09:26:01+00:00 - 26452 - GET - https://api.vimeo.com/videos/244173117 - []
+2017-11-23T09:26:06+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171296 - []
+2017-11-23T09:26:09+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171425 - []
+2017-11-23T09:26:14+00:00 - 26452 - GET - https://api.vimeo.com/videos/244171579 - []
+2017-11-23T09:26:31+00:00 - 26452 - GET - https://api.vimeo.com/videos/244173624 - []
+2017-11-23T09:26:37+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174253 - []
+2017-11-23T09:26:44+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174396 - []
+2017-11-23T09:26:53+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174449 - []
+2017-11-23T09:26:59+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174486 - []
+2017-11-23T09:27:04+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174776 - []
+2017-11-23T09:27:09+00:00 - 26452 - GET - https://api.vimeo.com/videos/244174951 - []
+2017-11-23T09:27:11+00:00 - 26452 - GET - https://api.vimeo.com/videos/244175028 - []
+2017-11-23T09:27:19+00:00 - 26452 - GET - https://api.vimeo.com/videos/244175092 - []
+2017-11-23T09:27:22+00:00 - 26452 - GET - https://api.vimeo.com/videos/244173244 - []
+2017-11-23T09:27:26+00:00 - 26452 - GET - https://api.vimeo.com/videos/244173223 - []
+2017-11-23T09:33:46+00:00 - 26452 - GET - https://api.vimeo.com/videos/244175650 - []
+2017-11-23T09:33:52+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176109 - []
+2017-11-23T09:33:59+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176286 - []
+2017-11-23T09:34:08+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176488 - []
+2017-11-23T09:34:16+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176201 - []
+2017-11-23T09:34:35+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176173 - []
+2017-11-23T09:34:41+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176562 - []
+2017-11-23T09:34:51+00:00 - 26452 - GET - https://api.vimeo.com/videos/244175862 - []
+2017-11-23T09:34:54+00:00 - 26452 - GET - https://api.vimeo.com/videos/244176140 - []
+2017-11-23T17:03:30+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T17:03:39+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118969729?video_file_id=879372447&upgrade=true&signature=abf08f2ddcf7d44b1b5545c2612884f8 - []
+2017-11-23T17:03:59+00:00 - 26452 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-23T17:20:28+00:00 - 26452 - GET - https://api.vimeo.com/videos/244235046 - []
+2017-11-23T17:23:22+00:00 - 26452 - DELETE - https://api.vimeo.com/users/73517704/uploads/118969848?video_file_id=879372749&upgrade=true&signature=84bc27f792dd4712887f52b0b3055cea - []
+2017-11-23T17:24:20+00:00 - 26452 - GET - https://api.vimeo.com/videos/244237666 - []
+2017-11-23T17:31:47+00:00 - 26452 - GET - https://api.vimeo.com/videos/244237666 - []
+2017-11-24T13:07:09+00:00 - 56906 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-24T13:08:13+00:00 - 56906 - DELETE - https://api.vimeo.com/users/73517704/uploads/119092104?video_file_id=879839462&upgrade=true&signature=7e6d68e2793fdb07ff6d169809317646 - []
+2017-11-24T13:08:14+00:00 - 56906 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-24T13:09:30+00:00 - 56906 - DELETE - https://api.vimeo.com/users/73517704/uploads/119092278?video_file_id=879840167&upgrade=true&signature=4d727a95dd129abe9e27ea7e63d6fc67 - []
+2017-11-24T13:09:31+00:00 - 56906 - POST - https://api.vimeo.com/me/videos - {"type":"streaming"}
+2017-11-24T13:13:15+00:00 - 56906 - DELETE - https://api.vimeo.com/users/73517704/uploads/119092454?video_file_id=879840999&upgrade=true&signature=9857af8cddae067dfb9c8af95ab37992 - []
+2017-11-24T13:22:43+00:00 - 56906 - GET - https://api.vimeo.com/videos/244335094 - []
+2017-11-24T13:22:55+00:00 - 56906 - GET - https://api.vimeo.com/videos/244335244 - []
+2017-11-24T13:23:01+00:00 - 56906 - GET - https://api.vimeo.com/videos/244335671 - []

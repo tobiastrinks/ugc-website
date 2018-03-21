@@ -1,0 +1,165 @@
+<div class="control_dashboard_rows">
+	<div class="control_dashboard_rows_mobile_element">
+		<?php
+			for($cd_k_x=0; $cd_k_x<2; $cd_k_x++){
+				
+				$cd_k_rights = "'admin'";
+				if($cd_k_x == 1)
+					$cd_k_rights = "'0' OR rights='premember'";
+				
+				$ergebnis_cd_k = $mysqli_project->query("SELECT kurs_id, progress, rights FROM user_kurse WHERE user_key='".$_SESSION["lc_user_key"]."' AND (rights=".$cd_k_rights.") AND kurs_id NOT IN (SELECT kurs_id FROM kurse_application WHERE timestamp='0' OR result=0)");
+				
+				if($cd_k_x == 1){
+				?>
+				<div class="control_dashboard_rows_mobile_element">
+					<div class="control_dashboard_rows_title" data-cmstype="text_short" data-cmspos="control_kurse_headline" data-cmsglobal="1"><?=$control_kurse_headline;?></div>
+				<?php
+					if(mysqli_num_rows($ergebnis_cd_k) == 0){
+				?>
+					<div class="control_dashboard_widget control_dashboard_course_empty">
+						<div class="control_dashboard_widget_text">
+							hier werden deine besuchten Kurse erscheinen
+						</div>
+					</div>
+				<?php
+					}
+				}
+				
+				if(mysqli_num_rows($ergebnis_cd_k) > 0){
+				
+					if($cd_k_x == 0){
+					?>
+						<div class="control_dashboard_rows_title" data-cmstype="text_short" data-cmspos="control_kurse_headline2" data-cmsglobal="1"><?=$control_kurse_headline2;?></div>
+						<?php
+							if(mysqli_num_rows($mysqli_project->query("SELECT ID FROM kurse_marketplace WHERE status='online' AND kurs_id IN (SELECT kurs_id FROM user_kurse WHERE rights='admin' AND user_key='".$_SESSION["lc_user_key"]."')")) > 0){
+						?>
+								<div class="control_dashboard_widget no_hover">
+											
+									<div id="control_dashboard_creator_post_title" class="control_dashboard_widget_title">Nachricht an alle Kursteilnehmer</div>
+									
+									<div id="control_dashboard_creator_post" class="control_dashboard_widget_text">
+										<input type="text" placeholder="Betreff" id="control_dashboard_creator_post_subject" />
+										<textarea placeholder="Deine Nachricht" id="control_dashboard_creator_post_content"></textarea>
+										<div id="control_dashboard_creator_post_submit">Senden</div>
+									</div>
+								</div>
+						<?php
+							}
+						?>
+					<?php
+					}
+				
+				
+					while($row_cd_k = $ergebnis_cd_k->fetch_assoc()){
+						
+						$ergebnis_cd_k_2 = $mysqli_project->query("SELECT name, thumbnail FROM kurse WHERE ID='".$row_cd_k["kurs_id"]."'");
+						while($row_cd_k_2 = $ergebnis_cd_k_2->fetch_assoc()){
+					?>
+						<div class="control_dashboard_course control_dashboard_widget half square<?php if($cd_k_x == 0){ ?> created<?php } ?>" data-course_id="<?=$row_cd_k["kurs_id"];?>" data-course_progress="<?=$row_cd_k["progress"];?>" title="<?=$row_cd_k_2["name"];?>">
+							
+							<div class="control_dashboard_widget_square">
+								<div class="control_dashboard_widget_bg">
+									<?php
+										$ergebnis_cd_k_3 = $mysqli_project->query("SELECT filename FROM media WHERE ID='".$row_cd_k_2["thumbnail"]."'");
+										if(mysqli_num_rows($ergebnis_cd_k_3) > 0){
+											while($row_cd_k_3 = $ergebnis_cd_k_3->fetch_assoc()){
+												
+												?>
+												<img src="<?=$home_dir."temp/media/project/kurse_thumb/".$row_cd_k_3["filename"];?>" alt="<?=$row_cd_k_2["name"];?>" />
+												<?php
+											}
+										}
+										else{
+										?>
+											<p class="control_dashboard_course_title"><?=$row_cd_k_2["name"];?></p>
+										<?php
+										}
+									?>
+								</div>
+								
+								<?php
+									if($cd_k_x == 0){
+									
+										if(isset($_SESSION["reply_not"]["kurs"][$row_cd_k["kurs_id"]])){
+											?>
+											<div class="control_dashboard_notification control_dashboard_course_not">
+												<?=count($_SESSION["reply_not"]["kurs"][$row_cd_k["kurs_id"]]);?>
+											</div>
+											<?php
+										}
+									
+										$ergebnis_cd_k_3 = $mysqli_project->query("SELECT status FROM kurse_marketplace WHERE kurs_id='".$row_cd_k["kurs_id"]."'");
+										if(mysqli_num_rows($ergebnis_cd_k_3) > 0){
+											while($row_cd_k_3 = $ergebnis_cd_k_3->fetch_assoc()){
+												if($row_cd_k_3["status"] == "offline"){
+											?>
+													<div class="control_dashboard_course_status">
+														<div class="control_dashboard_course_status_inner" title="noch nicht veröffentlicht">
+															<i class="fa fa-eye-slash" aria-hidden="true"></i>
+														</div>
+													</div>
+											<?php
+												}
+												if($row_cd_k_3["status"] == "application"){
+											?>
+													<div class="control_dashboard_course_status control_dashboard_course_status_application" title="Bewerbung gesendet">
+														<div class="control_dashboard_course_status_inner">
+															<i class="fa fa-envelope" aria-hidden="true"></i>
+														</div>
+													</div>
+											<?php
+												}
+												if($row_cd_k_3["status"] == "confirmed"){
+											?>
+													<div class="control_dashboard_course_status" title="Kurs angenommen">
+														<div class="control_dashboard_course_status_inner">
+															<i class="fa fa-check" aria-hidden="true"></i>
+														</div>
+													</div>
+											<?php
+												}
+											}
+										}
+									}
+									if($cd_k_x == 1){
+									
+										if($row_cd_k["rights"] == "premember"){
+											?>
+												<div class="control_dashboard_notification control_dashboard_course_not">
+													&#033;
+												</div>
+											<?php
+										}
+										?>
+											<div class="control_dashboard_course_blk"></div>
+											<div class="control_dashboard_course_progress"></div>
+											<div class="control_dashboard_course_progress_perc control_dashboard_widget_center">
+												<?=$row_cd_k["progress"];?> %
+												<?php
+													if($device == "mobile"){
+												?>
+												<br /><span class="control_dashboard_course_progress_perc_continue">Hier klicken zum Fortfahren</span>
+												<?php
+													}
+												?>
+											</div>
+										<?php
+									}
+								?>
+							</div>
+						</div>
+				<?php
+						}
+					}
+				}
+				if($cd_k_x == 0){
+				?>
+					<div class="clear"></div>
+				</div>
+				<?php
+				}
+			}
+		?>
+		<div class="clear"></div>
+	</div>
+</div>
