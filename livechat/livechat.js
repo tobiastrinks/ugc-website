@@ -101,8 +101,13 @@ var socketInit = $.Deferred();
 // if user is running mozilla then use it's built-in WebSocket
 window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-// const connection = new WebSocket('ws://172.17.0.1:8443');
-const connection = new WebSocket('ws://lc.unigrow.ttrks.de:8443');
+var connection;
+
+if (window.location.hostname === "172.17.0.1") {
+    connection = new WebSocket('ws://172.17.0.1:8443');
+} else {
+    connection = new WebSocket('ws://lc.unigrow.ttrks.de:8443');
+}
 
 connection.onopen = function () {
     // connection is opened and ready to use
