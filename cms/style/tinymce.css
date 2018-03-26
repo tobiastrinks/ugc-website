@@ -1,9 +1,0 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
-.mce-content-body, #cms_ib_editor_text_short_textarea{
-	color: black !important;
-	font-family: 'Open Sans Condensed', sans-serif !important;
-	background-color: grey !important;
-}
-#tinymce, .mce-content-body {
-	background-color: black !important;
-}

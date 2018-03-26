@@ -1,5 +1,0 @@
-class livechat {
-    public connect() {
-
-    }
-}

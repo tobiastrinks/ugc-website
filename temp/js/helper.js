@@ -8,11 +8,15 @@ function Helper () {
 }
 
 function Http (server) {
-
-    this.url = {
-        node: 'https://beta.unigrow.de:8443'//,
-        //php: 'http://unigrow.localhost:8080'
-    };
+    if (window.location.hostname === "172.17.0.1") {
+        this.url = {
+            node: 'http://172.17.0.1:8443'
+        }
+    } else {
+        this.url = {
+            node: 'http://lc.unigrow.ttrks.de:8443'
+        }
+    }
     this.get = function get (route, success = function (){}, error = function (){} ) {
         $.ajax({
             type: 'GET',
